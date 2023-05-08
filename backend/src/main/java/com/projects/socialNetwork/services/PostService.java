@@ -9,13 +9,14 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.projects.socialNetwork.dto.CommentDTO;
 import com.projects.socialNetwork.dto.PostDTO;
-
+import com.projects.socialNetwork.entities.Comment;
 import com.projects.socialNetwork.entities.Post;
+import com.projects.socialNetwork.repositories.CommentRepository;
 import com.projects.socialNetwork.repositories.PostRepository;
 import com.projects.socialNetwork.services.exceptions.DataBaseException;
 import com.projects.socialNetwork.services.exceptions.ResourceNotFoundException;
@@ -25,6 +26,9 @@ public class PostService {
 
 	@Autowired
 	private PostRepository repository;
+	
+	@Autowired
+	private CommentRepository commentRepository;
 
 	@Transactional(readOnly = true)
 	public Page<PostDTO> findAllPaged(Pageable pageable) {
@@ -36,7 +40,7 @@ public class PostService {
 	public PostDTO findById(Long id) {
 		Optional<Post> obj = repository.findById(id);
 		Post entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
-		return new PostDTO(entity);
+		return new PostDTO(entity, entity.getComments());
 	}
 
 	@Transactional
@@ -76,6 +80,13 @@ public class PostService {
 		entity.setDescription(dto.getDescription());
 		entity.setDate(dto.getDate());
 		entity.setUser(dto.getUser());
+		
+		entity.getComments().clear();
+
+		for (CommentDTO comDto : dto.getComments()) {
+			Comment comment = commentRepository.getOne(comDto.getId());
+			entity.getComments().add(comment);
+		}
 	}
 
 

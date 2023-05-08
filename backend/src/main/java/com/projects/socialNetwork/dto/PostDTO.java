@@ -2,8 +2,12 @@ package com.projects.socialNetwork.dto;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+
+import com.projects.socialNetwork.entities.Comment;
 import com.projects.socialNetwork.entities.Post;
 import com.projects.socialNetwork.entities.User;
 
@@ -17,6 +21,8 @@ public class PostDTO implements Serializable {
 	private Instant date;
 	
 	private User user;
+	
+	private List<CommentDTO> comments = new ArrayList<>();
 	
 	public PostDTO() {}
 
@@ -35,6 +41,13 @@ public class PostDTO implements Serializable {
 		this.description = entity.getDescription();
 		this.date = entity.getDate();
 		this.user = entity.getUser();
+		
+		entity.getComments().forEach(c -> this.comments.add(new CommentDTO(c)));
+	}
+	
+	public PostDTO(Post entity, List<Comment> comments) {
+		this(entity);
+		comments.forEach(c -> this.comments.add(new CommentDTO(c))); 
 	}
 
 	public Long getId() {
@@ -75,6 +88,10 @@ public class PostDTO implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<CommentDTO> getComments() {
+		return comments;
 	}
 
 	@Override

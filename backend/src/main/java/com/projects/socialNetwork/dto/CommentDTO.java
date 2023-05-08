@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import com.projects.socialNetwork.entities.Comment;
+import com.projects.socialNetwork.entities.Post;
 import com.projects.socialNetwork.entities.User;
 
 public class CommentDTO implements Serializable {
@@ -13,20 +14,23 @@ public class CommentDTO implements Serializable {
 	private Long id;
 	private String description;
 	private User user;
+	private Post post;
 	
 	public CommentDTO() {}
 
-	public CommentDTO(Long id, String description, User user) {
+	public CommentDTO(Long id, String description, User user, Post post) {
 		super();
 		this.id = id;
 		this.description = description;
 		this.user = user;
+		this.post = post;
 	}
 	
 	public CommentDTO(Comment entity) {
 		this.id = entity.getId();
 		this.description = entity.getDescription();
 		this.user = entity.getUser();
+		this.post = entity.getPost();
 	}
 
 	public Long getId() {
@@ -51,6 +55,14 @@ public class CommentDTO implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
 	}
 
 	@Override

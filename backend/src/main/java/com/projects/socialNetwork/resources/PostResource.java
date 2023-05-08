@@ -1,6 +1,7 @@
 package com.projects.socialNetwork.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.projects.socialNetwork.dto.CommentDTO;
 import com.projects.socialNetwork.dto.PostDTO;
+import com.projects.socialNetwork.services.CommentService;
 import com.projects.socialNetwork.services.PostService;
 
 @RestController
@@ -27,6 +30,9 @@ public class PostResource {
 
 	@Autowired
 	private PostService service;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	@GetMapping
 	public ResponseEntity<Page<PostDTO>> findAll(Pageable pageable) {
@@ -59,6 +65,12 @@ public class PostResource {
 	public ResponseEntity<PostDTO> delete(@PathVariable Long id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping(path = "/{id}/comments")
+	public ResponseEntity<List<CommentDTO>> findCommentsByPostId(@PathVariable Long id) {
+		List<CommentDTO> commentsDTO = commentService.findCommentsByPostId(id);
+		return ResponseEntity.ok(commentsDTO);
 	}
 	
 }

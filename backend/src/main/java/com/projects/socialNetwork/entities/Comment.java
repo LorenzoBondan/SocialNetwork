@@ -28,13 +28,18 @@ public class Comment implements Serializable {
     @JoinColumn(name = "user_id")
 	private User user;
 	
+	@ManyToOne
+    @JoinColumn(name = "post_id")
+	private Post post;
+	
 	public Comment() {}
 
-	public Comment(Long id, String description, User user) {
+	public Comment(Long id, String description, User user, Post post) {
 		super();
 		this.id = id;
 		this.description = description;
 		this.user = user;
+		this.post = post;
 	}
 
 	public Long getId() {
@@ -59,6 +64,15 @@ public class Comment implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
 	}
 
 	@Override
