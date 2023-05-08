@@ -52,14 +52,14 @@ public class UserService implements UserDetailsService {
 	public UserDTO findById(Long id) {
 		Optional<User> obj = repository.findById(id);
 		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
-		return new UserDTO(entity);
+		return new UserDTO(entity, entity.getRoles(), entity.getFollowing(), entity.getFollowers());
 	}
 	
 	@Transactional(readOnly = true)
 	public UserDTO findByEmail(String email) {
 		Optional<User> obj = Optional.ofNullable(repository.findByEmail(email));
 		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
-		return new UserDTO(entity);
+		return new UserDTO(entity, entity.getRoles(), entity.getFollowing(), entity.getFollowers());
 	}
 
 	@Transactional
@@ -85,8 +85,6 @@ public class UserService implements UserDetailsService {
 		}
 	}
 	
-	
-
 	public void delete(Long id) {
 		try {
 			repository.deleteById(id);
@@ -110,6 +108,20 @@ public class UserService implements UserDetailsService {
 		for (RoleDTO rolDto : dto.getRoles()) {
 			Role role = roleRepository.getOne(rolDto.getId());
 			entity.getRoles().add(role);
+		}
+		
+		entity.getFollowers().clear();
+		
+		for (UserDTO folDto : dto.getFollowers()) {
+			User follower = repository.getOne(folDto.getId());
+			entity.getFollowers().add(follower);
+		}
+		
+		entity.getFollowing().clear();
+		
+		for (UserDTO folDto : dto.getFollowers()) {
+			User following = repository.getOne(folDto.getId());
+			entity.getFollowing().add(following);
 		}
 	}
 

@@ -27,6 +27,10 @@ public class UserDTO implements Serializable {
 	private String imgUrl;
 	
 	private List<RoleDTO> roles = new ArrayList<>();
+	
+	private List<UserDTO> following = new ArrayList<>();
+	
+	private List<UserDTO> followers = new ArrayList<>();
 	  
 	public UserDTO() {}
 
@@ -47,11 +51,15 @@ public class UserDTO implements Serializable {
 		this.imgUrl = entity.getImgUrl();
 
 		entity.getRoles().forEach(rol -> this.roles.add(new RoleDTO(rol)));
+		entity.getFollowers().forEach(f -> this.followers.add(new UserDTO(f)));
+		entity.getFollowing().forEach(f -> this.following.add(new UserDTO(f)));
 	}
 
-	public UserDTO(User entity, Set<Role> roles) {
+	public UserDTO(User entity, Set<Role> roles, Set<User> following, Set<User> followers) {
 		this(entity); 
 		roles.forEach(rol -> this.roles.add(new RoleDTO(rol))); 
+		following.forEach(f -> this.following.add(new UserDTO(f)));
+		followers.forEach(f -> this.followers.add(new UserDTO(f)));
 	}
 
 	public Long getId() {
@@ -89,12 +97,18 @@ public class UserDTO implements Serializable {
 		this.imgUrl = imgUrl;
 	}
 
-
 	// SOMENTE O GET NAS LISTAS
 	public List<RoleDTO> getRoles() { 
 		return roles;
 	}
 
+	public List<UserDTO> getFollowing() {
+		return following;
+	}
+
+	public List<UserDTO> getFollowers() {
+		return followers;
+	}
 
 	@Override
 	public int hashCode() {

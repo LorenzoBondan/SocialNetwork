@@ -108,6 +108,15 @@ public class User implements UserDetails, Serializable{
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
+	
+
+	public Set<User> getFollowers() {
+		return followers;
+	}
+
+	public Set<User> getFollowing() {
+		return following;
+	}
 
 	@Override
 	public int hashCode() {
