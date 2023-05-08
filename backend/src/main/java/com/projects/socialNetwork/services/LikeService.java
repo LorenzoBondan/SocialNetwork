@@ -54,6 +54,7 @@ public class LikeService {
 
 	private void copyDtoToEntity(LikeDTO dto, Like entity) {
 		entity.setUser(dto.getUser());
+		entity.setPost(dto.getPost());
 	}
 
 }

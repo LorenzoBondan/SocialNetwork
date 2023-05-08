@@ -24,12 +24,16 @@ public class Like implements Serializable {
     @JoinColumn(name = "user_id")
 	private User user;
 	
+	@JoinColumn(name = "post_id")
+	private Post post;
+	
 	public Like() {}
 
-	public Like(Long id, User user) {
+	public Like(Long id, User user, Post post) {
 		super();
 		this.id = id;
 		this.user = user;
+		this.post = post;
 	}
 
 	public Long getId() {
@@ -46,6 +50,14 @@ public class Like implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
 	}
 
 	@Override
