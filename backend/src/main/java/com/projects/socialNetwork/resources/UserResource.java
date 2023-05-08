@@ -31,12 +31,10 @@ public class UserResource {
 	private UserService service;
 	
 	@GetMapping
-	public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable)
-	{
+	public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable) {
 		Page<UserDTO> list = service.findAllPaged(pageable);	
 		return ResponseEntity.ok().body(list);
 	}
-	
 	
 	@GetMapping(value = "/{id}") 
 	public ResponseEntity<UserDTO> findById(@PathVariable Long id) {

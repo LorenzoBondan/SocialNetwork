@@ -1,8 +1,10 @@
 package com.projects.socialNetwork.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -16,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -36,6 +39,7 @@ public class User implements UserDetails, Serializable{
 	@Column(unique = true)
 	private String email;
 	private String password;
+	@Column(columnDefinition = "TEXT")
 	private String imgUrl;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -56,6 +60,9 @@ public class User implements UserDetails, Serializable{
 				joinColumns = @JoinColumn(name = "user_id"), 
 				inverseJoinColumns = @JoinColumn(name = "following_id"))
 	private Set<User> following = new HashSet<>();
+	
+	@OneToMany(mappedBy = "user")
+	private List<Post> posts = new ArrayList<>();
 	
 	public User() {
 	}
@@ -116,6 +123,11 @@ public class User implements UserDetails, Serializable{
 
 	public Set<User> getFollowing() {
 		return following;
+	}
+	
+
+	public List<Post> getPosts() {
+		return posts;
 	}
 
 	@Override

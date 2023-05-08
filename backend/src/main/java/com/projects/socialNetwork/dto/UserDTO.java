@@ -31,6 +31,8 @@ public class UserDTO implements Serializable {
 	private List<UserDTO> following = new ArrayList<>();
 	
 	private List<UserDTO> followers = new ArrayList<>();
+	
+	private List<PostDTO> posts = new ArrayList<>();
 	  
 	public UserDTO() {}
 
@@ -53,6 +55,7 @@ public class UserDTO implements Serializable {
 		entity.getRoles().forEach(rol -> this.roles.add(new RoleDTO(rol)));
 		entity.getFollowers().forEach(f -> this.followers.add(new UserDTO(f)));
 		entity.getFollowing().forEach(f -> this.following.add(new UserDTO(f)));
+		entity.getPosts().forEach(p -> this.posts.add(new PostDTO(p)));
 	}
 
 	public UserDTO(User entity, Set<Role> roles, Set<User> following, Set<User> followers) {
@@ -109,6 +112,12 @@ public class UserDTO implements Serializable {
 	public List<UserDTO> getFollowers() {
 		return followers;
 	}
+	
+
+	public List<PostDTO> getPosts() {
+		return posts;
+	}
+
 
 	@Override
 	public int hashCode() {
