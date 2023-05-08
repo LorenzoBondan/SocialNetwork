@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
 import com.projects.socialNetwork.entities.Comment;
+import com.projects.socialNetwork.entities.Like;
 import com.projects.socialNetwork.entities.Post;
 import com.projects.socialNetwork.entities.User;
 
@@ -23,6 +23,8 @@ public class PostDTO implements Serializable {
 	private User user;
 	
 	private List<CommentDTO> comments = new ArrayList<>();
+	
+	private List<LikeDTO> likes = new ArrayList<>();
 	
 	public PostDTO() {}
 
@@ -43,11 +45,13 @@ public class PostDTO implements Serializable {
 		this.user = entity.getUser();
 		
 		entity.getComments().forEach(c -> this.comments.add(new CommentDTO(c)));
+		entity.getLikes().forEach(l -> this.likes.add(new LikeDTO(l)));
 	}
 	
-	public PostDTO(Post entity, List<Comment> comments) {
+	public PostDTO(Post entity, List<Comment> comments, List<Like> likes) {
 		this(entity);
 		comments.forEach(c -> this.comments.add(new CommentDTO(c))); 
+		likes.forEach(l -> this.likes.add(new LikeDTO(l))); 
 	}
 
 	public Long getId() {
@@ -92,6 +96,10 @@ public class PostDTO implements Serializable {
 
 	public List<CommentDTO> getComments() {
 		return comments;
+	}
+
+	public List<LikeDTO> getLikes() {
+		return likes;
 	}
 
 	@Override

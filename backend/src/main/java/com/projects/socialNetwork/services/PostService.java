@@ -13,10 +13,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.projects.socialNetwork.dto.CommentDTO;
+import com.projects.socialNetwork.dto.LikeDTO;
 import com.projects.socialNetwork.dto.PostDTO;
 import com.projects.socialNetwork.entities.Comment;
+import com.projects.socialNetwork.entities.Like;
 import com.projects.socialNetwork.entities.Post;
 import com.projects.socialNetwork.repositories.CommentRepository;
+import com.projects.socialNetwork.repositories.LikeRepository;
 import com.projects.socialNetwork.repositories.PostRepository;
 import com.projects.socialNetwork.services.exceptions.DataBaseException;
 import com.projects.socialNetwork.services.exceptions.ResourceNotFoundException;
@@ -29,6 +32,9 @@ public class PostService {
 	
 	@Autowired
 	private CommentRepository commentRepository;
+	
+	@Autowired
+	private LikeRepository likeRepository;
 
 	@Transactional(readOnly = true)
 	public Page<PostDTO> findAllPaged(Pageable pageable) {
@@ -40,7 +46,7 @@ public class PostService {
 	public PostDTO findById(Long id) {
 		Optional<Post> obj = repository.findById(id);
 		Post entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
-		return new PostDTO(entity, entity.getComments());
+		return new PostDTO(entity, entity.getComments(), entity.getLikes());
 	}
 
 	@Transactional
@@ -86,6 +92,13 @@ public class PostService {
 		for (CommentDTO comDto : dto.getComments()) {
 			Comment comment = commentRepository.getOne(comDto.getId());
 			entity.getComments().add(comment);
+		}
+		
+		entity.getLikes().clear();
+
+		for (LikeDTO likeDto : dto.getLikes()) {
+			Like like = likeRepository.getOne(likeDto.getId());
+			entity.getLikes().add(like);
 		}
 	}
 

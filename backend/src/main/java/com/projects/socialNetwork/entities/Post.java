@@ -38,6 +38,9 @@ public class Post implements Serializable {
 	@OneToMany(mappedBy = "post")
 	private List<Comment> comments = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "post")
+	private List<Like> likes = new ArrayList<>();
+	
 	public Post() {}
 
 	public Post(Long id, String title, String description, Instant date, User user) {
@@ -91,6 +94,10 @@ public class Post implements Serializable {
 
 	public List<Comment> getComments() {
 		return comments;
+	}
+
+	public List<Like> getLikes() {
+		return likes;
 	}
 
 	@Override
