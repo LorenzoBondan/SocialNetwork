@@ -24,19 +24,19 @@ public class UserDTO implements Serializable {
 	@Email(message = "Favor entrar com um email válido")
 	private String email;
 
-	private Long favoriteTeamId;
+	private String imgUrl;
 	
 	private List<RoleDTO> roles = new ArrayList<>();
 	  
 	public UserDTO() {}
 
 	
-	public UserDTO(Long id, String name, String email, String password, Long favoriteTeamId) {
+	public UserDTO(Long id, String name, String email, String password, Long favoriteTeamId, String imgUrl) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
-		this.favoriteTeamId = favoriteTeamId;
+		this.imgUrl = imgUrl;
 	}
 	
 	// construtor implantado na classe UserService
@@ -44,7 +44,7 @@ public class UserDTO implements Serializable {
 		this.id = entity.getId();
 		this.name = entity.getName();
 		this.email = entity.getEmail();
-		this.favoriteTeamId = entity.getFavoriteTeamId();
+		this.imgUrl = entity.getImgUrl();
 
 		entity.getRoles().forEach(rol -> this.roles.add(new RoleDTO(rol)));
 	}
@@ -79,14 +79,16 @@ public class UserDTO implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public Long getFavoriteTeamId() {
-		return favoriteTeamId;
+
+	public String getImgUrl() {
+		return imgUrl;
 	}
 
-	public void setFavoriteTeamId(Long favoriteTeamId) {
-		this.favoriteTeamId = favoriteTeamId;
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
+
 
 	// SOMENTE O GET NAS LISTAS
 	public List<RoleDTO> getRoles() { 

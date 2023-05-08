@@ -18,7 +18,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,6 +36,7 @@ public class User implements UserDetails, Serializable{
 	@Column(unique = true)
 	private String email;
 	private String password;
+	private String imgUrl;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_user_role",
@@ -45,19 +45,28 @@ public class User implements UserDetails, Serializable{
 			)
 	private Set<Role> roles = new HashSet<>();
 	
-	@Nullable
-	private Long favoriteTeamId;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "tb_user_followers",
+				joinColumns = @JoinColumn(name = "user_id"), 
+				inverseJoinColumns = @JoinColumn(name = "follower_id"))
+	private Set<User> followers = new HashSet<>();
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "tb_user_following",
+				joinColumns = @JoinColumn(name = "user_id"), 
+				inverseJoinColumns = @JoinColumn(name = "following_id"))
+	private Set<User> following = new HashSet<>();
 	
 	public User() {
 	}
 	
-	public User(Long id, String name, String email, String password, @Nullable Long favoriteTeamId) {
+	public User(Long id, String name, String email, String password, String imgUrl) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.favoriteTeamId = favoriteTeamId;
+		this.imgUrl = imgUrl;
 	}
 
 	public Long getId() {
@@ -91,13 +100,13 @@ public class User implements UserDetails, Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public Long getFavoriteTeamId() {
-		return favoriteTeamId;
+
+	public String getImgUrl() {
+		return imgUrl;
 	}
 
-	public void setFavoriteTeamId(Long favoriteTeamId) {
-		this.favoriteTeamId = favoriteTeamId;
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
 	@Override

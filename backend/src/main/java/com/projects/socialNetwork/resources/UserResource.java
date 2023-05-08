@@ -64,11 +64,6 @@ public class UserResource {
 		return ResponseEntity.ok().body(newDto);
 	}
 	
-	@PutMapping(value = "/{id}/favoriteTeam")
-	public ResponseEntity<UserDTO> updateFavoriteTeam(@PathVariable Long id, @Valid @RequestBody UserUpdateDTO dto)	{
-		UserDTO newDto = service.updateFavoriteTeam(id, dto);
-		return ResponseEntity.ok().body(newDto);
-	}
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<UserDTO> delete(@PathVariable Long id){
