@@ -2,7 +2,6 @@ package com.projects.socialNetwork.services;
 
 import java.util.Optional;
 
-import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -55,18 +54,6 @@ public class PostService {
 		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
 		return new PostDTO(entity);
-	}
-
-	@Transactional
-	public PostDTO update(Long id, PostDTO dto) {
-		try {
-			Post entity = repository.getOne(id);
-			copyDtoToEntity(dto, entity);
-			entity = repository.save(entity);
-			return new PostDTO(entity);
-		} catch (EntityNotFoundException e) {
-			throw new ResourceNotFoundException("Id not found " + id);
-		}
 	}
 	
 	public void delete(Long id) {

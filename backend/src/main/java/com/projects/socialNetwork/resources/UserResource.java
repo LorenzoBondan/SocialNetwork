@@ -69,4 +69,17 @@ public class UserResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	
+	@PutMapping(value = "/startFollowing/{id}/{followerId}")
+	public ResponseEntity<UserDTO> startFollowing(@PathVariable Long id, @Valid @RequestBody Long followerId)	{
+		UserDTO newDto = service.startFollowing(id, followerId);
+		return ResponseEntity.ok().body(newDto);
+	}
+	
+	@PutMapping(value = "/stopFollowing/{id}/{followerId}")
+	public ResponseEntity<UserDTO> stopFollowing(@PathVariable Long id, @Valid @RequestBody Long followerId)	{
+		UserDTO newDto = service.stopFollowing(id, followerId);
+		return ResponseEntity.ok().body(newDto);
+	}
+	
 }

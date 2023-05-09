@@ -136,4 +136,40 @@ public class UserService implements UserDetailsService {
 		logger.info("User found: " + username);
 		return user;
 	}
+	
+	
+	@Transactional
+	public UserDTO startFollowing(Long id, Long followerId) {
+		try {
+			User entity = repository.getOne(id);
+			
+			entity.getFollowers().clear();
+			
+			User follower = repository.getOne(followerId);
+			entity.getFollowers().add(follower);
+			
+			entity = repository.save(entity);
+			return new UserDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}
+	}
+	
+	@Transactional
+	public UserDTO stopFollowing(Long id, Long followerId) {
+		try {
+			User entity = repository.getOne(id);
+			
+			entity.getFollowers().clear();
+			
+			User follower = repository.getOne(followerId);
+			entity.getFollowers().remove(follower);
+			
+			entity = repository.save(entity);
+
+			return new UserDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}
+	}
 }
