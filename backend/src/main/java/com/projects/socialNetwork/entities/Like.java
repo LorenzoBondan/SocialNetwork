@@ -20,20 +20,22 @@ public class Like implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@ManyToOne
     @JoinColumn(name = "user_id")
 	private User user;
 	
+	@ManyToOne
 	@JoinColumn(name = "post_id")
-	private Post post;
+	private Post postLike;
 	
 	public Like() {}
 
-	public Like(Long id, User user, Post post) {
+	public Like(Long id, User user, Post postLike) {
 		super();
 		this.id = id;
 		this.user = user;
-		this.post = post;
+		this.postLike = postLike;
 	}
 
 	public Long getId() {
@@ -53,11 +55,11 @@ public class Like implements Serializable {
 	}
 
 	public Post getPost() {
-		return post;
+		return postLike;
 	}
 
 	public void setPost(Post post) {
-		this.post = post;
+		this.postLike = post;
 	}
 
 	@Override

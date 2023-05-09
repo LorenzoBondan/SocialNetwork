@@ -13,21 +13,21 @@ public class LikeDTO implements Serializable {
 	
 	private Long id;
 	private User user;
-	private Post post;
+	private Post postLike;
 	
 	public LikeDTO() {}
 	
 	public LikeDTO(Like entity) {
 		this.id = entity.getId();
 		this.user = entity.getUser();
-		this.post = entity.getPost();
+		this.postLike = entity.getPost();
 	}
 
 	public LikeDTO(Long id, User user, Post post) {
 		super();
 		this.id = id;
 		this.user = user;
-		this.post = post;
+		this.postLike = post;
 	}
 
 	public Long getId() {
@@ -47,11 +47,11 @@ public class LikeDTO implements Serializable {
 	}
 
 	public Post getPost() {
-		return post;
+		return postLike;
 	}
 
 	public void setPost(Post post) {
-		this.post = post;
+		this.postLike = post;
 	}
 
 	@Override

@@ -28,7 +28,7 @@ public class Post implements Serializable {
 	private String title;
 	@Column(columnDefinition = "TEXT")
 	private String description;
-	@Column(columnDefinition = "TIMESTAMP WITHOUT TIMEZONE")
+	@Column(columnDefinition = "TIMESTAMP WITH TIME ZONE")
 	private Instant date;
 	
 	@ManyToOne
@@ -38,7 +38,7 @@ public class Post implements Serializable {
 	@OneToMany(mappedBy = "post")
 	private List<Comment> comments = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "post")
+	@OneToMany(mappedBy = "postLike")
 	private List<Like> likes = new ArrayList<>();
 	
 	public Post() {}
