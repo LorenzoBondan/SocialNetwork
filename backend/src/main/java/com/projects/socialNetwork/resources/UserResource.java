@@ -1,6 +1,7 @@
 package com.projects.socialNetwork.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -42,6 +43,12 @@ public class UserResource {
 		return ResponseEntity.ok().body(dto);
 	}
 	
+	@GetMapping(value = "/{id}/following") 
+	public ResponseEntity<List<UserDTO>> findByFollowers(@PathVariable Long id) {
+		List<UserDTO> list = service.findByFollowers(id);	
+		return ResponseEntity.ok().body(list);
+	}
+	
 	@GetMapping(value = "/email/{email}") 
 	public ResponseEntity<UserDTO> findByEmail(@PathVariable String email) {
 		UserDTO dto = service.findByEmail(email);	
@@ -71,13 +78,13 @@ public class UserResource {
 	
 	
 	@PutMapping(value = "/startFollowing/{id}/{followerId}")
-	public ResponseEntity<UserDTO> startFollowing(@PathVariable Long id, @Valid @RequestBody Long followerId)	{
+	public ResponseEntity<UserDTO> startFollowing(@PathVariable Long id, @PathVariable @Valid @RequestBody Long followerId)	{
 		UserDTO newDto = service.startFollowing(id, followerId);
 		return ResponseEntity.ok().body(newDto);
 	}
 	
 	@PutMapping(value = "/stopFollowing/{id}/{followerId}")
-	public ResponseEntity<UserDTO> stopFollowing(@PathVariable Long id, @Valid @RequestBody Long followerId)	{
+	public ResponseEntity<UserDTO> stopFollowing(@PathVariable Long id, @PathVariable @Valid @RequestBody Long followerId)	{
 		UserDTO newDto = service.stopFollowing(id, followerId);
 		return ResponseEntity.ok().body(newDto);
 	}

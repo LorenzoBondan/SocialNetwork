@@ -1,6 +1,8 @@
 package com.projects.socialNetwork.services;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -53,6 +55,13 @@ public class UserService implements UserDetailsService {
 		Optional<User> obj = repository.findById(id);
 		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
 		return new UserDTO(entity, entity.getRoles(), entity.getFollowing(), entity.getFollowers());
+	}
+	
+	@Transactional(readOnly = true)
+	public List<UserDTO> findByFollowers(Long id) { // find who this id is following
+		Optional<User> obj = repository.findById(id);
+		List<User> list = repository.findByFollowers(obj);
+		return list.stream().map(item -> new UserDTO(item)).collect(Collectors.toList());
 	}
 	
 	@Transactional(readOnly = true)
@@ -142,10 +151,8 @@ public class UserService implements UserDetailsService {
 	public UserDTO startFollowing(Long id, Long followerId) {
 		try {
 			User entity = repository.getOne(id);
-			
-			entity.getFollowers().clear();
-			
 			User follower = repository.getOne(followerId);
+			
 			entity.getFollowers().add(follower);
 			
 			entity = repository.save(entity);
@@ -159,10 +166,8 @@ public class UserService implements UserDetailsService {
 	public UserDTO stopFollowing(Long id, Long followerId) {
 		try {
 			User entity = repository.getOne(id);
-			
-			entity.getFollowers().clear();
-			
 			User follower = repository.getOne(followerId);
+			
 			entity.getFollowers().remove(follower);
 			
 			entity = repository.save(entity);
