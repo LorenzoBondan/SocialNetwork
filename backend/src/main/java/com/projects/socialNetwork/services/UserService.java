@@ -65,6 +65,13 @@ public class UserService implements UserDetailsService {
 	}
 	
 	@Transactional(readOnly = true)
+	public List<UserDTO> findByFollowing(Long id) { // find who is followed by this user
+		Optional<User> obj = repository.findById(id);
+		List<User> list = repository.findByFollowing(obj);
+		return list.stream().map(item -> new UserDTO(item)).collect(Collectors.toList());
+	}
+	
+	@Transactional(readOnly = true)
 	public UserDTO findByEmail(String email) {
 		Optional<User> obj = Optional.ofNullable(repository.findByEmail(email));
 		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
@@ -154,8 +161,11 @@ public class UserService implements UserDetailsService {
 			User follower = repository.getOne(followerId);
 			
 			entity.getFollowers().add(follower);
+			follower.getFollowing().add(entity);
 			
 			entity = repository.save(entity);
+			follower = repository.save(follower);
+			
 			return new UserDTO(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found " + id);
@@ -169,8 +179,10 @@ public class UserService implements UserDetailsService {
 			User follower = repository.getOne(followerId);
 			
 			entity.getFollowers().remove(follower);
+			follower.getFollowing().remove(entity);
 			
 			entity = repository.save(entity);
+			follower = repository.save(follower);
 
 			return new UserDTO(entity);
 		} catch (EntityNotFoundException e) {

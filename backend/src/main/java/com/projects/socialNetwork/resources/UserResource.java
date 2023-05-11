@@ -49,6 +49,12 @@ public class UserResource {
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@GetMapping(value = "/{id}/followers") 
+	public ResponseEntity<List<UserDTO>> findByFollowing(@PathVariable Long id) {
+		List<UserDTO> list = service.findByFollowing(id);	
+		return ResponseEntity.ok().body(list);
+	}
+	
 	@GetMapping(value = "/email/{email}") 
 	public ResponseEntity<UserDTO> findByEmail(@PathVariable String email) {
 		UserDTO dto = service.findByEmail(email);	

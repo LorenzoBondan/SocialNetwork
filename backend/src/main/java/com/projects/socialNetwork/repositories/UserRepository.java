@@ -16,6 +16,8 @@ public interface UserRepository extends JpaRepository<User,Long>{
 	User findByEmail(String email);
 	
 	List<User> findByFollowers (Optional<User> obj);
+	
+	List<User> findByFollowing (Optional<User> obj);
 	// BUSCAR TODOS OS USUÁRIOS QUE SE CHAMAM MARIA, EXEMPLO
 	//List<User> findByFirstName(String firstName);
 }

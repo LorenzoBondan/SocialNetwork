@@ -54,7 +54,7 @@ public class UserDTO implements Serializable {
 
 		entity.getRoles().forEach(rol -> this.roles.add(new RoleDTO(rol)));
 		entity.getFollowers().forEach(f -> this.followers.add(new UserDTO(f)));
-		entity.getFollowing().forEach(f -> this.following.add(new UserDTO(f)));
+		entity.getFollowing().forEach(fo -> this.following.add(new UserDTO(fo)));
 		entity.getPosts().forEach(p -> this.posts.add(new PostDTO(p)));
 	}
 
@@ -62,7 +62,7 @@ public class UserDTO implements Serializable {
 		this(entity); 
 		roles.forEach(rol -> this.roles.add(new RoleDTO(rol))); 
 		following.forEach(f -> this.following.add(new UserDTO(f)));
-		followers.forEach(f -> this.followers.add(new UserDTO(f)));
+		followers.forEach(fo -> this.followers.add(new UserDTO(fo)));
 	}
 
 	public Long getId() {
