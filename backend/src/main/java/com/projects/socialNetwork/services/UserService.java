@@ -23,8 +23,10 @@ import com.projects.socialNetwork.dto.RoleDTO;
 import com.projects.socialNetwork.dto.UserDTO;
 import com.projects.socialNetwork.dto.UserInsertDTO;
 import com.projects.socialNetwork.dto.UserUpdateDTO;
+import com.projects.socialNetwork.entities.Post;
 import com.projects.socialNetwork.entities.Role;
 import com.projects.socialNetwork.entities.User;
+import com.projects.socialNetwork.repositories.PostRepository;
 import com.projects.socialNetwork.repositories.RoleRepository;
 import com.projects.socialNetwork.repositories.UserRepository;
 import com.projects.socialNetwork.services.exceptions.DataBaseException;
@@ -43,6 +45,9 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	private PostRepository postRepository;
 
 	@Transactional(readOnly = true)
 	public Page<UserDTO> findAllPaged(Pageable pageable) {
@@ -54,7 +59,7 @@ public class UserService implements UserDetailsService {
 	public UserDTO findById(Long id) {
 		Optional<User> obj = repository.findById(id);
 		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
-		return new UserDTO(entity, entity.getRoles(), entity.getFollowing(), entity.getFollowers());
+		return new UserDTO(entity);
 	}
 	
 	@Transactional(readOnly = true)
@@ -75,7 +80,7 @@ public class UserService implements UserDetailsService {
 	public UserDTO findByEmail(String email) {
 		Optional<User> obj = Optional.ofNullable(repository.findByEmail(email));
 		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
-		return new UserDTO(entity, entity.getRoles(), entity.getFollowing(), entity.getFollowers());
+		return new UserDTO(entity);
 	}
 
 	@Transactional
@@ -119,25 +124,24 @@ public class UserService implements UserDetailsService {
 		entity.setEmail(dto.getEmail());
 		entity.setImgUrl(dto.getImgUrl());
 
-		entity.getRoles().clear();
-
 		for (RoleDTO rolDto : dto.getRoles()) {
 			Role role = roleRepository.getOne(rolDto.getId());
 			entity.getRoles().add(role);
 		}
 		
-		entity.getFollowers().clear();
-		
-		for (UserDTO folDto : dto.getFollowers()) {
-			User follower = repository.getOne(folDto.getId());
+		for (Long folDtoId : dto.getFollowersId()) {
+			User follower = repository.getOne(folDtoId);
 			entity.getFollowers().add(follower);
 		}
 		
-		entity.getFollowing().clear();
-		
-		for (UserDTO folDto : dto.getFollowers()) {
-			User following = repository.getOne(folDto.getId());
+		for (Long folDtoId : dto.getFollowingId()) {
+			User following = repository.getOne(folDtoId);
 			entity.getFollowing().add(following);
+		}
+		
+		for (Long postDtoId : dto.getPostsId()) {
+			Post post = postRepository.getOne(postDtoId);
+			entity.getPosts().add(post);
 		}
 	}
 
@@ -161,10 +165,8 @@ public class UserService implements UserDetailsService {
 			User follower = repository.getOne(followerId);
 			
 			entity.getFollowers().add(follower);
-			follower.getFollowing().add(entity);
 			
 			entity = repository.save(entity);
-			follower = repository.save(follower);
 			
 			return new UserDTO(entity);
 		} catch (EntityNotFoundException e) {
@@ -179,10 +181,8 @@ public class UserService implements UserDetailsService {
 			User follower = repository.getOne(followerId);
 			
 			entity.getFollowers().remove(follower);
-			follower.getFollowing().remove(entity);
 			
 			entity = repository.save(entity);
-			follower = repository.save(follower);
 
 			return new UserDTO(entity);
 		} catch (EntityNotFoundException e) {

@@ -28,11 +28,11 @@ public class UserDTO implements Serializable {
 	
 	private List<RoleDTO> roles = new ArrayList<>();
 	
-	private List<UserDTO> following = new ArrayList<>();
+	private List<Long> followingId = new ArrayList<>();
 	
-	private List<UserDTO> followers = new ArrayList<>();
+	private List<Long> followersId = new ArrayList<>();
 	
-	private List<PostDTO> posts = new ArrayList<>();
+	private List<Long> postsId = new ArrayList<>();
 	  
 	public UserDTO() {}
 
@@ -53,17 +53,11 @@ public class UserDTO implements Serializable {
 		this.imgUrl = entity.getImgUrl();
 
 		entity.getRoles().forEach(rol -> this.roles.add(new RoleDTO(rol)));
-		entity.getFollowers().forEach(f -> this.followers.add(new UserDTO(f)));
-		entity.getFollowing().forEach(fo -> this.following.add(new UserDTO(fo)));
-		entity.getPosts().forEach(p -> this.posts.add(new PostDTO(p)));
+		entity.getFollowers().forEach(f -> this.followersId.add(f.getId()));
+		entity.getFollowing().forEach(fo -> this.followingId.add(fo.getId()));
+		entity.getPosts().forEach(p -> this.postsId.add(p.getId()));
 	}
 
-	public UserDTO(User entity, Set<Role> roles, Set<User> following, Set<User> followers) {
-		this(entity); 
-		roles.forEach(rol -> this.roles.add(new RoleDTO(rol))); 
-		following.forEach(f -> this.following.add(new UserDTO(f)));
-		followers.forEach(fo -> this.followers.add(new UserDTO(fo)));
-	}
 
 	public Long getId() {
 		return id;
@@ -105,17 +99,17 @@ public class UserDTO implements Serializable {
 		return roles;
 	}
 
-	public List<UserDTO> getFollowing() {
-		return following;
+	public List<Long> getFollowingId() {
+		return followingId;
 	}
 
-	public List<UserDTO> getFollowers() {
-		return followers;
+	public List<Long> getFollowersId() {
+		return followersId;
 	}
 	
 
-	public List<PostDTO> getPosts() {
-		return posts;
+	public List<Long> getPostsId() {
+		return postsId;
 	}
 
 

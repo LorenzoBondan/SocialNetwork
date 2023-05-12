@@ -55,10 +55,7 @@ public class User implements UserDetails, Serializable{
 				inverseJoinColumns = @JoinColumn(name = "follower_id"))
 	private Set<User> followers = new HashSet<>();
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "tb_user_following",
-				joinColumns = @JoinColumn(name = "user_id"), 
-				inverseJoinColumns = @JoinColumn(name = "following_id"))
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "followers")
 	private Set<User> following = new HashSet<>();
 	
 	@OneToMany(mappedBy = "user")
