@@ -4,12 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-import com.projects.socialNetwork.entities.Role;
 import com.projects.socialNetwork.entities.User;
 
 public class UserDTO implements Serializable {
@@ -36,7 +34,6 @@ public class UserDTO implements Serializable {
 	  
 	public UserDTO() {}
 
-	
 	public UserDTO(Long id, String name, String email, String password, Long favoriteTeamId, String imgUrl) {
 		super();
 		this.id = id;
@@ -45,7 +42,6 @@ public class UserDTO implements Serializable {
 		this.imgUrl = imgUrl;
 	}
 	
-	// construtor implantado na classe UserService
 	public UserDTO(User entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();
@@ -58,7 +54,6 @@ public class UserDTO implements Serializable {
 		entity.getPosts().forEach(p -> this.postsId.add(p.getId()));
 	}
 
-
 	public Long getId() {
 		return id;
 	}
@@ -67,11 +62,9 @@ public class UserDTO implements Serializable {
 		this.id = id;
 	}
 
-
 	public String getName() {
 		return name;
 	}
-
 
 	public void setName(String name) {
 		this.name = name;
@@ -89,12 +82,10 @@ public class UserDTO implements Serializable {
 		return imgUrl;
 	}
 
-
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
 
-	// SOMENTE O GET NAS LISTAS
 	public List<RoleDTO> getRoles() { 
 		return roles;
 	}
@@ -107,11 +98,9 @@ public class UserDTO implements Serializable {
 		return followersId;
 	}
 	
-
 	public List<Long> getPostsId() {
 		return postsId;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -129,7 +118,4 @@ public class UserDTO implements Serializable {
 		UserDTO other = (UserDTO) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
-
 }
