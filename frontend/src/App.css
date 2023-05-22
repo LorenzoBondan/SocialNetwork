@@ -1,0 +1,57 @@
+@font-face {
+  font-family: Instagram Sans;
+  src: url('./assets/fonts/InstagramSans-Regular.ttf');
+  font-weight: 400;
+}
+@font-face {
+  font-family: Instagram Sans;
+  src: url('./assets/fonts/InstagramSans-Bold.ttf');
+  font-weight: 700;
+}
+
+*, *::before, *::after{
+  font-family: 'Instagram Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* títulos principais do projeto estão em negrito */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  margin-bottom: 0;
+  text-decoration: none !important;
+}
+
+/* textos -> sem o sublinhado */
+a, a:hover{
+  text-decoration: none !important;
+  color: unset !important;
+}
+
+ul {
+  list-style-type: none; /* sem as bolinhas pretas no meio */
+  margin: 0;
+  padding: 0;
+}
+
+.base-card{
+  border-radius: 20px;
+  border: 1px solid white;
+  box-shadow: 5px 5px 5px silver;
+  background-color: #121212;
+}
+
+/* TEXTBOX */
+.base-input {
+  border-radius: 10px;
+  font-size: 1em;
+  letter-spacing: -0.015em;
+  color: #263238;
+  height: 50px;
+}
+
+
+.base-input::placeholder {
+  color: #9E9E9E;
+}
