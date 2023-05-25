@@ -4,6 +4,7 @@
     justify-content: space-between;
     padding: 30px;
     width: 300px;
+
 }
 
 .profile-card-image-container{
@@ -64,6 +65,7 @@
     .profile-card-container{
         flex-direction: row;
         width: 500px;
+        margin-bottom: 30px;
     }
     
     .profile-card-image-container img{

@@ -4,7 +4,7 @@
     align-items: flex-start;
     justify-content: center;
     padding: 20px;
-    width: 500px;
+    width: 320px;
     margin-top: 15px;
 }
 
@@ -56,6 +56,12 @@
     font-size: 14px;
     color: darkgray;
     text-align: end;
+    width: 100%;
+}
+
+.postcard-bottom-container{
+    display: flex;
+    justify-content: space-between;
     width: 100%;
 }
 
@@ -149,12 +155,13 @@
     height: 100%;
 }
 
-.postcard-second-container img{
+.postcard-second-container svg, .postcard-delete svg{
     height: 30px;
     margin-bottom: 0;
 }
 
-.postcard-second-container img:hover{
+.postcard-second-container svg:hover, .postcard-delete svg:hover{
     cursor: pointer;
+    transform: scale(1.15);
 }
 

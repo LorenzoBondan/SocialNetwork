@@ -63,8 +63,8 @@ const ProfileCard = ({userEmail} : Props) => {
             <div className='profile-card-posts-container'>
                 <div className='row'>
                     {page.postsId.map(p => (
-                        <div className='col-sm-12 col-lg-6 col-xl-4 posts-column' key={p}>
-                            <PostCard postId={p}/>
+                        <div className='col-sm-12 col-md-6 col-lg-4 col-xl-6 col-xxl-3 posts-column' key={p}>
+                            <PostCard postId={p} onDelete={() => getUser()}/>
                         </div>
                     ))}
                 </div>

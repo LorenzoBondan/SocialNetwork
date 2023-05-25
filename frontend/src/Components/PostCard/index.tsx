@@ -5,12 +5,14 @@ import { useCallback, useEffect, useState } from 'react';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
 import CommentCard from 'Components/CommentCard';
+import { GoTrashcan } from 'react-icons/go';
 
 type Props = {
     postId: number;
+    onDelete : Function;
 }
 
-const PostCard = ({postId} : Props) => {
+const PostCard = ({postId, onDelete} : Props) => {
 
     const [post, setPost] = useState<Post>();
 
@@ -88,6 +90,23 @@ const PostCard = ({postId} : Props) => {
         post?.comments && checkQuantityComments(post?.comments.length);
     })
 
+    const handleDelete = (postId : number) => {
+    
+        if(!window.confirm("Are you sure that you want to delete the post?")){ // messagebox
+          return;
+        }
+    
+        const params : AxiosRequestConfig = {
+          method:"DELETE",
+          url: `/posts/${postId}`,
+          withCredentials: true
+        }
+    
+        requestBackend(params).then(() => {
+          onDelete();
+        })
+      }
+
     return(
         <div className='postcard-container base-card'>
             <div className='postcard-content-container'>
@@ -99,18 +118,22 @@ const PostCard = ({postId} : Props) => {
                 <p>{post?.description}</p>
                 <p className='postcard-date'>{post?.date && formatDate(post.date)}</p>
             </div>
-            <div className='postcard-likes-comments-info'>
-                {quantityLikes ? (
-                    <p onClick={openAndCloseLikes}>{post?.likes.length} likes</p>
-                ) : (
-                    <p onClick={openAndCloseLikes}>{post?.likes.length} like</p>
-                )}
-                {quantityComments ? (
-                    <p onClick={openAndCloseComments}>{post?.comments.length} comments</p>
-                ) : (
-                    <p onClick={openAndCloseComments}>{post?.comments.length} comment</p>
-                )}
-                
+            <div className='postcard-bottom-container'>
+                <div className='postcard-likes-comments-info'>
+                    {quantityLikes ? (
+                        <p onClick={openAndCloseLikes}>{post?.likes.length} likes</p>
+                    ) : (
+                        <p onClick={openAndCloseLikes}>{post?.likes.length} like</p>
+                    )}
+                    {quantityComments ? (
+                        <p onClick={openAndCloseComments}>{post?.comments.length} comments</p>
+                    ) : (
+                        <p onClick={openAndCloseComments}>{post?.comments.length} comment</p>
+                    )}
+                </div>
+                <div className='postcard-delete'>
+                    <GoTrashcan onClick={() => post?.id && handleDelete(post.id)} />
+                </div>
             </div>
 
             {showLikes && 

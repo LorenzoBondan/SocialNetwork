@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,10 +36,10 @@ public class Post implements Serializable {
     @JoinColumn(name = "user_id")
 	private User user;
 	
-	@OneToMany(mappedBy = "post")
+	@OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "postLike")
+	@OneToMany(mappedBy = "postLike", cascade = CascadeType.REMOVE)
 	private List<Like> likes = new ArrayList<>();
 	
 	public Post() {}

@@ -17,6 +17,11 @@ INSERT INTO tb_user_followers (user_id, follower_id) VALUES (3,1);
 INSERT INTO tb_post (title, description, date, user_id) VALUES ('My first post', 'Hello, welcome to my profile, this is my first post!', TIMESTAMP WITH TIME ZONE '2020-07-14T10:30:00Z', 1);
 INSERT INTO tb_post (title, description, date, user_id) VALUES ('Follow Me', 'Hi guys, dont you forget to follow me!!', TIMESTAMP WITH TIME ZONE '2022-08-20T12:45:16Z', 2);
 INSERT INTO tb_post (title, description, date, user_id) VALUES ('I got a promotion on my job!', 'I am glad to share with you that I got a promotion on my job! Lets celebrate!', TIMESTAMP WITH TIME ZONE '2023-02-18T21:20:10Z', 3);
+INSERT INTO tb_post (title, description, date, user_id) VALUES ('My first post', 'Hello, welcome to my profile, this is my first post!', TIMESTAMP WITH TIME ZONE '2020-07-14T10:30:00Z', 2);
+INSERT INTO tb_post (title, description, date, user_id) VALUES ('My first post', 'Hello, welcome to my profile, this is my first post!', TIMESTAMP WITH TIME ZONE '2020-07-14T10:30:00Z', 2);
+INSERT INTO tb_post (title, description, date, user_id) VALUES ('My first post', 'Hello, welcome to my profile, this is my first post!', TIMESTAMP WITH TIME ZONE '2020-07-14T10:30:00Z', 2);
+INSERT INTO tb_post (title, description, date, user_id) VALUES ('My first post', 'Hello, welcome to my profile, this is my first post!', TIMESTAMP WITH TIME ZONE '2020-07-14T10:30:00Z', 2);
+INSERT INTO tb_post (title, description, date, user_id) VALUES ('My first post', 'Hello, welcome to my profile, this is my first post!', TIMESTAMP WITH TIME ZONE '2020-07-14T10:30:00Z', 2);
 
 INSERT INTO tb_comment (description, user_id, post_id) VALUES ('Hi girl! How are you?', 1, 2);
 INSERT INTO tb_comment (description, user_id, post_id) VALUES ('I saw you yesterday on the gym', 3, 2);

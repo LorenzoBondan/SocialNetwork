@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from "axios";
 import { Comment } from "types";
 import { requestBackend } from "util/requests";
-import trash from 'assets/images/trash.png';
+import { GoTrashcan } from 'react-icons/go';
 
 type Props = {
     comment: Comment;
@@ -39,7 +39,7 @@ const CommentCard = ({comment, onDelete} : Props) => {
                 </div>
             </div>
             <div className="postcard-second-container">
-                <img src={trash} alt="" onClick={() => handleDelete(comment.id)} />
+                <GoTrashcan onClick={() => handleDelete(comment.id)} />
             </div>
                     
         </div>
