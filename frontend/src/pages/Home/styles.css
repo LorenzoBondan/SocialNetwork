@@ -1,0 +1,53 @@
+.home-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 40px;
+}
+
+.home-first-container{
+    width: 30%;
+}
+
+.home-first-container h1{
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+    color: #7D5889;
+    margin-bottom: 30px;
+}
+
+.home-first-container p{
+    font-size: 18px;
+    text-align: center;
+    color: #E74A7D;
+    font-style: italic;
+    margin-bottom: 50px;
+}
+
+.home-second-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-second-container-logo img{
+    height: 350px;
+    margin-bottom: 50px;
+}
+
+.home-second-container-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-link-register{
+    color: #E74A7D !important;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+

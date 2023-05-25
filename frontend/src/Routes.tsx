@@ -1,5 +1,6 @@
 
 import Navbar from "Components/Navbar";
+import Home from "pages/Home";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 
 import history from "util/history";
@@ -8,42 +9,43 @@ const Routes = () => {
 
     return(
         <Router history={history}> 
-            <Navbar/>
+            <div className="flex-direction-row">
+                <Navbar/>
 
-            <Switch>
+                <Switch>
 
-                <Route path="/" exact>
+                    <Route path="/" exact>
+                        <div style={{display:"flex", alignItems:"center", justifyContent:"center", flex:"1"}}><Home/></div>
+                    </Route>
 
-                </Route>
+                    <Route path="/courses" exact>
+                        <div style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
 
-                <Route path="/courses" exact>
-                    <div style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
+                        </div>
+                        
+                    </Route>
 
-                    </div>
-                    
-                </Route>
+                    <Route path="/courses/:courseId">
 
-                <Route path="/courses/:courseId">
+                    </Route>
 
-                </Route>
+                    <Redirect from='/admin/auth' to='/admin/auth/login' exact />
+                    <Route path="/admin/auth">
 
-                <Redirect from='/admin/auth' to='/admin/auth/login' exact />
-                <Route path="/admin/auth">
+                    </Route>
 
-                </Route>
+                    <Redirect from="/admin" to="/admin/courses" exact />
+                    <Route path="/admin">
 
-                <Redirect from="/admin" to="/admin/courses" exact />
-                <Route path="/admin">
+                    </Route>
 
-                </Route>
+                    <Route path="/profile">
 
-                <Route path="/profile">
+                    </Route>
 
-                </Route>
-
-            </Switch>
-
-
+                </Switch>
+            </div>
+            
         </Router>
     );
 }

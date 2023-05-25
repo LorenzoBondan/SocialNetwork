@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { hasAnyRoles } from 'util/auth';
+import { getTokenData, hasAnyRoles, isAuthenticated } from 'util/auth';
 import logo from 'assets/images/sn-logo.png'
 import { AiOutlineHome } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
@@ -7,8 +7,41 @@ import { HiOutlineUsers } from 'react-icons/hi';
 import { MdOutlineAdminPanelSettings } from 'react-icons/md';
 
 import './styles.css';
+import { useContext, useEffect } from 'react';
+import { AuthContext } from 'AuthContext';
+import { removeAuthData } from 'util/storage';
+import history from 'util/history';
 
 const Navbar = () => {
+
+    const { authContextData, setAuthContextData } = useContext(AuthContext);
+
+    useEffect(() => {
+        if(isAuthenticated()){
+          setAuthContextData({
+            authenticated: true,
+            tokenData: getTokenData()
+          })
+        }
+        else{
+          setAuthContextData({
+            authenticated: false,
+          })
+        }
+      }, [setAuthContextData]);
+
+      const handleLogoutClick = (event : React.MouseEvent<HTMLAnchorElement>) => {
+        event.preventDefault(); 
+        
+        removeAuthData(); 
+    
+        setAuthContextData({
+          authenticated: false,
+        })
+    
+        history.replace('/'); 
+    }
+
     return(
         <nav className='admin-nav-container'>
             <div className='navbar-title'>
@@ -50,8 +83,31 @@ const Navbar = () => {
                 )}
                 </>
                 ) : (
-                    <div>login</div>
+                    <li>
+                        <NavLink to="/" exact className='admin-nav-item'>
+                            <AiOutlineHome style={{color:"#7D5889", marginRight:"8px"}}/>
+                            <p>Home</p>
+                        </NavLink>
+                    </li>   
+                
                 )}
+
+                { authContextData.authenticated ? (
+                    <li>
+                        <NavLink to="/" className='admin-nav-item' onClick={handleLogoutClick}>
+                            <CgProfile style={{color:"#7D5889", marginRight:"8px"}}/>
+                                <p>Logout</p>
+                        </NavLink>
+                    </li>
+                    ) : (
+                        <li>
+                            <NavLink to="/auth/login" className='admin-nav-item'>
+                                <CgProfile style={{color:"#7D5889", marginRight:"8px"}}/>
+                                <p>Login</p>
+                            </NavLink>
+                        </li>
+                    )
+                }
 
             </ul>
         </nav>
