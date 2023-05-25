@@ -4,6 +4,7 @@ import './styles.css';
 import { useCallback, useEffect, useState } from 'react';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
+import CommentCard from 'Components/CommentCard';
 
 type Props = {
     postId: number;
@@ -90,15 +91,7 @@ const PostCard = ({postId} : Props) => {
             {showComments && 
                 <div className='postcard-comments'>
                     {post?.comments && post.comments.map(comment => (
-                        <div className='postcard-comment-zone' key={comment.id}>
-                            <div className='postcard-comment-user-image'>
-                                <img src={comment.user.imgUrl} alt="" />
-                            </div>
-                            <div className='postcard-comment-description'>
-                                <span>{comment.user.name}</span>
-                                <p>{comment.description}</p>
-                            </div>        
-                        </div>
+                        <CommentCard comment={comment} onDelete={() => getPostById()} key={comment.id}/>
                     ))}
                 </div>
             }
