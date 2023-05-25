@@ -5,6 +5,7 @@
     justify-content: center;
     padding: 20px;
     width: 500px;
+    margin-top: 15px;
 }
 
 .postcard-content-container{
@@ -66,6 +67,12 @@
     margin-right: 10px;
     font-size: 16px;
     color: #533A5B;
+    margin-bottom: 0;
+}
+
+.postcard-likes-comments-info p:hover{
+    cursor: pointer;
+    color: #E74A7D;
 }
 
 .postcard-likes-zone{
@@ -73,6 +80,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    margin-top: 10px;
 }
 
 .postcard-like{
@@ -97,6 +105,7 @@
 
 .postcard-comments{
     width: 100%;
+    margin-top: 10px;
 }
 
 .postcard-comment-zone{

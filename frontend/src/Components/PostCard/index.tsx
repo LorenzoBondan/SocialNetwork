@@ -26,15 +26,39 @@ const PostCard = ({postId} : Props) => {
 
       useEffect(() => {
         getPostById();
-      }, [getPostById]);
+    }, [getPostById]);
 
-      const formatDate = (date : string) => {
+    const formatDate = (date : string) => {
         const fullDate = date.substring(0,10).replaceAll("-", "/");
         const dayAndMonth = fullDate.substring(5,10);
         const year = fullDate.substring(0,4);
         const time = date.substring(11,16);
         return `${dayAndMonth}/${year} at ${time}`;
-      }
+    }
+
+    const [showComments, setShowComments] = useState(false);
+
+    const openAndCloseComments = () => {
+        if(showComments){
+            setShowComments(false);
+        }
+        else{
+            setShowComments(true);
+            setShowLikes(false); // just to don't stay with both opened
+        }
+    }
+
+    const [showLikes, setShowLikes] = useState(false);
+
+    const openAndCloseLikes = () => {
+        if(showLikes){
+            setShowLikes(false);
+        }
+        else{
+            setShowLikes(true);
+            setShowComments(false); // just to don't stay with both opened
+        }
+    }
 
     return(
         <div className='postcard-container base-card'>
@@ -48,32 +72,36 @@ const PostCard = ({postId} : Props) => {
                 <p className='postcard-date'>{post?.date && formatDate(post.date)}</p>
             </div>
             <div className='postcard-likes-comments-info'>
-                <p>{post?.likes.length} likes</p>
-                <p>{post?.comments.length} comments</p>
+                <p onClick={openAndCloseLikes}>{post?.likes.length} likes</p>
+                <p onClick={openAndCloseComments}>{post?.comments.length} comments</p>
             </div>
 
-            <div className='postcard-likes-zone'>
-                {post?.likes && post.likes.map(like => (
-                    <div className='postcard-like' key={like.id}>
-                        <img src={like.user.imgUrl} alt="" />
-                        <p>{like.user.name}</p>
-                    </div>
-                ))}
-            </div>
-
-            <div className='postcard-comments'>
-                {post?.comments && post.comments.map(comment => (
-                    <div className='postcard-comment-zone' key={comment.id}>
-                        <div className='postcard-comment-user-image'>
-                            <img src={comment.user.imgUrl} alt="" />
+            {showLikes && 
+                <div className='postcard-likes-zone'>
+                    {post?.likes && post.likes.map(like => (
+                        <div className='postcard-like' key={like.id}>
+                            <img src={like.user.imgUrl} alt="" />
+                            <p>{like.user.name}</p>
                         </div>
-                        <div className='postcard-comment-description'>
-                            <span>{comment.user.name}</span>
-                            <p>{comment.description}</p>
-                        </div>        
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            }
+
+            {showComments && 
+                <div className='postcard-comments'>
+                    {post?.comments && post.comments.map(comment => (
+                        <div className='postcard-comment-zone' key={comment.id}>
+                            <div className='postcard-comment-user-image'>
+                                <img src={comment.user.imgUrl} alt="" />
+                            </div>
+                            <div className='postcard-comment-description'>
+                                <span>{comment.user.name}</span>
+                                <p>{comment.description}</p>
+                            </div>        
+                        </div>
+                    ))}
+                </div>
+            }
         </div>
     );
 }

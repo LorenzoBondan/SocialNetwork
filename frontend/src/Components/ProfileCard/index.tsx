@@ -61,12 +61,13 @@ const ProfileCard = ({userEmail} : Props) => {
 
         {page?.postsId && (
             <div className='profile-card-posts-container'>
-                <h2>Posts</h2>
-                {page.postsId.map(p => (
-                    <div key={p}>
-                        <PostCard postId={p}/>
-                    </div>
-                ))}
+                <div className='row'>
+                    {page.postsId.map(p => (
+                        <div className='col-sm-12 col-lg-6 col-xl-4 posts-column' key={p}>
+                            <PostCard postId={p}/>
+                        </div>
+                    ))}
+                </div>
             </div>
         )}
         </>
