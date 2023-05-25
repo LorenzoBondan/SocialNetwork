@@ -47,9 +47,18 @@ const PostCard = ({postId} : Props) => {
                 <p>{post?.description}</p>
                 <p className='postcard-date'>{post?.date && formatDate(post.date)}</p>
             </div>
-            <div className='postcard-likes'>
+            <div className='postcard-likes-comments-info'>
                 <p>{post?.likes.length} likes</p>
                 <p>{post?.comments.length} comments</p>
+            </div>
+
+            <div className='postcard-likes-zone'>
+                {post?.likes && post.likes.map(like => (
+                    <div className='postcard-like' key={like.id}>
+                        <img src={like.user.imgUrl} alt="" />
+                        <p>{like.user.name}</p>
+                    </div>
+                ))}
             </div>
 
             <div className='postcard-comments'>

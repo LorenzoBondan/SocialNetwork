@@ -58,14 +58,41 @@
     width: 100%;
 }
 
-.postcard-likes{
+.postcard-likes-comments-info{
     display: flex;
 }
 
-.postcard-likes p{
+.postcard-likes-comments-info p{
     margin-right: 10px;
     font-size: 16px;
     color: #533A5B;
+}
+
+.postcard-likes-zone{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.postcard-like{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.postcard-like img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.postcard-like p{
+    margin-bottom: 0;
+    font-weight: 700;
 }
 
 .postcard-comments{
