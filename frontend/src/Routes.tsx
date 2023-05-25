@@ -3,6 +3,7 @@ import Navbar from "Components/Navbar";
 import Auth from "pages/Auth";
 import Home from "pages/Home";
 import Profile from "pages/Profile";
+import Users from "pages/Users";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 
 import history from "util/history";
@@ -26,7 +27,11 @@ const Routes = () => {
                         <Profile/>
                     </Route>
 
-                    <Route path="/courses/:courseId">
+                    <Route path="/users" exact>
+                        <Users/>
+                    </Route>
+
+                    <Route path="/user/:userId">
 
                     </Route>
 

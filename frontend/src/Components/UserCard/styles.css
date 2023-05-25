@@ -1,0 +1,35 @@
+.usercard-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 250px;
+    border-radius: 60px 20px 20px 60px;
+}
+
+.usercard-image{
+    border-right: 1px solid silver;
+    padding-right: 5px;
+}
+
+.usercard-container img{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+.usercard-rigth{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.usercard-rigth p{
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.usercard-rigth button{
+    color: #fff;
+}
