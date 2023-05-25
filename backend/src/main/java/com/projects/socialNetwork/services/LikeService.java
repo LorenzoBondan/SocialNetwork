@@ -14,6 +14,7 @@ import com.projects.socialNetwork.entities.Like;
 import com.projects.socialNetwork.entities.Post;
 import com.projects.socialNetwork.repositories.LikeRepository;
 import com.projects.socialNetwork.repositories.PostRepository;
+import com.projects.socialNetwork.repositories.UserRepository;
 import com.projects.socialNetwork.services.exceptions.DataBaseException;
 import com.projects.socialNetwork.services.exceptions.ResourceNotFoundException;
 
@@ -25,6 +26,9 @@ public class LikeService {
 	
 	@Autowired
 	private PostRepository postRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Transactional(readOnly = true) // goes in PostResource
 	public List<LikeDTO> findLikesByPostId(Long PostId) {
@@ -53,8 +57,8 @@ public class LikeService {
 	}
 
 	private void copyDtoToEntity(LikeDTO dto, Like entity) {
-		entity.setUser(dto.getUser());
-		entity.setPost(dto.getPost());
+		entity.setUser(userRepository.getOne(dto.getUser().getId()));
+		entity.setPost(postRepository.getOne(dto.getPostId()));
 	}
 
 }

@@ -48,7 +48,7 @@ public class PostService {
 	public PostDTO findById(Long id) {
 		Optional<Post> obj = repository.findById(id);
 		Post entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
-		return new PostDTO(entity, entity.getComments(), entity.getLikes());
+		return new PostDTO(entity);
 	}
 
 	@Transactional

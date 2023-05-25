@@ -4,30 +4,21 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import com.projects.socialNetwork.entities.Like;
-import com.projects.socialNetwork.entities.Post;
-import com.projects.socialNetwork.entities.User;
 
 public class LikeDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-	private User user;
-	private Post postLike;
+	private UserDTO user;
+	private Long postId;
 	
 	public LikeDTO() {}
 	
 	public LikeDTO(Like entity) {
 		this.id = entity.getId();
-		this.user = entity.getUser();
-		this.postLike = entity.getPost();
-	}
-
-	public LikeDTO(Long id, User user, Post post) {
-		super();
-		this.id = id;
-		this.user = user;
-		this.postLike = post;
+		this.user = new UserDTO(entity.getUser());
+		this.postId = entity.getPost().getId();
 	}
 
 	public Long getId() {
@@ -38,20 +29,20 @@ public class LikeDTO implements Serializable {
 		this.id = id;
 	}
 
-	public User getUser() {
+	public UserDTO getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserDTO user) {
 		this.user = user;
 	}
 
-	public Post getPost() {
-		return postLike;
+	public Long getPostId() {
+		return postId;
 	}
 
-	public void setPost(Post post) {
-		this.postLike = post;
+	public void setPost(Long postId) {
+		this.postId = postId;
 	}
 
 	@Override
