@@ -5,6 +5,7 @@ import { requestBackend } from 'util/requests';
 import './styles.css';
 import { User } from 'types';
 import PostCard from 'Components/PostCard';
+import { FaUserEdit } from 'react-icons/fa';
 
 
 type Props ={
@@ -51,7 +52,7 @@ const ProfileCard = ({userEmail} : Props) => {
                     </div>
                 </div>
                 <div className='profile-card-content-container-button'>
-                    <button className='btn btn-primary'>Edit Profile</button>
+                    <button className='btn btn-primary' style={{display:"flex", alignItems:"center", justifyContent:"center"}}><FaUserEdit style={{marginRight:"5px"}}/>Edit Profile</button>
                 </div>
 
             </div>

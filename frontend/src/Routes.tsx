@@ -23,9 +23,7 @@ const Routes = () => {
                     </Route>
 
                     <Route path="/profile" exact>
-                        <div style={{display:"flex", alignItems:"flex-start", justifyContent:"center", flex:"1"}}>
-                            <Profile/>
-                        </div>
+                        <Profile/>
                     </Route>
 
                     <Route path="/courses/:courseId">

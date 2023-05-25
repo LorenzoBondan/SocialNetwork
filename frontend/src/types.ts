@@ -33,7 +33,8 @@ export type Post = {
     title: string;
     description: string;
     date: string;
-    commentaries: Comment[];
+    user: User;
+    comments: Comment[];
     likes: Like[];
 }
 
@@ -41,9 +42,11 @@ export type Comment = {
     id: number;
     description: string;
     user: User;
+    postId : number;
 }
 
 export type Like = {
     id: number;
     user: User;
+    postId: number;
 }
