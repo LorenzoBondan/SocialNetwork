@@ -25,12 +25,9 @@ const PostCard = ({postId} : Props) => {
           })
       }, [postId])
 
-      useEffect(() => {
+    useEffect(() => {
         getPostById();
-
-        post?.likes && checkQuantityLikes(post?.likes.length);
-        post?.comments && checkQuantityComments(post?.comments.length);
-    }, [getPostById, post?.likes, post?.comments]);
+    }, [getPostById]);
 
     const formatDate = (date : string) => {
         const fullDate = date.substring(0,10).replaceAll("-", "/");
@@ -85,6 +82,11 @@ const PostCard = ({postId} : Props) => {
                 setQuantityComments(false);
             }
     }
+
+    useEffect(() => {
+        post?.likes && checkQuantityLikes(post?.likes.length);
+        post?.comments && checkQuantityComments(post?.comments.length);
+    })
 
     return(
         <div className='postcard-container base-card'>
