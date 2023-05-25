@@ -14,7 +14,7 @@ const Routes = () => {
                 <Navbar/>
 
                 <Switch>
-
+                    <Redirect from='/' to='/home' exact />
                     <Route path="/home" exact>
                         <div style={{display:"flex", alignItems:"center", justifyContent:"center", flex:"1", padding:"10px"}}>
                             <Home/>

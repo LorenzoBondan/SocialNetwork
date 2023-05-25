@@ -53,13 +53,6 @@ const Navbar = () => {
                 {isAuthenticated() ? (
                 <>
                 <li>
-                    <NavLink to="/home" exact className='admin-nav-item'>
-                        <AiOutlineHome style={{color:"#7D5889", marginRight:"8px"}}/>
-                        <p>Home</p>
-                    </NavLink>
-                </li>
-                
-                <li>
                     <NavLink to="/profile" className='admin-nav-item'>
                         <CgProfile style={{color:"#7D5889", marginRight:"8px"}}/>
                         <p>Profile</p>
@@ -94,14 +87,14 @@ const Navbar = () => {
 
                 { authContextData.authenticated ? (
                     <li>
-                        <NavLink to="/" className='admin-nav-item' onClick={handleLogoutClick}>
+                        <NavLink to="/" className='login-nav-item' onClick={handleLogoutClick}>
                             <CgProfile style={{color:"#7D5889", marginRight:"8px"}}/>
                                 <p>Logout</p>
                         </NavLink>
                     </li>
                     ) : (
                         <li>
-                            <NavLink to="/auth/login" className='admin-nav-item'>
+                            <NavLink to="/auth/login" className='login-nav-item'>
                                 <CgProfile style={{color:"#7D5889", marginRight:"8px"}}/>
                                 <p>Login</p>
                             </NavLink>

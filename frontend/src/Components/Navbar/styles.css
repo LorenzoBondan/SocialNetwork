@@ -43,7 +43,7 @@
     display: none;
 }
 
-.admin-nav-item {
+.admin-nav-item, .login-nav-item{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,7 +58,7 @@
     border-radius: 100px;
 }
 
-.admin-nav-item:hover {
+.admin-nav-item:hover, .login-nav-item:hover {
     background-color: rgb(225, 225, 225);
     color: #7D5889 !important;
 }
@@ -72,7 +72,7 @@
     color: #fff !important;
 }
 
-.admin-nav-item p {
+.admin-nav-item p, .login-nav-item p {
     margin-bottom: 0;
 }
 
@@ -80,7 +80,7 @@
 /* --- VIRA UMA NAVBAR LATERAL ESQ */
 
 @media(min-width:768px){
-    .admin-nav-item {
+    .admin-nav-item, .login-nav-item {
         min-width: 220px;
     }
 
@@ -106,7 +106,7 @@
         height: calc(100vh); /* toda a altura da tela menos o cabeçalho */
     }
 
-    .admin-nav-item {
+    .admin-nav-item, .login-nav-item {
         height: 60px;
         background-color: white;
         justify-content: flex-start;
