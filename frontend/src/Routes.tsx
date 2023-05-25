@@ -15,7 +15,7 @@ const Routes = () => {
                 <Switch>
 
                     <Route path="/" exact>
-                        <div style={{display:"flex", alignItems:"center", justifyContent:"center", flex:"1"}}><Home/></div>
+                        <div style={{display:"flex", alignItems:"center", justifyContent:"center", flex:"1", padding:"10px"}}><Home/></div>
                     </Route>
 
                     <Route path="/courses" exact>

@@ -1,29 +1,38 @@
 .home-container{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    padding: 40px;
+    padding: 5px;
 }
 
 .home-first-container{
     width: 30%;
 }
 
+.home-first-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+}
+
 .home-first-container h1{
-    font-size: 40px;
-    text-align: center;
+    font-size: 28px;
     font-weight: bold;
     color: #7D5889;
     margin-bottom: 30px;
+    text-align: center;
 }
 
 .home-first-container p{
     font-size: 18px;
-    text-align: center;
     color: #E74A7D;
     font-style: italic;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .home-second-container{
@@ -34,8 +43,8 @@
 }
 
 .home-second-container-logo img{
-    height: 350px;
-    margin-bottom: 50px;
+    height: 200px;
+    margin-bottom: 30px;
 }
 
 .home-second-container-content{
@@ -49,5 +58,60 @@
     color: #E74A7D !important;
     font-weight: 700;
     margin-bottom: 10px;
+}
+
+@media(min-width:1200px){
+    .home-container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 40px;
+    }
+    
+    .home-first-container{
+        width: 35%;
+    }
+    
+    .home-first-container h1{
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        color: #7D5889;
+        margin-bottom: 30px;
+    }
+    
+    .home-first-container p{
+        font-size: 18px;
+        text-align: center;
+        color: #E74A7D;
+        font-style: italic;
+        margin-bottom: 50px;
+    }
+    
+    .home-second-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .home-second-container-logo img{
+        height: 350px;
+        margin-bottom: 50px;
+    }
+    
+    .home-second-container-content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .login-link-register{
+        color: #E74A7D !important;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
 }
 
