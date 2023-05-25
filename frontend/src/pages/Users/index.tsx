@@ -80,7 +80,9 @@ const Users = () => {
                 .sort((a,b) => a.name > b.name ? 1 : -1)
                 .map(u => (
                     <div className="col-sm-6 col-lg-6 col-xl-2 users-column" key={u.id}>
-                        <UserCard user={u} followerId={user?.id}/>
+                        {user && 
+                            <UserCard user={u} followerId={user?.id}/>
+                        }
                     </div>
                     )
                 )
