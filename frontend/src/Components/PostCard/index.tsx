@@ -61,6 +61,28 @@ const PostCard = ({postId} : Props) => {
         }
     }
 
+    const [quantityLikes, setQuantityLikes] = useState(false);
+
+    const checkQuantityLikes = (number : number) => {
+            if(number > 1){
+                setQuantityLikes(true);
+            }
+            else{
+                setQuantityLikes(false);
+            }
+    }
+
+    const [quantityComments, setQuantityComments] = useState(false);
+
+    const checkQuantityComments = (number : number) => {
+            if(number > 1){
+                setQuantityComments(true);
+            }
+            else{
+                setQuantityComments(false);
+            }
+    }
+
     return(
         <div className='postcard-container base-card'>
             <div className='postcard-content-container'>
@@ -73,8 +95,17 @@ const PostCard = ({postId} : Props) => {
                 <p className='postcard-date'>{post?.date && formatDate(post.date)}</p>
             </div>
             <div className='postcard-likes-comments-info'>
-                <p onClick={openAndCloseLikes}>{post?.likes.length} likes</p>
-                <p onClick={openAndCloseComments}>{post?.comments.length} comments</p>
+                {quantityLikes ? (
+                    <p onClick={openAndCloseLikes}>{post?.likes.length} likes</p>
+                ) : (
+                    <p onClick={openAndCloseLikes}>{post?.likes.length} like</p>
+                )}
+                {quantityComments ? (
+                    <p onClick={openAndCloseComments}>{post?.comments.length} comments</p>
+                ) : (
+                    <p onClick={openAndCloseComments}>{post?.comments.length} comment</p>
+                )}
+                
             </div>
 
             {showLikes && 
