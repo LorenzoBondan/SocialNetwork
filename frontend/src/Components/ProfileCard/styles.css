@@ -1,10 +1,16 @@
 .profile-card-container{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     padding: 30px;
-    width: 500px;
+    width: 300px;
     margin-top: 50px;
+}
+
+.profile-card-image-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .profile-card-image-container img{
@@ -12,6 +18,7 @@
     width: 200px;
     border-radius: 50%;
     border: 2px solid silver;
+    margin-bottom: 20px;
 }
 
 .profile-card-content-container h1{
@@ -52,4 +59,15 @@
     color: #fff;
     width: 100%;
     margin-right: 20px;
+}
+
+@media(min-width:568px){
+    .profile-card-container{
+        flex-direction: row;
+        width: 500px;
+    }
+    
+    .profile-card-image-container img{
+        margin-bottom: 0px;
+    }
 }
