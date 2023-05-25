@@ -27,7 +27,10 @@ const PostCard = ({postId} : Props) => {
 
       useEffect(() => {
         getPostById();
-    }, [getPostById]);
+
+        post?.likes && checkQuantityLikes(post?.likes.length);
+        post?.comments && checkQuantityComments(post?.comments.length);
+    }, [getPostById, post?.likes, post?.comments]);
 
     const formatDate = (date : string) => {
         const fullDate = date.substring(0,10).replaceAll("-", "/");
