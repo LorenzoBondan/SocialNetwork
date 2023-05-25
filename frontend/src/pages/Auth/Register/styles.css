@@ -1,0 +1,24 @@
+.students-crud-inputs-rigth-container img{
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid silver;
+    box-shadow: 5px 5px 15px silver;
+    display: none;
+}
+
+.students-crud-inputs-rigth-container{
+    padding: 10px;
+    margin-top: 20px;
+    border: 0.5px solid rgba(192, 192, 192, 0.466);
+    border-radius: 20px;
+    max-height: 230px;
+
+    display: flex;
+    justify-content: center;
+}
+
+@media(min-width:992px){
+    .students-crud-inputs-rigth-container img{
+        display: unset;
+    }
+}

@@ -50,10 +50,10 @@ const Navbar = () => {
             </div>
 
             <ul className='ul-container'>
-                {!hasAnyRoles(['ROLE_OPERATOR']) ? (
+                {isAuthenticated() ? (
                 <>
                 <li>
-                    <NavLink to="/" exact className='admin-nav-item'>
+                    <NavLink to="/home" exact className='admin-nav-item'>
                         <AiOutlineHome style={{color:"#7D5889", marginRight:"8px"}}/>
                         <p>Home</p>
                     </NavLink>

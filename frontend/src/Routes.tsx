@@ -1,5 +1,6 @@
 
 import Navbar from "Components/Navbar";
+import Auth from "pages/Auth";
 import Home from "pages/Home";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 
@@ -14,24 +15,27 @@ const Routes = () => {
 
                 <Switch>
 
-                    <Route path="/" exact>
-                        <div style={{display:"flex", alignItems:"center", justifyContent:"center", flex:"1", padding:"10px"}}><Home/></div>
+                    <Route path="/home" exact>
+                        <div style={{display:"flex", alignItems:"center", justifyContent:"center", flex:"1", padding:"10px"}}>
+                            <Home/>
+                        </div>
                     </Route>
 
                     <Route path="/courses" exact>
                         <div style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
 
                         </div>
-                        
                     </Route>
 
                     <Route path="/courses/:courseId">
 
                     </Route>
 
-                    <Redirect from='/admin/auth' to='/admin/auth/login' exact />
-                    <Route path="/admin/auth">
-
+                    <Redirect from='/auth' to='/auth/login' exact />
+                    <Route path="/auth">
+                        <div style={{display:"flex", alignItems:"center", justifyContent:"center", flex:"1", padding:"10px"}}>
+                            <Auth/>
+                        </div>
                     </Route>
 
                     <Redirect from="/admin" to="/admin/courses" exact />

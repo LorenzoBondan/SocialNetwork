@@ -16,11 +16,11 @@ const Home = () => {
                 </div>
                 <div className='home-second-container-content'>
                     <span className="not-registered">Do you have already an account?</span>
-                    <Link to="/admin/auth/login" className="login-link-register">
+                    <Link to="/auth/login" className="login-link-register">
                         SIGN IN
                     </Link>
                     <span className="not-registered">Don't have an account?</span>
-                    <Link to="/admin/auth/signup" className="login-link-register">
+                    <Link to="/auth/signup" className="login-link-register">
                         REGISTER NOW
                     </Link>
                 </div>
