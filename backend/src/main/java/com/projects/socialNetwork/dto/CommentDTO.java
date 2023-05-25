@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import com.projects.socialNetwork.entities.Comment;
-import com.projects.socialNetwork.entities.Post;
-import com.projects.socialNetwork.entities.User;
 
 public class CommentDTO implements Serializable {
 	
@@ -13,24 +11,24 @@ public class CommentDTO implements Serializable {
 	
 	private Long id;
 	private String description;
-	private User user;
-	private Post post;
+	private UserDTO user;
+	private Long postId;
 	
 	public CommentDTO() {}
 
-	public CommentDTO(Long id, String description, User user, Post post) {
+	public CommentDTO(Long id, String description, UserDTO user, Long postId) {
 		super();
 		this.id = id;
 		this.description = description;
 		this.user = user;
-		this.post = post;
+		this.postId = postId;
 	}
 	
 	public CommentDTO(Comment entity) {
 		this.id = entity.getId();
 		this.description = entity.getDescription();
-		this.user = entity.getUser();
-		this.post = entity.getPost();
+		this.user = new UserDTO(entity.getUser());
+		this.postId = entity.getPost().getId();
 	}
 
 	public Long getId() {
@@ -49,20 +47,20 @@ public class CommentDTO implements Serializable {
 		this.description = description;
 	}
 
-	public User getUser() {
+	public UserDTO getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserDTO user) {
 		this.user = user;
 	}
 
-	public Post getPost() {
-		return post;
+	public Long getPostId() {
+		return postId;
 	}
 
-	public void setPost(Post post) {
-		this.post = post;
+	public void setPost(Long postId) {
+		this.postId = postId;
 	}
 
 	@Override

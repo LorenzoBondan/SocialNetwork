@@ -9,7 +9,6 @@ import java.util.Objects;
 import com.projects.socialNetwork.entities.Comment;
 import com.projects.socialNetwork.entities.Like;
 import com.projects.socialNetwork.entities.Post;
-import com.projects.socialNetwork.entities.User;
 
 public class PostDTO implements Serializable {
 
@@ -20,7 +19,7 @@ public class PostDTO implements Serializable {
 	private String description;
 	private Instant date;
 	
-	private User user;
+	private UserDTO user;
 	
 	private List<CommentDTO> comments = new ArrayList<>();
 	
@@ -28,7 +27,7 @@ public class PostDTO implements Serializable {
 	
 	public PostDTO() {}
 
-	public PostDTO(Long id, String title, String description, Instant date, User user) {
+	public PostDTO(Long id, String title, String description, Instant date, UserDTO user) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -42,7 +41,7 @@ public class PostDTO implements Serializable {
 		this.title = entity.getTitle();
 		this.description = entity.getDescription();
 		this.date = entity.getDate();
-		this.user = entity.getUser();
+		this.user = new UserDTO(entity.getUser());
 		
 		entity.getComments().forEach(c -> this.comments.add(new CommentDTO(c)));
 		entity.getLikes().forEach(l -> this.likes.add(new LikeDTO(l)));
@@ -86,11 +85,11 @@ public class PostDTO implements Serializable {
 		this.date = date;
 	}
 
-	public User getUser() {
+	public UserDTO getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserDTO user) {
 		this.user = user;
 	}
 

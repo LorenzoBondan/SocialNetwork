@@ -14,6 +14,7 @@ import com.projects.socialNetwork.entities.Comment;
 import com.projects.socialNetwork.entities.Post;
 import com.projects.socialNetwork.repositories.CommentRepository;
 import com.projects.socialNetwork.repositories.PostRepository;
+import com.projects.socialNetwork.repositories.UserRepository;
 import com.projects.socialNetwork.services.exceptions.DataBaseException;
 import com.projects.socialNetwork.services.exceptions.ResourceNotFoundException;
 
@@ -25,6 +26,9 @@ public class CommentService {
 	
 	@Autowired
 	private PostRepository postRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Transactional(readOnly = true) // goes in PostResource
 	public List<CommentDTO> findCommentsByPostId(Long PostId) {
@@ -54,7 +58,7 @@ public class CommentService {
 
 	private void copyDtoToEntity(CommentDTO dto, Comment entity) {
 		entity.setDescription(dto.getDescription());
-		entity.setUser(dto.getUser());
+		entity.setUser(userRepository.getOne(dto.getUser().getId()));
 	}
 
 }

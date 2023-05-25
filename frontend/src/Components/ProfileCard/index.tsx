@@ -4,6 +4,7 @@ import { requestBackend } from 'util/requests';
 
 import './styles.css';
 import { User } from 'types';
+import PostCard from 'Components/PostCard';
 
 
 type Props ={
@@ -61,7 +62,9 @@ const ProfileCard = ({userEmail} : Props) => {
             <div className='profile-card-posts-container'>
                 <h2>Posts</h2>
                 {page.postsId.map(p => (
-                    <p key={p}>{p}</p>
+                    <div key={p}>
+                        <PostCard postId={p}/>
+                    </div>
                 ))}
             </div>
         )}

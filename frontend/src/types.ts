@@ -40,6 +40,7 @@ export type Post = {
 export type Comment = {
     id: number;
     description: string;
+    user: User;
 }
 
 export type Like = {

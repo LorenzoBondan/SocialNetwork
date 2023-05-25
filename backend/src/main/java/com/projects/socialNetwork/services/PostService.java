@@ -2,7 +2,6 @@ package com.projects.socialNetwork.services;
 
 import java.util.Optional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -20,6 +19,7 @@ import com.projects.socialNetwork.entities.Post;
 import com.projects.socialNetwork.repositories.CommentRepository;
 import com.projects.socialNetwork.repositories.LikeRepository;
 import com.projects.socialNetwork.repositories.PostRepository;
+import com.projects.socialNetwork.repositories.UserRepository;
 import com.projects.socialNetwork.services.exceptions.DataBaseException;
 import com.projects.socialNetwork.services.exceptions.ResourceNotFoundException;
 
@@ -34,6 +34,9 @@ public class PostService {
 	
 	@Autowired
 	private LikeRepository likeRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	@Transactional(readOnly = true)
 	public Page<PostDTO> findAllPaged(Pageable pageable) {
@@ -72,7 +75,7 @@ public class PostService {
 		entity.setTitle(dto.getTitle());
 		entity.setDescription(dto.getDescription());
 		entity.setDate(dto.getDate());
-		entity.setUser(dto.getUser());
+		entity.setUser(userRepository.getOne(dto.getUser().getId()));
 		
 		entity.getComments().clear();
 
