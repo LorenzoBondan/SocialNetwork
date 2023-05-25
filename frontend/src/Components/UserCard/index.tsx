@@ -25,7 +25,7 @@ const UserCard = ({user, followerId} : Props) => {
           .then(response => {
             setPage(response.data);
           })
-    }, [])
+    }, [followerId])
 
     useEffect(() => {
         getUser();
@@ -72,7 +72,29 @@ const UserCard = ({user, followerId} : Props) => {
     /**/
 
     const startFollowing = () => {
+        const params : AxiosRequestConfig = {
+            method:"PUT",
+            url: `/users/startFollowing/${user.id}/${followerId}`,
+            withCredentials:true
+          }
+          requestBackend(params) 
+            .then(() => {
+              setIsFollowing(true);
+              setIsMe(false);
+            })
+    }
 
+    const stopFollowing = () => {
+        const params : AxiosRequestConfig = {
+            method:"PUT",
+            url: `/users/stopFollowing/${user.id}/${followerId}`,
+            withCredentials:true
+          }
+          requestBackend(params) 
+            .then(() => {
+              setIsFollowing(false);
+              setIsMe(false);
+            })
     }
 
     return(
@@ -85,9 +107,9 @@ const UserCard = ({user, followerId} : Props) => {
             <div className='usercard-rigth'>
                 <p>{user.name}</p>
                 {isFollowing ? (
-                    <button className='btn btn-primary' >Unfollow</button>
+                    <button className='btn btn-primary' onClick={() => stopFollowing()}>Unfollow</button>
                 ) : (
-                    !isMe && <button className='btn btn-primary' >Follow</button>
+                    !isMe && <button className='btn btn-primary' onClick={() => startFollowing()}>Follow</button>
                 )}
             </div>
         </div>
