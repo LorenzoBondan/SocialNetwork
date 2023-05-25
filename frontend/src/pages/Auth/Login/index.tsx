@@ -48,7 +48,7 @@ const Login = () => {
 
             history.replace(from);
 
-            toast.info("Welcome!");
+            //toast.info("Welcome!");
         })
         .catch(error => {
             setHasError(true);

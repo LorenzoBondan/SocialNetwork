@@ -2,6 +2,7 @@
 import Navbar from "Components/Navbar";
 import Auth from "pages/Auth";
 import Home from "pages/Home";
+import Profile from "pages/Profile";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 
 import history from "util/history";
@@ -21,9 +22,9 @@ const Routes = () => {
                         </div>
                     </Route>
 
-                    <Route path="/courses" exact>
-                        <div style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
-
+                    <Route path="/profile" exact>
+                        <div style={{display:"flex", alignItems:"flex-start", justifyContent:"center", flex:"1"}}>
+                            <Profile/>
                         </div>
                     </Route>
 
@@ -43,9 +44,6 @@ const Routes = () => {
 
                     </Route>
 
-                    <Route path="/profile">
-
-                    </Route>
 
                 </Switch>
             </div>

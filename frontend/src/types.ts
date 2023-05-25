@@ -18,7 +18,9 @@ export type User = {
     password: string;
     imgUrl: string;
     roles : Role[];
-    posts: Post[];
+    postsId: number[];
+    followingId: number[];
+    followersId: number[];
 }
 
 export type Role = {
