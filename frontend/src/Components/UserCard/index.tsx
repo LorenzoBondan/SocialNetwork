@@ -50,6 +50,26 @@ const UserCard = ({user, followerId} : Props) => {
         testIfIsFollowing(page?.id);
     }, [testIfIsFollowing, page]);
 
+    /**/
+
+    const [isMe, setIsMe] = useState(false);
+
+    const testIfIsMe = useCallback((number : number) => {
+
+        if(user.id === (number)){
+            setIsMe(true);
+        }
+        else{
+            setIsMe(false);
+        }
+    }, [user.id])
+
+    useEffect(() => {
+        page && 
+        testIfIsMe(page?.id);
+    }, [testIfIsMe, page]);
+
+    /**/
 
     const startFollowing = () => {
 
@@ -67,7 +87,7 @@ const UserCard = ({user, followerId} : Props) => {
                 {isFollowing ? (
                     <button className='btn btn-primary' >Unfollow</button>
                 ) : (
-                    <button className='btn btn-primary' >Follow</button>
+                    !isMe && <button className='btn btn-primary' >Follow</button>
                 )}
             </div>
         </div>
