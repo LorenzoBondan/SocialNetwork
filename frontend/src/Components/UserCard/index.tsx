@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
+import verified from 'assets/images/verified.png';
 
 type Props = {
     user: User;
@@ -100,7 +101,10 @@ const UserCard = ({user, followerId} : Props) => {
                 </div>
             </Link>
             <div className='usercard-rigth'>
-                <p>{user.name}</p>
+                <div style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
+                    <p>{user.name}</p>
+                    {user.verified && <img src={verified} alt="" style={{height:"10px", width:"10px", marginLeft:"3px"}}/>}
+                </div>
                 {isFollowing ? (
                     <button className='btn btn-primary' onClick={() => stopFollowing()}>Unfollow</button>
                 ) : (
