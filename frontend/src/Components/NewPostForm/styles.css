@@ -1,0 +1,31 @@
+.post-card-form-card{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.post-card-form-card h1{
+    margin-bottom: 10px;
+    color: #E74A7D;
+    font-weight: 700;
+}
+
+.margin-bottom-30{
+    margin-bottom: 20px;
+}
+
+.description-input{
+    height: 150px !important;
+}
+
+.post-crud-buttons-container{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.post-crud-buttons-container button{
+    width: 45%;
+}

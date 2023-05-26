@@ -38,7 +38,6 @@ const NewPostForm = ({user}:Props) => {
         return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`;
     }
 
-
     const onSubmit = (formData : Post) => {
 
         console.log("Hora: ", currentTime.toLocaleString());
@@ -63,8 +62,6 @@ const NewPostForm = ({user}:Props) => {
         history.push("/profile");
     }
 
-
-
     return(
         <div className='new-post-form-container'>
             <div className="base-card post-card-form-card">
@@ -72,7 +69,7 @@ const NewPostForm = ({user}:Props) => {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='row post-crud-inputs-container'>
-                        <div className='col-lg-6 post-crud-inputs-left-container'>
+                        <div className='post-crud-inputs-left-container'>
 
                             <div className='margin-bottom-30'>
                                 <label htmlFor="">Title</label>
@@ -90,12 +87,12 @@ const NewPostForm = ({user}:Props) => {
 
                             <div className='margin-bottom-30'>
                                 <label htmlFor="">Description</label>
-                                <input 
+                                <textarea 
+                                    rows={10}
                                     {...register("description", {
                                     required: 'Campo obrigatório',
                                     })}
-                                    type="text"
-                                    className={`form-control base-input ${errors.description ? 'is-invalid' : ''}`}
+                                    className={`form-control base-input description-input ${errors.description ? 'is-invalid' : ''}`}
                                     placeholder="Description"
                                     name="description"
                                 />
