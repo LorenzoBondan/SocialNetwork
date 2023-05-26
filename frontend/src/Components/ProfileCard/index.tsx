@@ -6,6 +6,7 @@ import './styles.css';
 import { User } from 'types';
 import PostCard from 'Components/PostCard';
 import { FaUserEdit } from 'react-icons/fa';
+import verified from 'assets/images/verified.png';
 
 
 type Props ={
@@ -42,9 +43,9 @@ const ProfileCard = ({userEmail} : Props) => {
             <div className='profile-card-content-container'>
                 <div style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
                     <h1 style={{marginBottom:"0", marginRight:"5px"}}>{page?.name}</h1>
-                    <img src="https://cdn-icons-png.flaticon.com/512/6785/6785425.png" alt="" style={{height:"20px"}} />
+                    {page?.verified && <img src={verified} alt="" style={{height:"18px"}} />}
                 </div>
-                <p style={{color:"black"}}>Software Engineering Student</p>
+                <p style={{color:"darkgray"}}>{page?.bio}</p>
                 <div className='profile-card-follow-container'>
                     <div className='profile-card-content-container-follow'>
                         <p><strong>{page?.followersId.length}</strong></p>
