@@ -68,7 +68,9 @@ const UserCard = ({user, followerId} : Props) => {
         page && 
         testIfItsMe(page?.id);
     }, [testIfItsMe, page]);
+
     /**/
+
     const startFollowing = () => {
         const params : AxiosRequestConfig = {
             method:"PUT",
@@ -81,6 +83,7 @@ const UserCard = ({user, followerId} : Props) => {
               setIsMe(false);
             })
     }
+
     const stopFollowing = () => {
         const params : AxiosRequestConfig = {
             method:"PUT",
@@ -93,13 +96,23 @@ const UserCard = ({user, followerId} : Props) => {
               setIsMe(false);
             })
     }
+
     return(
         <div className='usercard-container base-card'>
-            <Link to={`/user/${user.id}`}>
-                <div className='usercard-image'>
-                    <img src={user.imgUrl} alt="" />
-                </div>
-            </Link>
+            {isMe ? (
+                <Link to={`/profile`}>
+                    <div className='usercard-image'>
+                        <img src={user.imgUrl} alt="" />
+                    </div>
+                </Link>
+            ) : (
+                <Link to={`/user/${user.id}`}>
+                    <div className='usercard-image'>
+                        <img src={user.imgUrl} alt="" />
+                    </div>
+                </Link>
+            )}
+
             <div className='usercard-rigth'>
                 <div style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
                     <p>{user.name}</p>
