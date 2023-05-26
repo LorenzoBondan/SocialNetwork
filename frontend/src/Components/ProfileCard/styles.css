@@ -63,7 +63,7 @@
 
 .posts-column{
     display: flex;
-    justify-content: center;
+    justify-content:center;
 }
 
 @media(min-width:568px){
@@ -78,6 +78,7 @@
     }
 
     .posts-column{
+        display: unset;
         justify-content: flex-start;
     }
 }
