@@ -175,3 +175,8 @@
     margin-right: 3px;
 }
 
+.postcard-like-zone img:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+

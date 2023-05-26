@@ -66,6 +66,10 @@
     justify-content:center;
 }
 
+.profile-card-posts-container{
+    width: 100%;
+}
+
 @media(min-width:568px){
     .profile-card-container{
         flex-direction: row;
