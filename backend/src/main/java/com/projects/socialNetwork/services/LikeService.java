@@ -1,6 +1,7 @@
 package com.projects.socialNetwork.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.projects.socialNetwork.dto.LikeDTO;
+import com.projects.socialNetwork.dto.PostDTO;
 import com.projects.socialNetwork.entities.Like;
 import com.projects.socialNetwork.entities.Post;
 import com.projects.socialNetwork.repositories.LikeRepository;
@@ -35,6 +37,13 @@ public class LikeService {
 		Post post = postRepository.getOne(PostId);
 		return post.getLikes().stream().map(comment -> new LikeDTO(comment)).collect(Collectors.toList());
 	}
+	
+	@Transactional(readOnly = true)
+	public LikeDTO findById(Long id) {
+		Optional<Like> obj = repository.findById(id);
+		Like entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
+		return new LikeDTO(entity);
+	}
 
 	@Transactional
 	public LikeDTO insert(LikeDTO dto) {
@@ -57,7 +66,7 @@ public class LikeService {
 	}
 
 	private void copyDtoToEntity(LikeDTO dto, Like entity) {
-		entity.setUser(userRepository.getOne(dto.getUser().getId()));
+		entity.setUser(userRepository.getOne(dto.getUserId()));
 		entity.setPost(postRepository.getOne(dto.getPostId()));
 	}
 

@@ -10,14 +10,14 @@ public class LikeDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-	private UserDTO user;
+	private Long userId;
 	private Long postId;
 	
 	public LikeDTO() {}
 	
 	public LikeDTO(Like entity) {
 		this.id = entity.getId();
-		this.user = new UserDTO(entity.getUser());
+		this.userId = entity.getUser().getId();
 		this.postId = entity.getPost().getId();
 	}
 
@@ -29,12 +29,12 @@ public class LikeDTO implements Serializable {
 		this.id = id;
 	}
 
-	public UserDTO getUser() {
-		return user;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setUser(UserDTO user) {
-		this.user = user;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public Long getPostId() {

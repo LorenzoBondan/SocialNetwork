@@ -1,5 +1,5 @@
 
-import { Post, User } from 'types';
+import { Like, Post, User } from 'types';
 import './styles.css';
 import { useCallback, useEffect, useState, useContext } from 'react';
 import { AxiosRequestConfig } from 'axios';
@@ -8,6 +8,10 @@ import CommentCard from 'Components/CommentCard';
 import { GoTrashcan } from 'react-icons/go';
 import { AuthContext } from 'AuthContext';
 import { getTokenData, isAuthenticated } from 'util/auth';
+import like from 'assets/images/like.png';
+import likeFilled from 'assets/images/like_filled.png';
+import comment from 'assets/images/comment.png';
+import LikeCard from 'Components/LikeCard';
 
 type Props = {
     postId: number;
@@ -175,6 +179,26 @@ const PostCard = ({postId, onDelete} : Props) => {
 
     /**/
 
+    const [isLiked, setIsLiked] = useState(false);
+
+    const likePost = (formData : Like) => {
+
+        formData.postId = 1;
+        formData.userId = 1;
+
+        const params : AxiosRequestConfig = {
+          method:"POST",
+          url: `/likes`,
+          data: formData,
+          withCredentials:true
+        }
+        requestBackend(params) 
+          .then(response => {
+            setIsLiked(true);
+            console.log("liked with success: ", response.data);
+          })
+    }
+
     return(
         <div className='postcard-container base-card'>
             <div className='postcard-content-container'>
@@ -185,6 +209,15 @@ const PostCard = ({postId, onDelete} : Props) => {
                 <h5>{post?.title}</h5>
                 <p>{post?.description}</p>
                 <p className='postcard-date'>{post?.date && formatDate(post.date)}</p>
+            </div>
+            <div className='postcard-like-zone'>
+                {isLiked ? (
+                    <img src={likeFilled} alt="" />
+                ) : (
+                    <img src={like} alt="" onClick={() => likePost}/>
+                )}
+                
+                <img src={comment} alt="" />
             </div>
             <div className='postcard-bottom-container'>
                 <div className='postcard-likes-comments-info'>
@@ -209,10 +242,7 @@ const PostCard = ({postId, onDelete} : Props) => {
             {showLikes && 
                 <div className='postcard-likes-zone'>
                     {post?.likes && post.likes.map(like => (
-                        <div className='postcard-like' key={like.id}>
-                            <img src={like.user.imgUrl} alt="" />
-                            <p>{like.user.name}</p>
-                        </div>
+                        <LikeCard userId={like.userId}/>
                     ))}
                 </div>
             }
