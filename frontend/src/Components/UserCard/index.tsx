@@ -54,7 +54,7 @@ const UserCard = ({user, followerId} : Props) => {
 
     const [isMe, setIsMe] = useState(false);
 
-    const testIfIsMe = useCallback((number : number) => {
+    const testIfItsMe = useCallback((number : number) => {
 
         if(user.id === (number)){
             setIsMe(true);
@@ -63,14 +63,11 @@ const UserCard = ({user, followerId} : Props) => {
             setIsMe(false);
         }
     }, [user.id])
-
     useEffect(() => {
         page && 
-        testIfIsMe(page?.id);
-    }, [testIfIsMe, page]);
-
+        testIfItsMe(page?.id);
+    }, [testIfItsMe, page]);
     /**/
-
     const startFollowing = () => {
         const params : AxiosRequestConfig = {
             method:"PUT",
@@ -83,7 +80,6 @@ const UserCard = ({user, followerId} : Props) => {
               setIsMe(false);
             })
     }
-
     const stopFollowing = () => {
         const params : AxiosRequestConfig = {
             method:"PUT",
@@ -96,7 +92,6 @@ const UserCard = ({user, followerId} : Props) => {
               setIsMe(false);
             })
     }
-
     return(
         <div className='usercard-container base-card'>
             <Link to={`/user/${user.id}`}>

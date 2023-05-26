@@ -24,6 +24,10 @@ public class UserDTO implements Serializable {
 
 	private String imgUrl;
 	
+	private String bio;
+	
+	private Boolean verified;
+	
 	private List<RoleDTO> roles = new ArrayList<>();
 	
 	private List<Long> followingId = new ArrayList<>();
@@ -34,12 +38,14 @@ public class UserDTO implements Serializable {
 	  
 	public UserDTO() {}
 
-	public UserDTO(Long id, String name, String email, String password, Long favoriteTeamId, String imgUrl) {
+	public UserDTO(Long id, String name, String email, String password, Long favoriteTeamId, String imgUrl, String bio, Boolean verified) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.imgUrl = imgUrl;
+		this.bio = bio;
+		this.verified = verified;
 	}
 	
 	public UserDTO(User entity) {
@@ -47,6 +53,8 @@ public class UserDTO implements Serializable {
 		this.name = entity.getName();
 		this.email = entity.getEmail();
 		this.imgUrl = entity.getImgUrl();
+		this.bio = entity.getBio();
+		this.verified = entity.getVerified();
 
 		entity.getRoles().forEach(rol -> this.roles.add(new RoleDTO(rol)));
 		entity.getFollowers().forEach(f -> this.followersId.add(f.getId()));
@@ -84,6 +92,22 @@ public class UserDTO implements Serializable {
 
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
+	}
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
+	public Boolean getVerified() {
+		return verified;
+	}
+
+	public void setVerified(Boolean verified) {
+		this.verified = verified;
 	}
 
 	public List<RoleDTO> getRoles() { 

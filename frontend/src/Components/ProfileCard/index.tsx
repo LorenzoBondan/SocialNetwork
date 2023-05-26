@@ -40,7 +40,11 @@ const ProfileCard = ({userEmail} : Props) => {
             </div>
 
             <div className='profile-card-content-container'>
-                <h1>{page?.name}</h1>
+                <div style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
+                    <h1 style={{marginBottom:"0", marginRight:"5px"}}>{page?.name}</h1>
+                    <img src="https://cdn-icons-png.flaticon.com/512/6785/6785425.png" alt="" style={{height:"20px"}} />
+                </div>
+                <p style={{color:"black"}}>Software Engineering Student</p>
                 <div className='profile-card-follow-container'>
                     <div className='profile-card-content-container-follow'>
                         <p><strong>{page?.followersId.length}</strong></p>
@@ -63,7 +67,7 @@ const ProfileCard = ({userEmail} : Props) => {
             <div className='profile-card-posts-container'>
                 <div className='row'>
                     {page.postsId.map(p => (
-                        <div className='col-sm-12 col-md-6 col-lg-4 col-xl-6 col-xxl-3 posts-column' key={p}>
+                        <div className='col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-3 posts-column' key={p}>
                             <PostCard postId={p} onDelete={() => getUser()}/>
                         </div>
                     ))}

@@ -41,6 +41,10 @@ public class User implements UserDetails, Serializable{
 	private String password;
 	@Column(columnDefinition = "TEXT")
 	private String imgUrl;
+	@Column(columnDefinition = "TEXT")
+	private String bio;
+	
+	private Boolean verified;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tb_user_role",
@@ -64,13 +68,15 @@ public class User implements UserDetails, Serializable{
 	public User() {
 	}
 	
-	public User(Long id, String name, String email, String password, String imgUrl) {
+	public User(Long id, String name, String email, String password, String imgUrl, String bio, Boolean verified) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.imgUrl = imgUrl;
+		this.bio = bio;
+		this.verified = verified;
 	}
 
 	public Long getId() {
@@ -112,7 +118,22 @@ public class User implements UserDetails, Serializable{
 	public void setImgUrl(String imgUrl) {
 		this.imgUrl = imgUrl;
 	}
-	
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
+	public Boolean getVerified() {
+		return verified;
+	}
+
+	public void setVerified(Boolean verified) {
+		this.verified = verified;
+	}
 
 	public Set<User> getFollowers() {
 		return followers;

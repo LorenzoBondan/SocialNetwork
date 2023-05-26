@@ -4,7 +4,6 @@ import './styles.css';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
-import { Link } from 'react-router-dom';
 import UserCard from 'Components/UserCard';
 import { AuthContext } from 'AuthContext';
 import { getTokenData, isAuthenticated } from 'util/auth';

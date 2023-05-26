@@ -17,6 +17,8 @@ export type User = {
     email: string;
     password: string;
     imgUrl: string;
+    bio: string;
+    verified: boolean;
     roles : Role[];
     postsId: number[];
     followingId: number[];
