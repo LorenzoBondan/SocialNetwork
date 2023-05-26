@@ -1,0 +1,16 @@
+.user-details-container{
+    padding: 60px;
+}
+
+.user-details-profile-card{
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    flex-direction: row;
+    width: 500px;
+    margin-bottom: 30px;
+}
+
+.btn-follow-unfollow{
+    border-radius: 30px;
+}

@@ -3,9 +3,9 @@ import Navbar from "Components/Navbar";
 import Auth from "pages/Auth";
 import Home from "pages/Home";
 import Profile from "pages/Profile";
+import UserDetails from "pages/UserDetails";
 import Users from "pages/Users";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
-
 import history from "util/history";
 
 const Routes = () => {
@@ -32,7 +32,7 @@ const Routes = () => {
                     </Route>
 
                     <Route path="/user/:userId">
-
+                        <UserDetails/>
                     </Route>
 
                     <Redirect from='/auth' to='/auth/login' exact />
