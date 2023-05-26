@@ -11,23 +11,23 @@ public class CommentDTO implements Serializable {
 	
 	private Long id;
 	private String description;
-	private UserDTO user;
+	private Long userId;
 	private Long postId;
 	
 	public CommentDTO() {}
 
-	public CommentDTO(Long id, String description, UserDTO user, Long postId) {
+	public CommentDTO(Long id, String description, Long userId, Long postId) {
 		super();
 		this.id = id;
 		this.description = description;
-		this.user = user;
+		this.userId = userId;
 		this.postId = postId;
 	}
 	
 	public CommentDTO(Comment entity) {
 		this.id = entity.getId();
 		this.description = entity.getDescription();
-		this.user = new UserDTO(entity.getUser());
+		this.userId = entity.getUser().getId();
 		this.postId = entity.getPost().getId();
 	}
 
@@ -47,12 +47,12 @@ public class CommentDTO implements Serializable {
 		this.description = description;
 	}
 
-	public UserDTO getUser() {
-		return user;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setUser(UserDTO user) {
-		this.user = user;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public Long getPostId() {

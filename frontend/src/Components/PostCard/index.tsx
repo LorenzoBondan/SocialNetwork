@@ -1,5 +1,5 @@
 
-import { Post, User } from 'types';
+import { Comment, Post, User } from 'types';
 import './styles.css';
 import { useCallback, useEffect, useState, useContext } from 'react';
 import { AxiosRequestConfig } from 'axios';
@@ -11,7 +11,8 @@ import { getTokenData, isAuthenticated } from 'util/auth';
 import LikeCard from 'Components/LikeCard';
 import like from 'assets/images/like.png';
 import likeFilled from 'assets/images/like_filled.png';
-import comment from 'assets/images/comment.png';
+import commentIcon from 'assets/images/comment.png';
+import CommentForm from 'Components/CommentForm';
 
 type Props = {
     postId: number;
@@ -228,6 +229,32 @@ const PostCard = ({postId, onDelete, userLogged} : Props) => {
     }, [testIfIsLiked]);
 
 
+    /**/
+
+    const [comments, setComments] = useState<Comment[]>([]); //recebe a lista de reviews obtida na requisição.
+
+    const getComments = useCallback(() => {
+        const params: AxiosRequestConfig = {
+            url: `/comments/${postId}`,
+            withCredentials: false,
+          }
+  
+          requestBackend(params).then((response) => {
+            setComments(response.data);
+            });
+    }, [postId])
+
+    useEffect(() => {
+        getComments();
+    }, [getComments]);
+
+
+    const handleInsertComment = (comment: Comment) => {
+        const clone = [...comments]; // copia o conteúdo que já tem
+        clone.push(comment); // insere o novo conteúdo naquele copiado
+        setComments(clone); // define o conteúdo copiado
+    };
+
     return(
         <div className='postcard-container base-card'>
             <div className='postcard-content-container'>
@@ -248,7 +275,11 @@ const PostCard = ({postId, onDelete, userLogged} : Props) => {
                             ) : (
                             <img src={like} alt="" onClick={() => user && likePost(user, post.id)}/>
                             )}
-                        <img src={comment} alt="" />
+
+                        <img src={commentIcon} alt="" />
+                        {userLogged &&
+                            <CommentForm user={userLogged} postId={postId} onInsertComment={handleInsertComment}/>
+                        }
                     </div>
                 }
             </div>

@@ -58,7 +58,8 @@ public class CommentService {
 
 	private void copyDtoToEntity(CommentDTO dto, Comment entity) {
 		entity.setDescription(dto.getDescription());
-		entity.setUser(userRepository.getOne(dto.getUser().getId()));
+		entity.setUser(userRepository.getOne(dto.getUserId()));
+		entity.setPost(postRepository.getOne(dto.getPostId()));
 	}
 
 }
