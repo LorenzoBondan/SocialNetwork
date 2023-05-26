@@ -21,6 +21,7 @@ export type User = {
     verified: boolean;
     roles : Role[];
     postsId: number[];
+    commentsId: number[];
     followingId: number[];
     followersId: number[];
 }

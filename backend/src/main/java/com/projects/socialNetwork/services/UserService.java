@@ -23,9 +23,11 @@ import com.projects.socialNetwork.dto.RoleDTO;
 import com.projects.socialNetwork.dto.UserDTO;
 import com.projects.socialNetwork.dto.UserInsertDTO;
 import com.projects.socialNetwork.dto.UserUpdateDTO;
+import com.projects.socialNetwork.entities.Comment;
 import com.projects.socialNetwork.entities.Post;
 import com.projects.socialNetwork.entities.Role;
 import com.projects.socialNetwork.entities.User;
+import com.projects.socialNetwork.repositories.CommentRepository;
 import com.projects.socialNetwork.repositories.PostRepository;
 import com.projects.socialNetwork.repositories.RoleRepository;
 import com.projects.socialNetwork.repositories.UserRepository;
@@ -48,6 +50,9 @@ public class UserService implements UserDetailsService {
 	
 	@Autowired
 	private PostRepository postRepository;
+	
+	@Autowired
+	private CommentRepository commentRepository;
 
 	@Transactional(readOnly = true)
 	public Page<UserDTO> findAllPaged(Pageable pageable) {
@@ -144,6 +149,11 @@ public class UserService implements UserDetailsService {
 		for (Long postDtoId : dto.getPostsId()) {
 			Post post = postRepository.getOne(postDtoId);
 			entity.getPosts().add(post);
+		}
+		
+		for (Long commentDtoId : dto.getCommentsId()) {
+			Comment comment = commentRepository.getOne(commentDtoId);
+			entity.getComments().add(comment);
 		}
 	}
 

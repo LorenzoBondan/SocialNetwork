@@ -65,6 +65,9 @@ public class User implements UserDetails, Serializable{
 	@OneToMany(mappedBy = "user")
 	private List<Post> posts = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "user")
+	private List<Comment> comments = new ArrayList<>();
+	
 	public User() {
 	}
 	
@@ -143,9 +146,12 @@ public class User implements UserDetails, Serializable{
 		return following;
 	}
 	
-
 	public List<Post> getPosts() {
 		return posts;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
 	}
 
 	@Override
