@@ -2,6 +2,7 @@
 import Navbar from "Components/Navbar";
 import Auth from "pages/Auth";
 import Home from "pages/Home";
+import NewPost from "pages/NewPost";
 import Profile from "pages/Profile";
 import UserDetails from "pages/UserDetails";
 import Users from "pages/Users";
@@ -21,6 +22,10 @@ const Routes = () => {
                         <div style={{display:"flex", alignItems:"center", justifyContent:"center", flex:"1", padding:"10px"}}>
                             <Home/>
                         </div>
+                    </Route>
+
+                    <Route path="/create" exact>
+                        <NewPost/>
                     </Route>
 
                     <Route path="/profile" exact>

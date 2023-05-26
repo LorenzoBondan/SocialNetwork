@@ -5,6 +5,7 @@ import { AiOutlineHome } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
 import { HiOutlineUsers } from 'react-icons/hi';
 import { MdOutlineAdminPanelSettings } from 'react-icons/md';
+import { RxInstagramLogo } from 'react-icons/rx';
 
 import './styles.css';
 import { useContext, useEffect } from 'react';
@@ -52,6 +53,12 @@ const Navbar = () => {
             <ul className='ul-container'>
                 {isAuthenticated() ? (
                 <>
+                <li>
+                    <NavLink to="/create" className='admin-nav-item'>
+                        <RxInstagramLogo style={{color:"#7D5889", marginRight:"8px"}}/>
+                        <p>New Post</p>
+                    </NavLink>
+                </li>
                 <li>
                     <NavLink to="/profile" className='admin-nav-item'>
                         <CgProfile style={{color:"#7D5889", marginRight:"8px"}}/>
