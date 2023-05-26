@@ -37,7 +37,6 @@ const CommentForm = ( {userId, postId, onInsertComment}: Props ) => {
             .then((response) => {
                 setValue("description", "");
                 onInsertComment(response.data);
-                console.log("comment added")
             })
             .catch((error) => {
                 console.log("Error", error);

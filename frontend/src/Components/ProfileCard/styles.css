@@ -61,6 +61,11 @@
     margin-right: 20px;
 }
 
+.posts-column{
+    display: flex;
+    justify-content: center;
+}
+
 @media(min-width:568px){
     .profile-card-container{
         flex-direction: row;
@@ -70,5 +75,9 @@
     
     .profile-card-image-container img{
         margin-bottom: 0px;
+    }
+
+    .posts-column{
+        justify-content: flex-start;
     }
 }
