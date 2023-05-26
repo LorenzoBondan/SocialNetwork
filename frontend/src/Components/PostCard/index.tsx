@@ -253,6 +253,7 @@ const PostCard = ({postId, onDelete, userLogged} : Props) => {
         const clone = [...comments]; // copia o conteúdo que já tem
         clone.push(comment); // insere o novo conteúdo naquele copiado
         setComments(clone); // define o conteúdo copiado
+        getPostById();
     };
 
     return(
@@ -278,7 +279,7 @@ const PostCard = ({postId, onDelete, userLogged} : Props) => {
 
                         <img src={commentIcon} alt="" />
                         {userLogged &&
-                            <CommentForm user={userLogged} postId={postId} onInsertComment={handleInsertComment}/>
+                            <CommentForm userId={userLogged.id} postId={postId} onInsertComment={handleInsertComment}/>
                         }
                     </div>
                 }

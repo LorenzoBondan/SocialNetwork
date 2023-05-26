@@ -110,14 +110,34 @@ const CommentCard = ({comment, onDelete} : Props) => {
         thisCommentIsInMyPost();
     }, [thisCommentIsInMyPost, user]);
 
+
+    const [userOfComment, setUserOfComment] = useState<User>();
+
+    const getUserOfComment = useCallback(() => {
+        const params : AxiosRequestConfig = {
+          method:"GET",
+          url: `/users/${comment.userId}`,
+          withCredentials:true
+        }
+        requestBackend(params) 
+          .then(response => {
+            setUserOfComment(response.data);
+          })
+    }, [])
+
+    useEffect(() => {
+      getUserOfComment();
+    }, [getUserOfComment]);
+
+
     return(
         <div className='postcard-comment-zone'>
             <div className="postcard-first-container">
                 <div className='postcard-comment-user-image'>
-                    <img src={comment.user.imgUrl} alt="" />
+                    {userOfComment && <img src={userOfComment.imgUrl} alt="" />}
                 </div>
                 <div className='postcard-comment-description'>
-                    <span>{comment.user.name}</span>
+                    {userOfComment && <span>{userOfComment.name}</span>}
                     <p>{comment.description}</p>
                 </div>
             </div>

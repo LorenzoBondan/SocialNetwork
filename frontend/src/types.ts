@@ -45,6 +45,6 @@ export type Post = {
 export type Comment = {
     id: number;
     description: string;
-    user: User;
+    userId: number;
     postId : number;
 }

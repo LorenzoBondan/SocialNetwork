@@ -6,24 +6,24 @@ import './styles.css';
 
 type FormData = {
     description: string;
-    user: User;
+    userId: number;
     postId : number;
 }
 
 type Props = {
     postId : number;
-    user : User;
+    userId : number;
     onInsertComment: (comment: Comment) => void;
 }
 
-const CommentForm = ( {user, postId, onInsertComment}: Props ) => {
+const CommentForm = ( {userId, postId, onInsertComment}: Props ) => {
     
     const { register, handleSubmit, setValue} = useForm<FormData>();
 
     // evento de enviar formulário
     const onSubmit = (formData : FormData) => {
 
-        formData.user = user;
+        formData.userId = userId;
         formData.postId = postId;
 
         const config: AxiosRequestConfig = {
