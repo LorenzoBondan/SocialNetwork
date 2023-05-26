@@ -22,11 +22,11 @@ const EditProfileForm = ({userId} : Props) => {
                 const user = response.data as User;
 
                 setValue('name', user.name);
-                setValue('password', user.password);
                 setValue('imgUrl', user.imgUrl);
                 setValue('bio', user.bio);
 
                 // not editable values
+                setValue('password', user.password);
                 setValue('email', user.email);
                 setValue('commentsId', user.commentsId);
                 setValue('followersId', user.followersId);
@@ -50,7 +50,6 @@ const EditProfileForm = ({userId} : Props) => {
 
         requestBackend(params)
             .then(response => {
-                console.log('success', response.data);
                 history.push("/profile");
         })
     };
@@ -98,20 +97,7 @@ const EditProfileForm = ({userId} : Props) => {
                         </div>
 
                         <div className='margin-bottom-30'>
-                            <label htmlFor="">Password</label>
-                                <input 
-                                    {...register("password", {
-                                    })}
-                                    type="text"
-                                    className={`form-control base-input ${errors.password ? 'is-invalid' : ''}`}
-                                    placeholder="Password"
-                                    name="password"
-                                />
-                                <div className='invalid-feedback d-block'>{errors.password?.message}</div>
-                        </div>
-
-                        <div className='margin-bottom-30'>
-                            <label htmlFor="" style={{color:"white"}}>Img Url</label>  
+                            <label htmlFor="">Img Url</label>  
                                 <input 
                                     {...register("imgUrl", {
                                     required: 'Campo obrigatório',
