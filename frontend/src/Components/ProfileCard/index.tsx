@@ -7,6 +7,7 @@ import { User } from 'types';
 import PostCard from 'Components/PostCard';
 import { FaUserEdit } from 'react-icons/fa';
 import verified from 'assets/images/verified.png';
+import { Link } from 'react-router-dom';
 
 
 type Props ={
@@ -57,7 +58,9 @@ const ProfileCard = ({userEmail} : Props) => {
                     </div>
                 </div>
                 <div className='profile-card-content-container-button'>
-                    <button className='btn btn-primary' style={{display:"flex", alignItems:"center", justifyContent:"center"}}><FaUserEdit style={{marginRight:"5px"}}/>Edit Profile</button>
+                    <Link to="/editProfile">
+                        <button className='btn btn-primary' style={{display:"flex", alignItems:"center", justifyContent:"center"}}><FaUserEdit style={{marginRight:"5px"}}/>Edit Profile</button>
+                    </Link>
                 </div>
 
             </div>

@@ -1,6 +1,7 @@
 
 import Navbar from "Components/Navbar";
 import Auth from "pages/Auth";
+import EditProfile from "pages/EditProfile";
 import Home from "pages/Home";
 import NewPost from "pages/NewPost";
 import Profile from "pages/Profile";
@@ -30,6 +31,10 @@ const Routes = () => {
 
                     <Route path="/profile" exact>
                         <Profile/>
+                    </Route>
+
+                    <Route path="/editProfile" exact>
+                        <EditProfile/>
                     </Route>
 
                     <Route path="/users" exact>
