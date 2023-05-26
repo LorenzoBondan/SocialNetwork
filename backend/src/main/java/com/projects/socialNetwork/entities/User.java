@@ -69,7 +69,7 @@ public class User implements UserDetails, Serializable{
 	private List<Comment> comments = new ArrayList<>();
 	
 	@ManyToMany(mappedBy = "likes")
-	private List<Post> likes = new ArrayList<>();
+	private List<Post> postsLiked = new ArrayList<>();
 	
 	public User() {
 	}
@@ -157,8 +157,8 @@ public class User implements UserDetails, Serializable{
 		return comments;
 	}
 
-	public List<Post> getLikes() {
-		return likes;
+	public List<Post> getPostsLiked() {
+		return postsLiked;
 	}
 
 	@Override

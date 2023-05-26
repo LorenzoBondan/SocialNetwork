@@ -156,9 +156,9 @@ public class UserService implements UserDetailsService {
 			entity.getComments().add(comment);
 		}
 		
-		for (Long likeDtoId : dto.getLikesId()) {
+		for (Long likeDtoId : dto.getPostsLikedId()) {
 			Post post = postRepository.getOne(likeDtoId);
-			entity.getLikes().add(post);
+			entity.getPostsLiked().add(post);
 		}
 	}
 
@@ -201,6 +201,40 @@ public class UserService implements UserDetailsService {
 			
 			entity = repository.save(entity);
 
+			return new UserDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}
+	}
+	
+	@Transactional
+	public UserDTO likePost(Long id, Long postId) {
+		try {
+			User entity = repository.getOne(id);
+			Post post = postRepository.getOne(postId);
+			
+			entity.getPostsLiked().add(post);
+			post.getLikes().add(entity);
+			entity = repository.save(entity);
+			post = postRepository.save(post);
+			
+			return new UserDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}
+	}
+	
+	@Transactional
+	public UserDTO dislikePost(Long id, Long postId) {
+		try {
+			User entity = repository.getOne(id);
+			Post post = postRepository.getOne(postId);
+			
+			entity.getPostsLiked().remove(post);
+			post.getLikes().remove(entity);
+			entity = repository.save(entity);
+			post = postRepository.save(post);
+			
 			return new UserDTO(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found " + id);

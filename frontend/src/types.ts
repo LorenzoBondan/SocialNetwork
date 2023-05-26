@@ -24,6 +24,7 @@ export type User = {
     commentsId: number[];
     followingId: number[];
     followersId: number[];
+    postsLikedId: number[];
 }
 
 export type Role = {
@@ -38,7 +39,7 @@ export type Post = {
     date: string;
     user: User;
     comments: Comment[];
-    likes: Like[];
+    likes: User[];
 }
 
 export type Comment = {
@@ -46,10 +47,4 @@ export type Comment = {
     description: string;
     user: User;
     postId : number;
-}
-
-export type Like = {
-    id: number;
-    userId: number | undefined;
-    postId: number;
 }

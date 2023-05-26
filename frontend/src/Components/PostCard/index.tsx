@@ -1,5 +1,5 @@
 
-import { Like, Post, User } from 'types';
+import { Post, User } from 'types';
 import './styles.css';
 import { useCallback, useEffect, useState, useContext } from 'react';
 import { AxiosRequestConfig } from 'axios';
@@ -8,9 +8,6 @@ import CommentCard from 'Components/CommentCard';
 import { GoTrashcan } from 'react-icons/go';
 import { AuthContext } from 'AuthContext';
 import { getTokenData, isAuthenticated } from 'util/auth';
-import like from 'assets/images/like.png';
-import likeFilled from 'assets/images/like_filled.png';
-import comment from 'assets/images/comment.png';
 import LikeCard from 'Components/LikeCard';
 import LikeAndComment from 'Components/LikeAndComment';
 
@@ -219,7 +216,7 @@ const PostCard = ({postId, onDelete} : Props) => {
             {showLikes && 
                 <div className='postcard-likes-zone'>
                     {post?.likes && post.likes.map(like => (
-                        <LikeCard userId={like.userId}/>
+                        <LikeCard userId={like.id}/>
                     ))}
                 </div>
             }

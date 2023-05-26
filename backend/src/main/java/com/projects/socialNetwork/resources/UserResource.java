@@ -95,4 +95,16 @@ public class UserResource {
 		return ResponseEntity.ok().body(newDto);
 	}
 	
+	@PutMapping(value = "/like/{id}/{postId}")
+	public ResponseEntity<UserDTO> likePost(@PathVariable Long id, @PathVariable @Valid @RequestBody Long postId)	{
+		UserDTO newDto = service.likePost(id, postId);
+		return ResponseEntity.ok().body(newDto);
+	}
+	
+	@PutMapping(value = "/dislike/{id}/{postId}")
+	public ResponseEntity<UserDTO> dislikePost(@PathVariable Long id, @PathVariable @Valid @RequestBody Long postId)	{
+		UserDTO newDto = service.dislikePost(id, postId);
+		return ResponseEntity.ok().body(newDto);
+	}
+	
 }
