@@ -9,14 +9,62 @@ import { GoTrashcan } from 'react-icons/go';
 import { AuthContext } from 'AuthContext';
 import { getTokenData, isAuthenticated } from 'util/auth';
 import LikeCard from 'Components/LikeCard';
-import LikeAndComment from 'Components/LikeAndComment';
+import like from 'assets/images/like.png';
+import likeFilled from 'assets/images/like_filled.png';
+import comment from 'assets/images/comment.png';
 
 type Props = {
     postId: number;
     onDelete : Function;
+    userLogged : User;
 }
 
-const PostCard = ({postId, onDelete} : Props) => {
+const PostCard = ({postId, onDelete, userLogged} : Props) => {
+
+    // getting the email
+    const { authContextData, setAuthContextData } = useContext(AuthContext);
+
+    useEffect(() => {
+        if(isAuthenticated()){
+          setAuthContextData({
+            authenticated: true,
+            tokenData: getTokenData()
+          })
+        }
+        else{
+          setAuthContextData({
+            authenticated: false,
+          })
+        }
+    }, [setAuthContextData]);
+
+    let email: string;
+
+    authContextData.authenticated && (
+        authContextData.tokenData?.user_name && (
+        email = authContextData.tokenData?.user_name)) 
+    
+    // then, getting the user Id by email
+    
+    const [user, setUser] = useState<User>();
+
+    const getUser = useCallback(() => {
+        const params : AxiosRequestConfig = {
+          method:"GET",
+          url: `/users/email/${email}`,
+          withCredentials:true
+        }
+        requestBackend(params) 
+          .then(response => {
+            setUser(response.data);
+          })
+    }, [])
+
+    useEffect(() => {
+        getUser();
+    }, [getUser]);
+
+    /**/
 
     const [post, setPost] = useState<Post>();
 
@@ -113,51 +161,6 @@ const PostCard = ({postId, onDelete} : Props) => {
 
     /**/
 
-    // getting the email
-    const { authContextData, setAuthContextData } = useContext(AuthContext);
-
-    useEffect(() => {
-        if(isAuthenticated()){
-          setAuthContextData({
-            authenticated: true,
-            tokenData: getTokenData()
-          })
-        }
-        else{
-          setAuthContextData({
-            authenticated: false,
-          })
-        }
-    }, [setAuthContextData]);
-
-    let email: string;
-
-    authContextData.authenticated && (
-        authContextData.tokenData?.user_name && (
-        email = authContextData.tokenData?.user_name)) 
-    
-    // then, getting the user Id by email
-    
-    const [user, setUser] = useState<User>();
-
-    const getUser = useCallback(() => {
-        const params : AxiosRequestConfig = {
-          method:"GET",
-          url: `/users/email/${email}`,
-          withCredentials:true
-        }
-        requestBackend(params) 
-          .then(response => {
-            setUser(response.data);
-          })
-    }, [])
-
-    useEffect(() => {
-        getUser();
-    }, [getUser]);
-
-    /**/
-
     const [isMine, setIsMine] = useState(false);
 
     const testIfThisPostIsMine = useCallback(() => {
@@ -175,7 +178,55 @@ const PostCard = ({postId, onDelete} : Props) => {
         testIfThisPostIsMine();
     }, [testIfThisPostIsMine, user]);
 
-    /**/
+     /**/
+
+     const [isLiked, setIsLiked] = useState(false);
+
+     const testIfIsLiked = useCallback(() => {
+        const likesId = post?.likes.map(like => like.id);
+          if(likesId && likesId.includes(userLogged.id)){
+              setIsLiked(true);
+          }
+          else{
+              setIsLiked(false);
+          }
+          
+      }, [post, userLogged])
+ 
+     const likePost = (user : User, postId : number) => {
+ 
+         user.postsLikedId.includes(postId);
+ 
+         const params : AxiosRequestConfig = {
+           method:"PUT",
+           url: `/users/like/${user.id}/${postId}`,
+           withCredentials:true
+         }
+         requestBackend(params) 
+           .then(response => {
+             setIsLiked(true);
+             getPostById();
+           })
+     }
+ 
+     const dislikePost = (user : User, postId : number) => {
+ 
+         const params : AxiosRequestConfig = {
+             method:"PUT",
+             url: `/users/dislike/${user.id}/${postId}`,
+           withCredentials:true
+         }
+         requestBackend(params) 
+           .then(response => {
+             setIsLiked(false);
+             getPostById();
+           })
+     }
+
+     useEffect(() => {
+        testIfIsLiked();
+    }, [testIfIsLiked]);
+
 
     return(
         <div className='postcard-container base-card'>
@@ -190,7 +241,16 @@ const PostCard = ({postId, onDelete} : Props) => {
             </div>
 
             <div>
-                
+                {post && 
+                    <div className='postcard-like-zone'>
+                        {isLiked ? (
+                            <img src={likeFilled} alt="" onClick={() => user && dislikePost(user, post.id)}/>
+                            ) : (
+                            <img src={like} alt="" onClick={() => user && likePost(user, post.id)}/>
+                            )}
+                        <img src={comment} alt="" />
+                    </div>
+                }
             </div>
 
             <div className='postcard-bottom-container'>

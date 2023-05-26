@@ -169,9 +169,9 @@ const UserDetails = () => {
             {user?.postsId && (
             <div className='profile-card-posts-container'>
                 <div className='row'>
-                    {user.postsId.map(p => (
+                    {userLogged && user.postsId.map(p => (
                         <div className='col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-3 posts-column' key={p}>
-                            <PostCard postId={p} onDelete={() => getUser()}/>
+                            <PostCard postId={p} userLogged={userLogged} onDelete={() => getUser()}/>
                         </div>
                     ))}
                 </div>

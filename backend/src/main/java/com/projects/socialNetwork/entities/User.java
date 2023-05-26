@@ -68,8 +68,8 @@ public class User implements UserDetails, Serializable{
 	@OneToMany(mappedBy = "user")
 	private List<Comment> comments = new ArrayList<>();
 	
-	@ManyToMany(mappedBy = "likes")
-	private List<Post> postsLiked = new ArrayList<>();
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "likes")
+	private Set<Post> postsLiked = new HashSet<>();
 	
 	public User() {
 	}
@@ -157,7 +157,7 @@ public class User implements UserDetails, Serializable{
 		return comments;
 	}
 
-	public List<Post> getPostsLiked() {
+	public Set<Post> getPostsLiked() {
 		return postsLiked;
 	}
 
