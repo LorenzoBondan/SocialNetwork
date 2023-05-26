@@ -94,6 +94,22 @@ const CommentCard = ({comment, onDelete} : Props) => {
 
     /**/
 
+    const [isInMyPost, setIsInMyPost] = useState(false);
+
+    const thisCommentIsInMyPost = useCallback(() => {
+        if(user?.postsId.includes(comment.postId)){
+            setIsInMyPost(true);
+        }
+        else{
+            setIsInMyPost(false);
+        }
+    }, [comment.postId, user])
+
+    useEffect(() => {
+        user && 
+        thisCommentIsInMyPost();
+    }, [thisCommentIsInMyPost, user]);
+
     return(
         <div className='postcard-comment-zone'>
             <div className="postcard-first-container">
@@ -105,7 +121,7 @@ const CommentCard = ({comment, onDelete} : Props) => {
                     <p>{comment.description}</p>
                 </div>
             </div>
-            {isMine && 
+            {(isMine || isInMyPost) && 
                 <div className="postcard-second-container">
                     <GoTrashcan onClick={() => handleDelete(comment.id)} />
                 </div>
