@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 import { useForm } from "react-hook-form";
-import { Comment, User } from "types";
+import { Comment } from "types";
 import { requestBackend } from "util/requests";
 import './styles.css';
 
@@ -45,22 +45,23 @@ const CommentForm = ( {userId, postId, onInsertComment}: Props ) => {
     };
 
     return(
-        <div className="review-submit-card">
+        <div className="comment-submit-card">
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} className="comment-form">
 
                 <input
                     {...register("description", {
                     required: "Required field,",
                     })}
-                    id="input-review"
+                    id="input-comment"
                     type="description"
-                    placeholder="Insert your review here"
+                    placeholder="Insert your comment here"
                     name="description"
+                    className="base-input"
                 />
                 <div style={{display: "flex", justifyContent: "center"}}>
 
-                <button>Save Comment</button>
+                <button className="btn btn-primary"><p>{'>'}</p></button>
         
                 </div>
             </form>

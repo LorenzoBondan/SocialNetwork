@@ -43,11 +43,13 @@ ul {
 
 /* TEXTBOX */
 .base-input {
-  border-radius: 10px;
+  border-radius: 30px;
+  padding-left: 12px;
   font-size: 1em;
   letter-spacing: -0.015em;
   color: #263238;
-  height: 50px;
+  height: 40px;
+  border: #9E9E9E 1px solid;
 }
 
 

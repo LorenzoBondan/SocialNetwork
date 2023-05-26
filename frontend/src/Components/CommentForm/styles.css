@@ -1,0 +1,24 @@
+.comment-submit-card{
+    display: flex;
+    flex-direction: row;
+}
+
+.comment-form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.comment-form button{
+    color: #fff;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+.comment-form input{
+    width: 235px !important;
+}
