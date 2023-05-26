@@ -15,7 +15,7 @@ const CommentCard = ({comment, onDelete} : Props) => {
 
     const handleDelete = (commentId : number) => {
     
-        if(!window.confirm("Are you sure that you want to delete the user?")){ // messagebox
+        if(!window.confirm("Are you sure that you want to delete this comment?")){ // messagebox
           return;
         }
     

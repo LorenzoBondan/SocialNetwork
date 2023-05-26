@@ -117,6 +117,10 @@ const UserDetails = () => {
     }
 
     const stopFollowing = () => {
+        if(!window.confirm("Are you sure that you want to stop following this user?")){ // messagebox
+            return;
+        }
+
         const params : AxiosRequestConfig = {
             method:"PUT",
             url: `/users/stopFollowing/${userId}/${userLogged?.id}`,
