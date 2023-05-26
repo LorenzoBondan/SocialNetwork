@@ -11,13 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.projects.socialNetwork.dto.CommentDTO;
-import com.projects.socialNetwork.dto.LikeDTO;
 import com.projects.socialNetwork.dto.PostDTO;
+import com.projects.socialNetwork.dto.UserDTO;
 import com.projects.socialNetwork.entities.Comment;
-import com.projects.socialNetwork.entities.Like;
 import com.projects.socialNetwork.entities.Post;
+import com.projects.socialNetwork.entities.User;
 import com.projects.socialNetwork.repositories.CommentRepository;
-import com.projects.socialNetwork.repositories.LikeRepository;
 import com.projects.socialNetwork.repositories.PostRepository;
 import com.projects.socialNetwork.repositories.UserRepository;
 import com.projects.socialNetwork.services.exceptions.DataBaseException;
@@ -31,9 +30,6 @@ public class PostService {
 	
 	@Autowired
 	private CommentRepository commentRepository;
-	
-	@Autowired
-	private LikeRepository likeRepository;
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -86,9 +82,9 @@ public class PostService {
 		
 		entity.getLikes().clear();
 
-		for (LikeDTO likeDto : dto.getLikes()) {
-			Like like = likeRepository.getOne(likeDto.getId());
-			entity.getLikes().add(like);
+		for (UserDTO userDto : dto.getLikes()) {
+			User user = userRepository.getOne(userDto.getId());
+			entity.getLikes().add(user);
 		}
 	}
 

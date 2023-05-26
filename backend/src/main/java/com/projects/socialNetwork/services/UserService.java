@@ -155,6 +155,11 @@ public class UserService implements UserDetailsService {
 			Comment comment = commentRepository.getOne(commentDtoId);
 			entity.getComments().add(comment);
 		}
+		
+		for (Long likeDtoId : dto.getLikesId()) {
+			Post post = postRepository.getOne(likeDtoId);
+			entity.getLikes().add(post);
+		}
 	}
 
 	@Override

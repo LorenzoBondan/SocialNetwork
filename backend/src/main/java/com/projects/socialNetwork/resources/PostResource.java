@@ -19,10 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.projects.socialNetwork.dto.CommentDTO;
-import com.projects.socialNetwork.dto.LikeDTO;
 import com.projects.socialNetwork.dto.PostDTO;
 import com.projects.socialNetwork.services.CommentService;
-import com.projects.socialNetwork.services.LikeService;
 import com.projects.socialNetwork.services.PostService;
 
 @RestController
@@ -35,8 +33,6 @@ public class PostResource {
 	@Autowired
 	private CommentService commentService;
 	
-	@Autowired
-	private LikeService likeService;
 	
 	@GetMapping
 	public ResponseEntity<Page<PostDTO>> findAll(Pageable pageable) {
@@ -68,12 +64,6 @@ public class PostResource {
 	public ResponseEntity<List<CommentDTO>> findCommentsByPostId(@PathVariable Long id) {
 		List<CommentDTO> commentsDTO = commentService.findCommentsByPostId(id);
 		return ResponseEntity.ok(commentsDTO);
-	}
-	
-	@GetMapping(path = "/{id}/likes")
-	public ResponseEntity<List<LikeDTO>> findLikesByPostId(@PathVariable Long id) {
-		List<LikeDTO> likesDTO = likeService.findLikesByPostId(id);
-		return ResponseEntity.ok(likesDTO);
 	}
 	
 }

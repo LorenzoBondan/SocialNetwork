@@ -3,16 +3,21 @@ package com.projects.socialNetwork.entities;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -39,8 +44,11 @@ public class Post implements Serializable {
 	@OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
 	private List<Comment> comments = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "postLike", cascade = CascadeType.REMOVE)
-	private List<Like> likes = new ArrayList<>();
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+	@JoinTable(name = "tb_user_likes",
+				joinColumns = @JoinColumn(name = "post_id"), 
+				inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private Set<User> likes = new HashSet<>();
 	
 	public Post() {}
 
@@ -97,7 +105,7 @@ public class Post implements Serializable {
 		return comments;
 	}
 
-	public List<Like> getLikes() {
+	public Set<User> getLikes() {
 		return likes;
 	}
 

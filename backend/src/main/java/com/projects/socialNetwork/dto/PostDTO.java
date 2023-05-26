@@ -21,7 +21,7 @@ public class PostDTO implements Serializable {
 	
 	private List<CommentDTO> comments = new ArrayList<>();
 	
-	private List<LikeDTO> likes = new ArrayList<>();
+	private List<UserDTO> likes = new ArrayList<>();
 	
 	public PostDTO() {}
 
@@ -42,7 +42,7 @@ public class PostDTO implements Serializable {
 		this.user = new UserDTO(entity.getUser());
 		
 		entity.getComments().forEach(c -> this.comments.add(new CommentDTO(c)));
-		entity.getLikes().forEach(l -> this.likes.add(new LikeDTO(l)));
+		entity.getLikes().forEach(l -> this.likes.add(new UserDTO(l)));
 	}
 
 	public Long getId() {
@@ -89,7 +89,7 @@ public class PostDTO implements Serializable {
 		return comments;
 	}
 
-	public List<LikeDTO> getLikes() {
+	public List<UserDTO> getLikes() {
 		return likes;
 	}
 

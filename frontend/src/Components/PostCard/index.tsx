@@ -12,6 +12,7 @@ import like from 'assets/images/like.png';
 import likeFilled from 'assets/images/like_filled.png';
 import comment from 'assets/images/comment.png';
 import LikeCard from 'Components/LikeCard';
+import LikeAndComment from 'Components/LikeAndComment';
 
 type Props = {
     postId: number;
@@ -179,26 +180,6 @@ const PostCard = ({postId, onDelete} : Props) => {
 
     /**/
 
-    const [isLiked, setIsLiked] = useState(false);
-
-    const likePost = (formData : Like) => {
-
-        formData.postId = 1;
-        formData.userId = 1;
-
-        const params : AxiosRequestConfig = {
-          method:"POST",
-          url: `/likes`,
-          data: formData,
-          withCredentials:true
-        }
-        requestBackend(params) 
-          .then(response => {
-            setIsLiked(true);
-            console.log("liked with success: ", response.data);
-          })
-    }
-
     return(
         <div className='postcard-container base-card'>
             <div className='postcard-content-container'>
@@ -210,15 +191,11 @@ const PostCard = ({postId, onDelete} : Props) => {
                 <p>{post?.description}</p>
                 <p className='postcard-date'>{post?.date && formatDate(post.date)}</p>
             </div>
-            <div className='postcard-like-zone'>
-                {isLiked ? (
-                    <img src={likeFilled} alt="" />
-                ) : (
-                    <img src={like} alt="" onClick={() => likePost}/>
-                )}
+
+            <div>
                 
-                <img src={comment} alt="" />
             </div>
+
             <div className='postcard-bottom-container'>
                 <div className='postcard-likes-comments-info'>
                     {quantityLikes ? (

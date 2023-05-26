@@ -50,6 +50,6 @@ export type Comment = {
 
 export type Like = {
     id: number;
-    userId: number;
+    userId: number | undefined;
     postId: number;
 }

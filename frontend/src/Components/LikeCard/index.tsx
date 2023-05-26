@@ -4,7 +4,7 @@ import { User } from "types";
 import { requestBackend } from "util/requests";
 
 type Props ={
-    userId: number;  
+    userId: number | undefined;  
 }
 
 const LikeCard = ({userId} : Props) => {
