@@ -256,6 +256,19 @@ const PostCard = ({postId, onDelete, userLogged} : Props) => {
         getPostById();
     };
 
+    /////
+
+    const [showCommentForm, setShowCommentForm] = useState(false);
+
+    const openAndCloseCommentForm = () => {
+        if(showCommentForm){
+            setShowCommentForm(false);
+        }
+        else{
+            setShowCommentForm(true);
+        }
+    }
+
     return(
         <div className='postcard-container base-card'>
             <div className='postcard-content-container'>
@@ -275,10 +288,11 @@ const PostCard = ({postId, onDelete, userLogged} : Props) => {
                             <img src={likeFilled} alt="" onClick={() => user && dislikePost(user, post.id)}/>
                             ) : (
                             <img src={like} alt="" onClick={() => user && likePost(user, post.id)}/>
-                            )}
+                        )}
 
-                        <img src={commentIcon} alt="" />
-                        {userLogged &&
+                        <img src={commentIcon} alt="" onClick={() => openAndCloseCommentForm()}/>
+
+                        {userLogged && showCommentForm && 
                             <CommentForm userId={userLogged.id} postId={postId} onInsertComment={handleInsertComment}/>
                         }
                     </div>
