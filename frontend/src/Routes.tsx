@@ -1,5 +1,6 @@
 
 import Navbar from "Components/Navbar";
+import Admin from "pages/Admin";
 import Auth from "pages/Auth";
 import EditProfile from "pages/EditProfile";
 import Home from "pages/Home";
@@ -52,9 +53,9 @@ const Routes = () => {
                         </div>
                     </Route>
 
-                    <Redirect from="/admin" to="/admin/courses" exact />
+                    <Redirect from="/admin" to="/admin/users" exact />
                     <Route path="/admin">
-
+                        <Admin/>
                     </Route>
 
 

@@ -1,0 +1,17 @@
+.admin-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+}
+
+.admin-content{
+    width: 100%;
+}
+
+@media(min-width:1200px){
+    .admin-container{
+        display: flex;
+        flex-direction: row;
+    }
+}
