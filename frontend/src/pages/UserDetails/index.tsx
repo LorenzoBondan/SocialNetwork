@@ -3,11 +3,12 @@ import { useParams } from 'react-router-dom';
 import './styles.css';
 import { useEffect, useState, useContext, useCallback } from 'react';
 import { User } from 'types';
-import axios, { AxiosRequestConfig } from 'axios';
-import { BASE_URL, requestBackend } from 'util/requests';
+import { AxiosRequestConfig } from 'axios';
+import { requestBackend } from 'util/requests';
 import verified from 'assets/images/verified.png';
 import { AuthContext } from 'AuthContext';
 import { getTokenData, isAuthenticated } from 'util/auth';
+import PostCard from 'Components/PostCard';
 
 type UrlParams = {
     userId: string;
@@ -160,6 +161,18 @@ const UserDetails = () => {
                     </div>
                 </div>
             </div>
+
+            {user?.postsId && (
+            <div className='profile-card-posts-container'>
+                <div className='row'>
+                    {user.postsId.map(p => (
+                        <div className='col-sm-12 col-md-6 col-lg-4 col-xl-4 col-xxl-3 posts-column' key={p}>
+                            <PostCard postId={p} onDelete={() => getUser()}/>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )}
         </div>
     );
 }

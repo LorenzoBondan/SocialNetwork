@@ -1,11 +1,13 @@
 
-import { Post } from 'types';
+import { Post, User } from 'types';
 import './styles.css';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useContext } from 'react';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
 import CommentCard from 'Components/CommentCard';
 import { GoTrashcan } from 'react-icons/go';
+import { AuthContext } from 'AuthContext';
+import { getTokenData, isAuthenticated } from 'util/auth';
 
 type Props = {
     postId: number;
@@ -107,6 +109,72 @@ const PostCard = ({postId, onDelete} : Props) => {
         })
       }
 
+    /**/
+
+    // getting the email
+    const { authContextData, setAuthContextData } = useContext(AuthContext);
+
+    useEffect(() => {
+        if(isAuthenticated()){
+          setAuthContextData({
+            authenticated: true,
+            tokenData: getTokenData()
+          })
+        }
+        else{
+          setAuthContextData({
+            authenticated: false,
+          })
+        }
+    }, [setAuthContextData]);
+
+    let email: string;
+
+    authContextData.authenticated && (
+        authContextData.tokenData?.user_name && (
+        email = authContextData.tokenData?.user_name)) 
+    
+    // then, getting the user Id by email
+    
+    const [user, setUser] = useState<User>();
+
+    const getUser = useCallback(() => {
+        const params : AxiosRequestConfig = {
+          method:"GET",
+          url: `/users/email/${email}`,
+          withCredentials:true
+        }
+        requestBackend(params) 
+          .then(response => {
+            setUser(response.data);
+          })
+    }, [])
+
+    useEffect(() => {
+        getUser();
+    }, [getUser]);
+
+    /**/
+
+    const [isMine, setIsMine] = useState(false);
+
+    const testIfThisPostIsMine = useCallback(() => {
+
+        if(user && user.postsId.includes(postId)){
+            setIsMine(true);
+        }
+        else{
+            setIsMine(false);
+        }
+    }, [user, postId])
+
+    useEffect(() => {
+        user && 
+        testIfThisPostIsMine();
+    }, [testIfThisPostIsMine, user]);
+
+    /**/
+
     return(
         <div className='postcard-container base-card'>
             <div className='postcard-content-container'>
@@ -131,9 +199,11 @@ const PostCard = ({postId, onDelete} : Props) => {
                         <p onClick={openAndCloseComments}>{post?.comments.length} comment</p>
                     )}
                 </div>
-                <div className='postcard-delete'>
-                    <GoTrashcan onClick={() => post?.id && handleDelete(post.id)} />
-                </div>
+                {isMine && 
+                    <div className='postcard-delete'>
+                        <GoTrashcan onClick={() => post?.id && handleDelete(post.id)} />
+                    </div>
+                }
             </div>
 
             {showLikes && 
