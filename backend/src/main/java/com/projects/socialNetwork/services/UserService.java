@@ -1,5 +1,6 @@
 package com.projects.socialNetwork.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,6 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.projects.socialNetwork.dto.PostDTO;
 import com.projects.socialNetwork.dto.RoleDTO;
 import com.projects.socialNetwork.dto.UserDTO;
 import com.projects.socialNetwork.dto.UserInsertDTO;
@@ -239,5 +241,19 @@ public class UserService implements UserDetailsService {
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id not found " + id);
 		}
+	}
+	
+	@Transactional(readOnly = true)
+	public List<PostDTO> findPostsOfFollowing(Long userId) {
+		User user = repository.getOne(userId);
+		List<PostDTO> list = new ArrayList<>();
+		
+		for(User following : user.getFollowing()) {
+			for(Post post : following.getPosts()) {
+				list.add(new PostDTO(post));
+			}
+		}
+		
+		return list;
 	}
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.projects.socialNetwork.dto.PostDTO;
 import com.projects.socialNetwork.dto.UserDTO;
 import com.projects.socialNetwork.dto.UserInsertDTO;
 import com.projects.socialNetwork.dto.UserUpdateDTO;
@@ -105,6 +106,12 @@ public class UserResource {
 	public ResponseEntity<UserDTO> dislikePost(@PathVariable Long id, @PathVariable @Valid @RequestBody Long postId)	{
 		UserDTO newDto = service.dislikePost(id, postId);
 		return ResponseEntity.ok().body(newDto);
+	}
+	
+	@GetMapping(value = "/{id}/postsOfFollowing") 
+	public ResponseEntity<List<PostDTO>> findPostsOfFollowing (@PathVariable Long id) {
+		List<PostDTO> dto = service.findPostsOfFollowing(id);	
+		return ResponseEntity.ok().body(dto);
 	}
 	
 }
