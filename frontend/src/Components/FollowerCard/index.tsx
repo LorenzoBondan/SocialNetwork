@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { AxiosRequestConfig } from "axios";
 import { requestBackend } from "util/requests";
 import { Link } from "react-router-dom";
+import './styles.css';
 
 type Props = {
     followerId : number;
@@ -30,7 +31,7 @@ const FollowerCard = ({followerId} : Props) => {
 
     return(
         <div className="follower-card base-card">
-            <Link to={`/user/${page?.id}`}>
+            <Link to={`/user/${page?.id}`} className="follower-card-content">
                 <img src={page?.imgUrl} alt="" />
                 <p>{page?.name}</p>
             </Link>

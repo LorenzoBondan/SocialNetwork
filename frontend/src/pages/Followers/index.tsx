@@ -35,6 +35,7 @@ const Followers = () => {
 
     return(
         <div className='followers-container'>
+            <h3>{user?.name}'s Followers</h3>
             <div className='row'>
                 {user?.followersId.map(follower => (
                     <div key={follower}>

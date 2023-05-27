@@ -1,0 +1,29 @@
+.follower-card{
+    padding: 20px;
+    height: 100px;
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.follower-card-content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.follower-card img{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.follower-card p{
+    margin-bottom: 0;
+    font-weight: 700;
+}
