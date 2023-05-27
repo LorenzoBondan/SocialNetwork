@@ -47,7 +47,6 @@ const Feed = () => {
           const response = await requestBackend(params);
           setUser(response.data);
         } catch (error) {
-          // Lidar com o erro aqui
           console.error(error);
         }
       }, []);
@@ -85,7 +84,7 @@ const Feed = () => {
     return(
         <div className='feed-container'>
             <div className='row'>
-                {user && page?.map(post => (
+                {user && page?.sort((a,b) => a.date > b.date ? -1 : 1).map(post => (
                     <div key={post.id}>
                         <PostCard postId={post.id} userLogged={user} onDelete={getPosts}/>
                     </div>
