@@ -26,11 +26,12 @@
 }
 
 .pagination-item:hover{
-    color: white;
+    color: #7D5889 !important;
 }
 
 .pagination-link-active {
     background-color: #E74A7D;
+    color: #fff !important;
 }
 
 .arrow-inactive{

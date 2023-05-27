@@ -34,7 +34,7 @@ const Users = () => {
         url: "/users",
         params: {
           page: controlComponentsData.activePage,
-          size: 4,
+          size: 12,
   
           name: controlComponentsData.filterData.name
         },
@@ -115,13 +115,15 @@ const Users = () => {
                     </div>
                 ))}
             </div>
-
-            <Pagination 
-              pageCount={(page) ? page.totalPages : 0} 
-              range={2}
-              onChange={handlePageChange}
-              forcePage={page?.number}
-            />
+            
+            <div className='pagination-container'>
+              <Pagination 
+                pageCount={(page) ? page.totalPages : 0} 
+                range={2}
+                onChange={handlePageChange}
+                forcePage={page?.number}
+              />
+            </div>
 
         </div>
     );
