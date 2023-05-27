@@ -38,14 +38,14 @@ const RegisterForm = () => {
     }
 
     return(
-        <div className="students-crud-container">
+        <div className="register-container">
 
-            <div className="base-card students-card-form-card">
+            <div className="base-card user-register-form-card">
                 <h1>REGISTER</h1>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className='row students-crud-inputs-container'>
-                        <div className='students-crud-inputs-left-container'>
+                    <div className='row user-crud-inputs-container'>
+                        <div className='user-crud-inputs-left-container'>
 
                             <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"black"}}>Name</label>
@@ -94,14 +94,14 @@ const RegisterForm = () => {
                             </div>
                         </div>
 
-                        <div className='students-crud-buttons-container'>
+                        <div className='user-buttons-container'>
                             <button 
-                                className='btn btn-outline-danger students-crud-buttons'
+                                className='btn btn-outline-danger user-crud-buttons'
                                 onClick={handleCancel}
                                 >
                                 CANCEL
                             </button>
-                            <button className='btn btn-primary text-white students-crud-buttons'>REGISTER</button>
+                            <button className='btn btn-primary text-white user-crud-buttons'>REGISTER</button>
                         </div>
                     </div>
                 </form>
