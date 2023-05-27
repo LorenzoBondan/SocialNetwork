@@ -57,8 +57,8 @@ public class UserService implements UserDetailsService {
 	private CommentRepository commentRepository;
 
 	@Transactional(readOnly = true)
-	public Page<UserDTO> findAllPaged(Pageable pageable) {
-		Page<User> list = repository.findAll(pageable);
+	public Page<UserDTO> findAllPaged(String name, Pageable pageable) {
+		Page<User> list = repository.find(name, pageable);
 		return list.map(x -> new UserDTO(x));
 	}
 
