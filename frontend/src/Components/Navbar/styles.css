@@ -1,8 +1,10 @@
 .admin-nav-container{
     padding: 10px;
     background-color: #fff;
-    border-right: 1px solid darkgray;
+    width: 100%;
     border-bottom: 1px solid darkgray;
+    position: fixed;
+    z-index: 9999;
 }
 
 .navbar-title{
@@ -81,10 +83,6 @@
 /* --- VIRA UMA NAVBAR LATERAL ESQ */
 
 @media(min-width:768px){
-    .admin-nav-item, .login-nav-item {
-        min-width: 220px;
-    }
-
     .ul-container p {
         font-size: 20px;
     }
@@ -105,6 +103,7 @@
         padding: 0px;
         width: 300px;
         height: 100vh; /* toda a altura da tela menos o cabeçalho */
+        border-right: 1px solid darkgray;
     }
 
     .admin-nav-item, .login-nav-item {

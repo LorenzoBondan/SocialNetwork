@@ -13,6 +13,7 @@ import { AuthContext } from 'AuthContext';
 import { removeAuthData } from 'util/storage';
 import history from 'util/history';
 
+
 const Navbar = () => {
 
     const { authContextData, setAuthContextData } = useContext(AuthContext);

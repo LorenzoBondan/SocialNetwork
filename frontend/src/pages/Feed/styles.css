@@ -1,8 +1,16 @@
 .feed-container{
     padding: 20px;
+    margin-top: 250px;
 }
 
 .feed-container h3{
     font-weight: 700;
     text-shadow: 1px 1px 2px silver;
+}
+
+@media(min-width:1200px){
+    .feed-container{
+        margin-top: 0;
+        margin-left: 300px;
+    }
 }
