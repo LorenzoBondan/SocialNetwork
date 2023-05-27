@@ -4,6 +4,7 @@ import Admin from "pages/Admin";
 import Auth from "pages/Auth";
 import EditProfile from "pages/EditProfile";
 import Followers from "pages/Followers";
+import Following from "pages/Following";
 import Home from "pages/Home";
 import NewPost from "pages/NewPost";
 import Profile from "pages/Profile";
@@ -49,6 +50,10 @@ const Routes = () => {
 
                     <Route path="/user/:userId/followers">
                         <Followers/>
+                    </Route>
+
+                    <Route path="/user/:userId/following">
+                        <Following/>
                     </Route>
 
                     <Redirect from='/auth' to='/auth/login' exact />
