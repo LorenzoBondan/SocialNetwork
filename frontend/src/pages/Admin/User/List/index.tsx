@@ -1,29 +1,54 @@
 import { AxiosRequestConfig } from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { requestBackend } from "util/requests";
 import UserCrudCard from "../UserCrudCard";
 import { SpringPage, User } from "types";
+import UserFilter, { UserFilterData } from "Components/UserFilter";
+import Pagination from "Components/Pagination";
+
+type ControlComponentsData = {
+    activePage: number;
+    filterData: UserFilterData;
+  }
 
 const List = () => {
 
+     // pagination and filter
+     const [controlComponentsData, setControlComponentsData] = useState<ControlComponentsData>({activePage:0, filterData: { name: '' },});
+
+     const handlePageChange = (pageNumber : number) => {
+       setControlComponentsData({activePage: pageNumber, filterData: controlComponentsData.filterData});
+     }
+
     const [page, setPage] = useState<SpringPage<User>>();
 
-    const getUsers = () => {
+    const getUsers = useCallback(() => {
         const params : AxiosRequestConfig = {
-            url: '/users',
-            withCredentials: true,
-          };
+          method:"GET",
+          url: "/users",
+          params: {
+            page: controlComponentsData.activePage,
+            size: 12,
+    
+            name: controlComponentsData.filterData.name
+          },
+        }
       
-      
-          requestBackend(params).then((response) => {
+        requestBackend(params) 
+          .then(response => {
             setPage(response.data);
-          });
-    }
+            window.scrollTo(0, 0);
+          })
+      }, [controlComponentsData])
 
     useEffect(() => {
         getUsers();
-    }, []);
+    }, [getUsers]);
+
+    const handleSubmitFilter = (data : UserFilterData) => {
+        setControlComponentsData({activePage: 0, filterData: data});
+      }
 
     return(
         <div className='courses-crud-container'>
@@ -35,6 +60,10 @@ const List = () => {
                 </Link>
             </div>
 
+            <div className='users-search-bar-container'>
+              <UserFilter onSubmitFilter={handleSubmitFilter} />
+            </div>
+
             <div className='row'>
                 {page?.content
                     .sort( (a,b) => a.name > b.name ? 1 : -1)
@@ -44,6 +73,15 @@ const List = () => {
                         </div>
                     ))
                 }
+            </div>
+
+            <div className='pagination-container'>
+              <Pagination 
+                pageCount={(page) ? page.totalPages : 0} 
+                range={2}
+                onChange={handlePageChange}
+                forcePage={page?.number}
+              />
             </div>
     </div>
     );

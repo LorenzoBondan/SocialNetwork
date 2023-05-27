@@ -24,8 +24,6 @@ const Users = () => {
       setControlComponentsData({activePage: pageNumber, filterData: controlComponentsData.filterData});
     }
 
-
-
     const [page, setPage] = useState<SpringPage<User>>();
 
     const getUsers = useCallback(() => {
