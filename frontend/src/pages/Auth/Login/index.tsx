@@ -19,7 +19,7 @@ type LocationState = {
 const Login = () => {
 
     const location = useLocation<LocationState>();
-    const {from} = location.state || { from: { pathname: '/profile'}};
+    const {from} = location.state || { from: { pathname: '/feed'}};
 
     const { setAuthContextData } = useContext(AuthContext);
 
