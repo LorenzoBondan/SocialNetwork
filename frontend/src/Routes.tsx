@@ -3,6 +3,7 @@ import Navbar from "Components/Navbar";
 import Admin from "pages/Admin";
 import Auth from "pages/Auth";
 import EditProfile from "pages/EditProfile";
+import Feed from "pages/Feed";
 import Followers from "pages/Followers";
 import Following from "pages/Following";
 import Home from "pages/Home";
@@ -26,6 +27,10 @@ const Routes = () => {
                         <div style={{display:"flex", alignItems:"center", justifyContent:"center", flex:"1", padding:"10px"}}>
                             <Home/>
                         </div>
+                    </Route>
+
+                    <Route path="/feed" exact>
+                        <Feed/>
                     </Route>
 
                     <Route path="/create" exact>

@@ -6,7 +6,7 @@ import { CgProfile } from 'react-icons/cg';
 import { HiOutlineUsers } from 'react-icons/hi';
 import { MdOutlineAdminPanelSettings } from 'react-icons/md';
 import { RxInstagramLogo } from 'react-icons/rx';
-
+import { CgFeed } from 'react-icons/cg';
 import './styles.css';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from 'AuthContext';
@@ -53,6 +53,12 @@ const Navbar = () => {
             <ul className='ul-container'>
                 {isAuthenticated() ? (
                 <>
+                <li>
+                    <NavLink to="/feed" className='admin-nav-item'>
+                        <CgFeed style={{color:"#7D5889", marginRight:"8px"}}/>
+                        <p>Feed</p>
+                    </NavLink>
+                </li>
                 <li>
                     <NavLink to="/create" className='admin-nav-item'>
                         <RxInstagramLogo style={{color:"#7D5889", marginRight:"8px"}}/>
