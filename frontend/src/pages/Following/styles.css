@@ -1,8 +1,16 @@
 .followers-container{
     padding: 20px;
+    margin-top: 250px;
 }
 
 .followers-container h3{
     font-weight: 700;
     color: #7D5889;
+}
+
+@media(min-width:1200px){
+    .followers-container{
+        margin-top: 0;
+        margin-left: 300px;
+    }
 }
