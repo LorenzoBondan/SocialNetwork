@@ -21,6 +21,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -41,7 +42,7 @@ public class User implements UserDetails, Serializable{
 	private String password;
 	@Column(columnDefinition = "TEXT")
 	private String imgUrl;
-	@Column(columnDefinition = "TEXT")
+	@Length(max = 50)
 	private String bio;
 	
 	private Boolean verified;
