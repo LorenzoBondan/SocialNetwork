@@ -48,6 +48,10 @@ const ProfileCard = ({userEmail} : Props) => {
                 </div>
                 <p className='profile-card-bio'>{page?.bio}</p>
                 <div className='profile-card-follow-container'>
+                    <div className='profile-card-content-container-follow'>
+                            <p><strong>{page?.postsId.length}</strong></p>
+                            <p>Posts</p>
+                        </div>
                     <Link to={`/user/${page?.id}/followers`}>
                         <div className='profile-card-content-container-follow'>
                             <p><strong>{page?.followersId.length}</strong></p>

@@ -104,14 +104,14 @@ const UserCard = ({user, followerId} : Props) => {
     return(
         <div className='usercard-container base-card'>
             {isMe ? (
-                <Link to={`/profile`}>
-                    <div className='usercard-image'>
+                <Link to={`/profile`} className='usercard-image'>
+                    <div>
                         <img src={user.imgUrl} alt="" />
                     </div>
                 </Link>
             ) : (
-                <Link to={`/user/${user.id}`}>
-                    <div className='usercard-image'>
+                <Link to={`/user/${user.id}`} className='usercard-image'>
+                    <div>
                         <img src={user.imgUrl} alt="" />
                     </div>
                 </Link>
@@ -121,6 +121,9 @@ const UserCard = ({user, followerId} : Props) => {
                 <div style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
                     <p>{user.name}</p>
                     {user.verified && <img src={verified} alt="" style={{height:"10px", width:"10px", marginLeft:"3px"}}/>}
+                </div>
+                <div className='usercard-content-container'>
+                    <span className='profile-card-bio'>{user.bio}</span>
                 </div>
                 {isFollowing ? (
                     <button className='btn btn-primary' onClick={() => stopFollowing()}>Unfollow</button>

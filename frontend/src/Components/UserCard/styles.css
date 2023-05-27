@@ -1,5 +1,6 @@
 .usercard-container{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
@@ -9,30 +10,45 @@
 }
 
 .usercard-image{
-    border-right: 1px solid silver;
-    padding-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid silver;
+    padding-bottom: 10px;
+    width: 100%;
 }
 
-.usercard-container img{
-    height: 100px;
-    width: 100px;
+.usercard-image img{
+    height: 200px;
+    width: 200px;
     border-radius: 50%;
+    border: 3px solid silver;
 }
 
 .usercard-rigth{
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 100%;
+    margin-top: 5px;
 }
 
 .usercard-rigth p{
     margin-bottom: 0;
     text-align: center;
     flex-wrap: wrap;
+    font-weight: 700;
+    font-size: 20px;
 }
 
 .usercard-rigth button{
     color: #fff;
     margin-top: 20px;
     border-radius: 100px;
+}
+
+.usercard-content-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: left;
 }
