@@ -46,7 +46,7 @@ const ProfileCard = ({userEmail} : Props) => {
                     <h1 style={{marginBottom:"0", marginRight:"5px"}}>{page?.name}</h1>
                     {page?.verified && <img src={verified} alt="" style={{height:"18px"}} />}
                 </div>
-                <p style={{color:"darkgray"}}>{page?.bio}</p>
+                <p className='profile-card-bio'>{page?.bio}</p>
                 <div className='profile-card-follow-container'>
                     <div className='profile-card-content-container-follow'>
                         <p><strong>{page?.followersId.length}</strong></p>

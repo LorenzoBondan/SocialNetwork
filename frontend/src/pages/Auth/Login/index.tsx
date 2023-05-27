@@ -2,7 +2,6 @@ import { AuthContext } from 'AuthContext';
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { getTokenData } from 'util/auth';
 import { requestBackendLogin } from 'util/requests';
 import { getAuthData, saveAuthData } from 'util/storage';
@@ -104,7 +103,7 @@ const Login = () => {
                     
                     <div className="signup-container">
                         <span className="not-registered">Don't have an account?</span>
-                        <Link to="/admin/auth/signup" className="login-link-register">
+                        <Link to="/auth/signup" className="login-link-register">
                             REGISTER NOW
                         </Link>
                     </div>

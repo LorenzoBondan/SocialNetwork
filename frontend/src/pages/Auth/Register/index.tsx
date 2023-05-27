@@ -2,8 +2,6 @@
 import { AxiosRequestConfig } from 'axios';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-import { toast } from 'react-toastify';
-
 import { requestBackend } from 'util/requests';
 import './styles.css';
 import { User } from 'types';
@@ -17,7 +15,9 @@ const RegisterForm = () => {
 
     const onSubmit = (formData : User) => {
         
-        formData.roles = [ {id:3, authority:"ROLE_MEMBER"} ]; // todo usuário recém registrado começa como operator
+        formData.roles = [ {id:1, authority:"ROLE_OPERATOR"} ]; 
+        formData.verified = false;
+        formData.imgUrl = "https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg";
 
         const params : AxiosRequestConfig = {
             method: "POST",
@@ -28,18 +28,13 @@ const RegisterForm = () => {
 
         requestBackend(params)
             .then(response => {
-                console.log('Sucesso', response.data);
-                history.push("/admin/auth/login");
-                toast.success("User registered!");
-            })
-            .catch(() => {
-                toast.error('Erro ao cadastrar o User.');
+                console.log('Success', response.data);
+                history.push("/auth/login");
             })
     };
 
-    // botão de cancelar -> reenvia o usuário para a lista de produtos, saindo do form
     const handleCancel = () => {
-        history.push("/")
+        history.push("/home")
     }
 
     return(
@@ -64,10 +59,8 @@ const RegisterForm = () => {
                                     name="name"
                                 />
                                 <div className='invalid-feedback d-block'>{errors.name?.message}</div>
-
                             </div>
 
-                            
                             <div className='margin-bottom-30'>
                                 <label htmlFor="" style={{color:"black"}}>Email</label>
                                 <input 
@@ -83,7 +76,6 @@ const RegisterForm = () => {
                                     name="email"
                                 />
                                 <div className='invalid-feedback d-block'>{errors.email?.message}</div>
-
                             </div>
 
 
@@ -100,7 +92,6 @@ const RegisterForm = () => {
                                 <div className='invalid-feedback d-block'>{errors.password?.message}</div>
 
                             </div>
-
                         </div>
 
                         <div className='students-crud-buttons-container'>
@@ -108,14 +99,10 @@ const RegisterForm = () => {
                                 className='btn btn-outline-danger students-crud-buttons'
                                 onClick={handleCancel}
                                 >
-                                CANCELAR
+                                CANCEL
                             </button>
-
-                            <button className='btn btn-primary text-white students-crud-buttons'>SALVAR</button>
-
+                            <button className='btn btn-primary text-white students-crud-buttons'>REGISTER</button>
                         </div>
-
-                
                     </div>
                 </form>
             
