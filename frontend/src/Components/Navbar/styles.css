@@ -2,6 +2,7 @@
     padding: 10px;
     background-color: #fff;
     border-right: 1px solid darkgray;
+    border-bottom: 1px solid darkgray;
 }
 
 .navbar-title{
@@ -103,7 +104,7 @@
     .admin-nav-container{
         padding: 0px;
         width: 300px;
-        height: calc(100vh); /* toda a altura da tela menos o cabeçalho */
+        height: 100vh; /* toda a altura da tela menos o cabeçalho */
     }
 
     .admin-nav-item, .login-nav-item {

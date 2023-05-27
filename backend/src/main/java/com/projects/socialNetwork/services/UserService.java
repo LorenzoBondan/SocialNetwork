@@ -254,6 +254,11 @@ public class UserService implements UserDetailsService {
 			}
 		}
 		
+		// including my posts too
+		for(Post post : user.getPosts()) {
+			list.add(new PostDTO(post));
+		}
+		
 		return list;
 	}
 }

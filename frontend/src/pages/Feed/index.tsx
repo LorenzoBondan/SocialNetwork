@@ -83,10 +83,11 @@ const Feed = () => {
 
     return(
         <div className='feed-container'>
+            <h3>The most recent posts from your friends</h3>
             <div className='row'>
                 {user && page?.sort((a,b) => a.date > b.date ? -1 : 1).map(post => (
                     <div key={post.id}>
-                        <PostCard postId={post.id} userLogged={user} onDelete={getPosts}/>
+                        <PostCard postId={post.id} userLogged={user} onDelete={() => getPosts}/>
                     </div>
                 ))}
             </div>

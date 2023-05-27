@@ -12,6 +12,7 @@ import Profile from "pages/Profile";
 import UserDetails from "pages/UserDetails";
 import Users from "pages/Users";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
+import { isAuthenticated } from "util/auth";
 import history from "util/history";
 
 const Routes = () => {
@@ -22,7 +23,12 @@ const Routes = () => {
                 <Navbar/>
 
                 <Switch>
-                    <Redirect from='/' to='/home' exact />
+                    {isAuthenticated() ? (
+                        <Redirect from='/' to='/feed' exact />
+                    ) : (
+                        <Redirect from='/' to='/home' exact />
+                    )}
+                    
                     <Route path="/home" exact>
                         <div style={{display:"flex", alignItems:"center", justifyContent:"center", flex:"1", padding:"10px"}}>
                             <Home/>
