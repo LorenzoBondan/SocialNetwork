@@ -5,6 +5,7 @@
     justify-content: flex-start;
     width: 100%;
     padding: 20px;
+    margin-top: 250px;
 }
 
 .users-column{
@@ -23,4 +24,11 @@
     justify-content: center;
     align-items: center;
     margin-top: 10px;
+}
+
+@media(min-width:1200px){
+    .users-container{
+        margin-top: 0;
+        margin-left: 300px;
+    }
 }

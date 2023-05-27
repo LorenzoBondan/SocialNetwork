@@ -5,6 +5,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 250px;
 }
 
 @media(min-width:1200px){
@@ -12,5 +13,7 @@
         padding: 60px;
         align-items: flex-start;
         justify-content: flex-start;
+        margin-top: 0;
+        margin-left: 300px;
     }
 }

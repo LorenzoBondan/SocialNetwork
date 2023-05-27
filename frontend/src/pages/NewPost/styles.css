@@ -1,3 +1,11 @@
 .new-post-container{
     padding: 40px;
+    margin-top: 250px;
+}
+
+@media(min-width:1200px){
+    .new-post-container{
+        margin-top: 0;
+        margin-left: 300px;
+    }
 }
