@@ -9,7 +9,6 @@ function Auth(){
             
             <div className='auth-form-container'>
                 <Switch>
-
                     <Route path="/auth/login">
                         <Login />
                     </Route>

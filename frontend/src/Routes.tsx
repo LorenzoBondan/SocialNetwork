@@ -30,9 +30,7 @@ const Routes = () => {
                     )}
                     
                     <Route path="/home" exact>
-                        <div style={{display:"flex", alignItems:"center", justifyContent:"center", flex:"1", padding:"10px"}}>
-                            <Home/>
-                        </div>
+                        <Home/>
                     </Route>
 
                     <Route path="/feed" exact>
@@ -69,9 +67,7 @@ const Routes = () => {
 
                     <Redirect from='/auth' to='/auth/login' exact />
                     <Route path="/auth">
-                        <div style={{display:"flex", alignItems:"center", justifyContent:"center", flex:"1", padding:"10px"}}>
-                            <Auth/>
-                        </div>
+                        <Auth/>
                     </Route>
 
                     <Redirect from="/admin" to="/admin/users" exact />
