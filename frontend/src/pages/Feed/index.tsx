@@ -1,4 +1,4 @@
-import { Post, SpringPage, User } from 'types';
+import { Post, User } from 'types';
 import './styles.css';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { AxiosRequestConfig } from 'axios';
@@ -7,8 +7,11 @@ import { AuthContext } from 'AuthContext';
 import { getTokenData, isAuthenticated } from 'util/auth';
 import './styles.css';
 import PostCard from 'Components/PostCard';
+import CardLoader from 'Components/CardLoader';
 
 const Feed = () => {
+
+  const [isLoading, setIsLoading] = useState(false);
 
     // getting the email
     const { authContextData, setAuthContextData } = useContext(AuthContext);
@@ -44,10 +47,14 @@ const Feed = () => {
             url: `/users/email/${email}`,
             withCredentials: true
           };
+          setIsLoading(true);
           const response = await requestBackend(params);
           setUser(response.data);
         } catch (error) {
           console.error(error);
+        }
+        finally{
+          setIsLoading(false);
         }
       }, []);
 
@@ -65,13 +72,16 @@ const Feed = () => {
         const params : AxiosRequestConfig = {
           method:"GET",
           url: `/users/${user?.id}/postsOfFollowing`,
-
         }
-    
+
+        setIsLoading(true);
         requestBackend(params) 
           .then(response => {
             setPage(response.data);
             window.scrollTo(0, 0);
+          })
+          .finally(() => {
+            setIsLoading(false);
           })
       }, [user?.id])
   
@@ -85,11 +95,13 @@ const Feed = () => {
         <div className='feed-container'>
             <h3>The most recent posts from your friends</h3>
             <div className='row'>
-                {user && page?.sort((a,b) => a.date > b.date ? -1 : 1).map(post => (
+              {isLoading ? <CardLoader/> : (
+                user && page?.sort((a,b) => a.date > b.date ? -1 : 1).map(post => (
                     <div key={post.id}>
                         <PostCard postId={post.id} userLogged={user} onDelete={() => getPosts}/>
                     </div>
-                ))}
+                ))
+              )}
             </div>
         </div>
     );
