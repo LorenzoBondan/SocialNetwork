@@ -14,3 +14,7 @@
 .btn-follow-unfollow{
     border-radius: 30px;
 }
+
+.profile-card-content-container-follow:hover{
+    cursor: pointer;
+}

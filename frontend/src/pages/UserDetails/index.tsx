@@ -1,5 +1,5 @@
 
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './styles.css';
 import { useEffect, useState, useContext, useCallback } from 'react';
 import { User } from 'types';
@@ -144,16 +144,21 @@ const UserDetails = () => {
                         <h1 style={{marginBottom:"0", marginRight:"5px"}}>{user?.name}</h1>
                         {user?.verified && <img src={verified} alt="" style={{height:"18px"}} />}
                     </div>
-                    <p style={{color:"darkgray"}}>{user?.bio}</p>
+                    <p className='profile-card-bio'>{user?.bio}</p>
                     <div className='profile-card-follow-container'>
-                        <div className='profile-card-content-container-follow'>
-                            <p><strong>{user?.followersId.length}</strong></p>
-                            <p>Followers</p>
-                        </div>
-                        <div className='profile-card-content-container-follow'>
-                            <p><strong>{user?.followingId.length}</strong></p>
-                            <p>Following</p>
-                        </div>
+                        <Link to={`/user/${userId}/followers`}>
+                            <div className='profile-card-content-container-follow'>
+                                <p><strong>{user?.followersId.length}</strong></p>
+                                <p>Followers</p>
+                            </div>
+                        </Link>
+
+                        <Link to={`/user/${userId}/following`}>
+                            <div className='profile-card-content-container-follow'>
+                                <p><strong>{user?.followingId.length}</strong></p>
+                                <p>Following</p>
+                            </div>
+                        </Link>
                     </div>
                     <div className='profile-card-content-container-button'>
                         {isFollowing ? (
