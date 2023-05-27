@@ -145,28 +145,33 @@ const UserDetails = () => {
                         {user?.verified && <img src={verified} alt="" style={{height:"18px"}} />}
                     </div>
                     <p className='profile-card-bio'>{user?.bio}</p>
-                    <div className='profile-card-follow-container'>
-                        <Link to={`/user/${userId}/followers`}>
+                    <div className='space-between-follow-and-button'>
+                        <div className='profile-card-follow-container'>
                             <div className='profile-card-content-container-follow'>
-                                <p><strong>{user?.followersId.length}</strong></p>
-                                <p>Followers</p>
+                                <p><strong>{user?.postsId.length}</strong></p>
+                                <p>Posts</p>
                             </div>
-                        </Link>
+                            <Link to={`/user/${userId}/followers`}>
+                                <div className='profile-card-content-container-follow'>
+                                    <p><strong>{user?.followersId.length}</strong></p>
+                                    <p>Followers</p>
+                                </div>
+                            </Link>
 
-                        <Link to={`/user/${userId}/following`}>
-                            <div className='profile-card-content-container-follow'>
-                                <p><strong>{user?.followingId.length}</strong></p>
-                                <p>Following</p>
-                            </div>
-                        </Link>
-                    </div>
-                    <div className='profile-card-content-container-button'>
-                        {isFollowing ? (
-                            <button className='btn btn-primary btn-follow-unfollow' style={{display:"flex", alignItems:"center", justifyContent:"center"}} onClick={() => stopFollowing()}>Unfollow</button>
-                        ) : (
-                            <button className='btn btn-primary btn-follow-unfollow' style={{display:"flex", alignItems:"center", justifyContent:"center"}} onClick={() => startFollowing()}>Follow</button>
-                        )}
-                        
+                            <Link to={`/user/${userId}/following`}>
+                                <div className='profile-card-content-container-follow'>
+                                    <p><strong>{user?.followingId.length}</strong></p>
+                                    <p>Following</p>
+                                </div>
+                            </Link>
+                        </div>
+                        <div className='profile-card-content-container-button'>
+                            {isFollowing ? (
+                                <button className='btn btn-primary btn-follow-unfollow' style={{display:"flex", alignItems:"center", justifyContent:"center"}} onClick={() => stopFollowing()}>Unfollow</button>
+                            ) : (
+                                <button className='btn btn-primary btn-follow-unfollow' style={{display:"flex", alignItems:"center", justifyContent:"center"}} onClick={() => startFollowing()}>Follow</button>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

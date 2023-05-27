@@ -47,30 +47,31 @@ const ProfileCard = ({userEmail} : Props) => {
                     {page?.verified && <img src={verified} alt="" style={{height:"18px"}} />}
                 </div>
                 <p className='profile-card-bio'>{page?.bio}</p>
-                <div className='profile-card-follow-container'>
-                    <div className='profile-card-content-container-follow'>
+                <div className='space-between-follow-and-button'>
+                    <div className='profile-card-follow-container'>
+                        <div className='profile-card-content-container-follow'>
                             <p><strong>{page?.postsId.length}</strong></p>
                             <p>Posts</p>
                         </div>
-                    <Link to={`/user/${page?.id}/followers`}>
-                        <div className='profile-card-content-container-follow'>
-                            <p><strong>{page?.followersId.length}</strong></p>
-                            <p>Followers</p>
-                        </div>
-                    </Link>
-                    <Link to={`/user/${page?.id}/following`}>
-                        <div className='profile-card-content-container-follow'>
-                            <p><strong>{page?.followingId.length}</strong></p>
-                            <p>Following</p>
-                        </div>
-                    </Link>
+                        <Link to={`/user/${page?.id}/followers`}>
+                            <div className='profile-card-content-container-follow'>
+                                <p><strong>{page?.followersId.length}</strong></p>
+                                <p>Followers</p>
+                            </div>
+                        </Link>
+                        <Link to={`/user/${page?.id}/following`}>
+                            <div className='profile-card-content-container-follow'>
+                                <p><strong>{page?.followingId.length}</strong></p>
+                                <p>Following</p>
+                            </div>
+                        </Link>
+                    </div>
+                    <div className='profile-card-content-container-button'>
+                        <Link to="/editProfile">
+                            <button className='btn btn-primary' style={{display:"flex", alignItems:"center", justifyContent:"center"}}><FaUserEdit style={{marginRight:"5px"}}/>Edit Profile</button>
+                        </Link>
+                    </div>
                 </div>
-                <div className='profile-card-content-container-button'>
-                    <Link to="/editProfile">
-                        <button className='btn btn-primary' style={{display:"flex", alignItems:"center", justifyContent:"center"}}><FaUserEdit style={{marginRight:"5px"}}/>Edit Profile</button>
-                    </Link>
-                </div>
-
             </div>
 
         </div>

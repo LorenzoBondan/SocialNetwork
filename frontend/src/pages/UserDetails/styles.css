@@ -18,3 +18,10 @@
 .profile-card-content-container-follow:hover{
     cursor: pointer;
 }
+
+.space-between-follow-and-button{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 125px;
+}
