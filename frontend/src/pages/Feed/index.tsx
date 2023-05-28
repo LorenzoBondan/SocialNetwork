@@ -93,7 +93,7 @@ const Feed = () => {
 
     return(
         <div className='feed-container'>
-            <h3>The most recent posts from your friends</h3>
+            <h3>The most recent posts from the people you're following</h3>
             <div className='row'>
               {isLoading ? <CardLoader/> : (
                 user && page?.sort((a,b) => a.date > b.date ? -1 : 1).map(post => (

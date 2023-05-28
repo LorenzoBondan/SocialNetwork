@@ -3,7 +3,6 @@ package com.projects.socialNetwork.services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -67,20 +66,6 @@ public class UserService implements UserDetailsService {
 		Optional<User> obj = repository.findById(id);
 		User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found."));
 		return new UserDTO(entity);
-	}
-	
-	@Transactional(readOnly = true)
-	public List<UserDTO> findByFollowers(Long id) { // find who this id is following
-		Optional<User> obj = repository.findById(id);
-		List<User> list = repository.findByFollowers(obj);
-		return list.stream().map(item -> new UserDTO(item)).collect(Collectors.toList());
-	}
-	
-	@Transactional(readOnly = true)
-	public List<UserDTO> findByFollowing(Long id) { // find who is followed by this user
-		Optional<User> obj = repository.findById(id);
-		List<User> list = repository.findByFollowing(obj);
-		return list.stream().map(item -> new UserDTO(item)).collect(Collectors.toList());
 	}
 	
 	@Transactional(readOnly = true)

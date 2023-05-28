@@ -6,6 +6,7 @@
 .feed-container h3{
     font-weight: 700;
     text-shadow: 1px 1px 2px silver;
+    font-size: 20px;
 }
 
 @media(min-width:1200px){
