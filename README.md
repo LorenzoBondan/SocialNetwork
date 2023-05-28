@@ -1,29 +1,49 @@
-# University
+# SocialNetwork
 
 ## About the Project
 
-This is a project of a Univesity where students can subscribe to courses and classes from subjects.
+This is a project of Social Network where users can post, follow, like and comment their friends posts.
 
 ## Layout desktop
 
-#### Home page
-![Captura de tela 2023-04-20 150146](https://user-images.githubusercontent.com/105743965/233791700-2fc0d1e8-5224-482c-ba43-3b6021b12a7e.png)
-#### Courses page
-![Captura de tela 2023-04-20 150244](https://user-images.githubusercontent.com/105743965/233456462-49c3db10-cab4-4073-ba15-5305622518e8.png)
-#### Courses details page
-![Captura de tela 2023-04-20 153356](https://user-images.githubusercontent.com/105743965/233456776-e75cfb62-013a-459b-b25d-2c10e85bb406.png)
-#### Student profile page
-![Captura de tela 2023-04-20 150303](https://user-images.githubusercontent.com/105743965/233456905-64f7a8df-2035-4424-b74c-cc6ba6f4a984.png)
+#### Profile page
+![profile](https://github.com/LorenzoBondan/SocialNetwork/assets/105743965/db0c85ec-9e48-4abe-a172-20b496399648)
+
+#### Feed page
+![feed1](https://github.com/LorenzoBondan/SocialNetwork/assets/105743965/9226f580-e2cf-483a-a521-066dab96080d)
+![feed2](https://github.com/LorenzoBondan/SocialNetwork/assets/105743965/ce4e75bd-d663-4cfd-8669-a5187e05e325)
+![feed3](https://github.com/LorenzoBondan/SocialNetwork/assets/105743965/bf5ac103-db61-4e4c-9faf-09b91175162d)
+
+#### Users page
+![users](https://github.com/LorenzoBondan/SocialNetwork/assets/105743965/91dcebf8-9741-4561-a09a-858578446bc8)
+
+#### User followers and following page
+![followers](https://github.com/LorenzoBondan/SocialNetwork/assets/105743965/201cad30-8f63-4895-b256-0c4c605c40b3)
+![following](https://github.com/LorenzoBondan/SocialNetwork/assets/105743965/d0cb3d2b-db5e-4949-8992-2b0897a5b065)
+
 #### Admin CRUD page
-![Captura de tela 2023-04-20 150412](https://user-images.githubusercontent.com/105743965/233457267-e5a77243-0fd3-4715-917c-836d30844bf9.png)
+![admin](https://github.com/LorenzoBondan/SocialNetwork/assets/105743965/22feb7db-0edd-4ce3-a735-1e93e6c9b68b)
+
 #### Admin editing form
-![Captura de tela 2023-04-20 150353](https://user-images.githubusercontent.com/105743965/233457331-69136d99-f39b-40eb-93e2-ee0172fead3d.png)
+![adminCrud](https://github.com/LorenzoBondan/SocialNetwork/assets/105743965/6a758d75-7252-48b1-a754-02708b09164d)
+
+#### User edit profile form
+![editprofile](https://github.com/LorenzoBondan/SocialNetwork/assets/105743965/14d4023d-27c1-4e3b-931b-1b8fdf2d1a76)
+
+#### New Post form
+![newpost](https://github.com/LorenzoBondan/SocialNetwork/assets/105743965/a3cd95bd-6364-484b-a221-1a12ebb1290c)
+
+#### Home page
+![home](https://github.com/LorenzoBondan/SocialNetwork/assets/105743965/4ebfc970-87cf-49b1-badd-539a27a55b98)
+
+#### Login and register forms
+![login](https://github.com/LorenzoBondan/SocialNetwork/assets/105743965/1aecd7e2-c0de-417c-a854-72bde6bd119a)
+![register](https://github.com/LorenzoBondan/SocialNetwork/assets/105743965/f706ea94-1039-4134-8001-db55282c1937)
 
 
 ## Class Diagram
 
-![asta](https://user-images.githubusercontent.com/105743965/233456170-f1a07d6f-7891-4875-af3f-85b87a6cbac7.png)
-
+![image](https://github.com/LorenzoBondan/SocialNetwork/assets/105743965/fddda630-8923-4782-8ded-e2e6100c28a3)
 
 ## Used technologies
 
