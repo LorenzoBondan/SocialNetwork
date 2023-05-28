@@ -1,5 +1,6 @@
 .user-details-container{
     padding: 60px;
+    margin-top: 250px;
 }
 
 .user-details-profile-card{
@@ -24,4 +25,11 @@
     flex-direction: column;
     justify-content: space-between;
     height: 125px;
+}
+
+@media(min-width:1200px){
+    .user-details-container{
+        margin-top: 0;
+        margin-left: 300px;
+    }
 }

@@ -128,7 +128,7 @@ const UserCard = ({user, followerId} : Props) => {
                 {isFollowing ? (
                     <button className='btn btn-primary' onClick={() => stopFollowing()}>Unfollow</button>
                 ) : (
-                    !isMe && <button className='btn btn-primary' onClick={() => startFollowing()}>Follow</button>
+                    !isMe ? (<button className='btn btn-primary' onClick={() => startFollowing()}>Follow</button>) : (<div className='margin-bottom-56'></div>)
                 )}
             </div>
         </div>

@@ -7,6 +7,7 @@
     padding: 10px;
     width: 250px;
     border-radius: 60px 20px 20px 60px;
+    height: 370px;
 }
 
 .usercard-image{
@@ -51,4 +52,8 @@
     flex-direction: column;
     width: 100%;
     text-align: left;
+}
+
+.margin-bottom-56{
+    margin-bottom: 56px;
 }
