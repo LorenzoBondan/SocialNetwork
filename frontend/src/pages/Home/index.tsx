@@ -2,7 +2,6 @@ import logo from 'assets/images/sn-logo.png'
 import './styles.css';
 import { Link } from 'react-router-dom';
 
-
 const Home = () => {
     return(
         <div className='home-page'>

@@ -1,13 +1,11 @@
-
 import { Link, useParams } from 'react-router-dom';
 import './styles.css';
-import { useEffect, useState, useContext, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { User } from 'types';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
 import verified from 'assets/images/verified.png';
-import { AuthContext } from 'AuthContext';
-import { getTokenData, isAuthenticated } from 'util/auth';
+import { getTokenData } from 'util/auth';
 import PostCard from 'Components/PostCard';
 
 type UrlParams = {
@@ -39,44 +37,26 @@ const UserDetails = () => {
 
     /**/
 
-    // getting the email
-    const { authContextData, setAuthContextData } = useContext(AuthContext);
-
-    useEffect(() => {
-        if(isAuthenticated()){
-          setAuthContextData({
-            authenticated: true,
-            tokenData: getTokenData()
-          })
-        }
-        else{
-          setAuthContextData({
-            authenticated: false,
-          })
-        }
-    }, [setAuthContextData]);
-
-    let email: string;
-
-    authContextData.authenticated && (
-        authContextData.tokenData?.user_name && (
-        email = authContextData.tokenData?.user_name)) 
-    
-    // then, getting the user Id by email
-    
     const [userLogged, setUserLogged] = useState<User>();
+    
+    const getUser = useCallback(async () => {
+        try {
+            const email = getTokenData()?.user_name;
 
-    const getUser = useCallback(() => {
-        const params : AxiosRequestConfig = {
-          method:"GET",
-          url: `/users/email/${email}`,
-          withCredentials:true
-        }
-        requestBackend(params) 
-          .then(response => {
+            if (email) {
+                const params: AxiosRequestConfig = {
+                method: "GET",
+                url: `/users/email/${email}`,
+                withCredentials: true,
+            };
+
+            const response = await requestBackend(params);
             setUserLogged(response.data);
-          })
-    }, [])
+        }
+        } catch (error) {
+            console.log("Error: " + error);
+        }
+    }, []);
 
     useEffect(() => {
         getUser();
@@ -157,7 +137,6 @@ const UserDetails = () => {
                                     <p>Followers</p>
                                 </div>
                             </Link>
-
                             <Link to={`/user/${userId}/following`}>
                                 <div className='profile-card-content-container-follow'>
                                     <p><strong>{user?.followingId.length}</strong></p>
@@ -175,7 +154,6 @@ const UserDetails = () => {
                     </div>
                 </div>
             </div>
-
             {user?.postsId && (
             <div className='profile-card-posts-container'>
                 <div className='row'>

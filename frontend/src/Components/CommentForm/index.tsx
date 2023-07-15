@@ -20,7 +20,6 @@ const CommentForm = ( {userId, postId, onInsertComment}: Props ) => {
     
     const { register, handleSubmit, setValue} = useForm<FormData>();
 
-    // evento de enviar formulário
     const onSubmit = (formData : FormData) => {
 
         formData.userId = userId;
@@ -45,9 +44,7 @@ const CommentForm = ( {userId, postId, onInsertComment}: Props ) => {
 
     return(
         <div className="comment-submit-card">
-
             <form onSubmit={handleSubmit(onSubmit)} className="comment-form">
-
                 <input
                     {...register("description", {
                     required: "Required field,",
@@ -59,9 +56,7 @@ const CommentForm = ( {userId, postId, onInsertComment}: Props ) => {
                     className="base-input"
                 />
                 <div style={{display: "flex", justifyContent: "center"}}>
-
                 <button className="btn btn-primary"><p>{'>'}</p></button>
-        
                 </div>
             </form>
         </div>

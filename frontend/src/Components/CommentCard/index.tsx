@@ -2,9 +2,8 @@ import { AxiosRequestConfig } from "axios";
 import { Comment, User } from "types";
 import { requestBackend } from "util/requests";
 import { GoTrashcan } from 'react-icons/go';
-import { AuthContext } from "AuthContext";
-import { useContext, useEffect, useState, useCallback } from 'react';
-import { getTokenData, isAuthenticated } from "util/auth";
+import { useEffect, useState, useCallback } from 'react';
+import { getTokenData } from "util/auth";
 
 type Props = {
     comment: Comment;
@@ -30,48 +29,30 @@ const CommentCard = ({comment, onDelete} : Props) => {
         })
       }
 
-      // getting the email
-    const { authContextData, setAuthContextData } = useContext(AuthContext);
+      const [user, setUser] = useState<User | null>(null);
 
-    useEffect(() => {
-        if(isAuthenticated()){
-          setAuthContextData({
-            authenticated: true,
-            tokenData: getTokenData()
-          })
-        }
-        else{
-          setAuthContextData({
-            authenticated: false,
-          })
-        }
-    }, [setAuthContextData]);
-
-    let email: string;
-
-    authContextData.authenticated && (
-        authContextData.tokenData?.user_name && (
-        email = authContextData.tokenData?.user_name)) 
-    
-    // then, getting the user Id by email
-    
-    const [user, setUser] = useState<User>();
-
-    const getUser = useCallback(() => {
-        const params : AxiosRequestConfig = {
-          method:"GET",
-          url: `/users/email/${email}`,
-          withCredentials:true
-        }
-        requestBackend(params) 
-          .then(response => {
-            setUser(response.data);
-          })
-    }, [])
-
-    useEffect(() => {
-        getUser();
-    }, [getUser]);
+      const getUser = useCallback(async () => {
+          try {
+              const email = getTokenData()?.user_name;
+  
+              if (email) {
+                  const params: AxiosRequestConfig = {
+                  method: "GET",
+                  url: `/users/email/${email}`,
+                  withCredentials: true,
+              };
+  
+              const response = await requestBackend(params);
+              setUser(response.data);
+          }
+          } catch (error) {
+              console.log("Error: " + error);
+          }
+      }, []);
+  
+      useEffect(() => {
+          getUser();
+      }, [getUser]);
 
     /**/
 
@@ -123,12 +104,11 @@ const CommentCard = ({comment, onDelete} : Props) => {
           .then(response => {
             setUserOfComment(response.data);
           })
-    }, [])
+    }, [comment.userId])
 
     useEffect(() => {
       getUserOfComment();
     }, [getUserOfComment]);
-
 
     return(
         <div className='postcard-comment-zone'>
@@ -145,8 +125,7 @@ const CommentCard = ({comment, onDelete} : Props) => {
                 <div className="postcard-second-container">
                     <GoTrashcan onClick={() => handleDelete(comment.id)} />
                 </div>
-            }
-                    
+            }     
         </div>
     );
 }

@@ -66,11 +66,9 @@ const NewPostForm = ({user}:Props) => {
         <div className='new-post-form-container'>
             <div className="base-card post-card-form-card">
                 <h1>Add new Post</h1>
-
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='row post-crud-inputs-container'>
                         <div className='post-crud-inputs-left-container'>
-
                             <div className='margin-bottom-30'>
                                 <label htmlFor="">Title</label>
                                 <input 
@@ -84,7 +82,6 @@ const NewPostForm = ({user}:Props) => {
                                 />
                                 <div className='invalid-feedback d-block'>{errors.title?.message}</div>
                             </div>
-
                             <div className='margin-bottom-30'>
                                 <label htmlFor="">Description</label>
                                 <textarea 
@@ -99,7 +96,6 @@ const NewPostForm = ({user}:Props) => {
                                 <div className='invalid-feedback d-block'>{errors.description?.message}</div>
                             </div>
                         </div>
-
                         <div className='post-crud-buttons-container'>
                             <button 
                                 className='btn btn-outline-danger post-crud-buttons'
@@ -107,12 +103,10 @@ const NewPostForm = ({user}:Props) => {
                                 >
                                 CANCEL
                             </button>
-
                             <button className='btn btn-primary text-white post-crud-buttons'>POST</button>
                         </div>
                     </div>
                 </form>
-            
             </div>
         </div>
     );

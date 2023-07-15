@@ -1,12 +1,10 @@
-
 import { SpringPage, User } from 'types';
 import './styles.css';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
 import UserCard from 'Components/UserCard';
-import { AuthContext } from 'AuthContext';
-import { getTokenData, isAuthenticated } from 'util/auth';
+import { getTokenData } from 'util/auth';
 import UserFilter, { UserFilterData } from 'Components/UserFilter';
 import Pagination from 'Components/Pagination';
 
@@ -49,44 +47,26 @@ const Users = () => {
       getUsers();
     }, [getUsers]);
 
-    // getting the email
-    const { authContextData, setAuthContextData } = useContext(AuthContext);
+    const [user, setUser] = useState<User | null>(null);
 
-    useEffect(() => {
-        if(isAuthenticated()){
-          setAuthContextData({
-            authenticated: true,
-            tokenData: getTokenData()
-          })
-        }
-        else{
-          setAuthContextData({
-            authenticated: false,
-          })
-        }
-    }, [setAuthContextData]);
+    const getUser = useCallback(async () => {
+        try {
+            const email = getTokenData()?.user_name;
 
-    let email: string;
+            if (email) {
+                const params: AxiosRequestConfig = {
+                method: "GET",
+                url: `/users/email/${email}`,
+                withCredentials: true,
+            };
 
-    authContextData.authenticated && (
-        authContextData.tokenData?.user_name && (
-        email = authContextData.tokenData?.user_name)) 
-    
-    // then, getting the user Id by email
-    
-    const [user, setUser] = useState<User>();
-
-    const getUser = useCallback(() => {
-        const params : AxiosRequestConfig = {
-          method:"GET",
-          url: `/users/email/${email}`,
-          withCredentials:true
-        }
-        requestBackend(params) 
-          .then(response => {
+            const response = await requestBackend(params);
             setUser(response.data);
-          })
-    }, [])
+        }
+        } catch (error) {
+            console.log("Error: " + error);
+        }
+    }, []);
 
     useEffect(() => {
         getUser();
@@ -101,7 +81,6 @@ const Users = () => {
             <div className='users-search-bar-container'>
               <UserFilter onSubmitFilter={handleSubmitFilter} />
             </div>
-
             <div className="row" style={{width:"100%"}}>
                 {page?.content
                 .sort((a,b) => a.name > b.name ? 1 : -1)
@@ -113,7 +92,6 @@ const Users = () => {
                     </div>
                 ))}
             </div>
-            
             <div className='pagination-container'>
               <Pagination 
                 pageCount={(page) ? page.totalPages : 0} 
@@ -122,10 +100,8 @@ const Users = () => {
                 forcePage={page?.number}
               />
             </div>
-
         </div>
     );
 }
-
 
 export default Users;

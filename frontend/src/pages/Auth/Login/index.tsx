@@ -6,6 +6,8 @@ import { getTokenData } from 'util/auth';
 import { requestBackendLogin } from 'util/requests';
 import { getAuthData, saveAuthData } from 'util/storage';
 import './styles.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 type FormData = {
     username: string,
@@ -46,8 +48,7 @@ const Login = () => {
             })
 
             history.replace(from);
-
-            //toast.info("Welcome!");
+            toast.info("Welcome!");
         })
         .catch(error => {
             setHasError(true);
@@ -56,16 +57,13 @@ const Login = () => {
     };
 
     return(
-        <>
             <div className="base-card login-card">
                 <h1>LOGIN</h1>
-
                 { hasError && (
                     <div className="alert alert-danger">
                        Error when trying to login
                     </div>
                 )}
-
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-4">
                         <input 
@@ -83,7 +81,6 @@ const Login = () => {
                         />
                         <div className='invalid-feedback d-block'>{errors.username?.message}</div>
                     </div>
-
                     <div className="mb-2">
                         <input
                             {...register("password", {
@@ -96,11 +93,9 @@ const Login = () => {
                         />
                         <div className='invalid-feedback d-block' >{errors.password?.message}</div>
                     </div>
-
                     <div className="login-submit">
                         <button className='btn btn-primary'>LOGIN</button>
                     </div>
-                    
                     <div className="signup-container">
                         <span className="not-registered">Don't have an account?</span>
                         <Link to="/auth/signup" className="login-link-register">
@@ -109,7 +104,6 @@ const Login = () => {
                     </div>
                 </form>
             </div>
-        </>
     );
 }
 

@@ -59,11 +59,9 @@ const List = () => {
                     </button>
                 </Link>
             </div>
-
             <div className='users-search-bar-container'>
               <UserFilter onSubmitFilter={handleSubmitFilter} />
             </div>
-
             <div className='row'>
                 {page?.content
                     .sort( (a,b) => a.name > b.name ? 1 : -1)
@@ -74,7 +72,6 @@ const List = () => {
                     ))
                 }
             </div>
-
             <div className='pagination-container'>
               <Pagination 
                 pageCount={(page) ? page.totalPages : 0} 

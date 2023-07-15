@@ -1,4 +1,3 @@
-
 import { User } from 'types';
 import './styles.css';
 import { Link } from 'react-router-dom';
@@ -14,7 +13,7 @@ type Props = {
 
 const UserCard = ({user, followerId} : Props) => {
 
-    const [page, setPage] = useState<User>(); /* quem eu sou */
+    const [page, setPage] = useState<User>(); /* Me */
 
     const getUser = useCallback(() => {
         const params : AxiosRequestConfig = {
@@ -116,7 +115,6 @@ const UserCard = ({user, followerId} : Props) => {
                     </div>
                 </Link>
             )}
-
             <div className='usercard-rigth'>
                 <div style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
                     <p>{user.name}</p>

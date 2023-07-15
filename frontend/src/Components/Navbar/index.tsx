@@ -13,7 +13,6 @@ import { AuthContext } from 'AuthContext';
 import { removeAuthData } from 'util/storage';
 import history from 'util/history';
 
-
 const Navbar = () => {
 
     const { authContextData, setAuthContextData } = useContext(AuthContext);
@@ -50,7 +49,6 @@ const Navbar = () => {
                 <img src={logo} alt="logo" />
                 <h1 className='title'><div style={{color:"#E74A7D"}}>Social</div><div style={{color:"#7D5889"}}>Network</div></h1>
             </div>
-
             <ul className='ul-container'>
                 {isAuthenticated() ? (
                 <>
@@ -72,14 +70,12 @@ const Navbar = () => {
                         <p>Profile</p>
                     </NavLink>
                 </li>
-
                 <li>
                     <NavLink to="/users" className='admin-nav-item'>
                         <HiOutlineUsers style={{color:"#7D5889", marginRight:"8px"}}/>
                         <p>Users</p>
                     </NavLink>
                 </li>
-
                 { hasAnyRoles(['ROLE_ADMIN']) && ( 
                     <li>
                         <NavLink to="/admin" className='admin-nav-item'>
@@ -98,7 +94,6 @@ const Navbar = () => {
                     </li>   
                 
                 )}
-
                 { authContextData.authenticated ? (
                     <li>
                         <NavLink to="/" className='login-nav-item' onClick={handleLogoutClick}>
@@ -115,11 +110,8 @@ const Navbar = () => {
                         </li>
                     )
                 }
-
             </ul>
         </nav>
-        
-
     );
 }
 

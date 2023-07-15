@@ -1,13 +1,11 @@
-
 import { Comment, Post, User } from 'types';
 import './styles.css';
-import { useCallback, useEffect, useState, useContext } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
 import CommentCard from 'Components/CommentCard';
 import { GoTrashcan } from 'react-icons/go';
-import { AuthContext } from 'AuthContext';
-import { getTokenData, isAuthenticated } from 'util/auth';
+import { getTokenData } from 'util/auth';
 import LikeCard from 'Components/LikeCard';
 import like from 'assets/images/like.png';
 import likeFilled from 'assets/images/like_filled.png';
@@ -22,44 +20,26 @@ type Props = {
 
 const PostCard = ({postId, onDelete, userLogged} : Props) => {
 
-    // getting the email
-    const { authContextData, setAuthContextData } = useContext(AuthContext);
+    const [user, setUser] = useState<User | null>(null);
 
-    useEffect(() => {
-        if(isAuthenticated()){
-          setAuthContextData({
-            authenticated: true,
-            tokenData: getTokenData()
-          })
-        }
-        else{
-          setAuthContextData({
-            authenticated: false,
-          })
-        }
-    }, [setAuthContextData]);
+    const getUser = useCallback(async () => {
+        try {
+            const email = getTokenData()?.user_name;
 
-    let email: string;
+            if (email) {
+                const params: AxiosRequestConfig = {
+                method: "GET",
+                url: `/users/email/${email}`,
+                withCredentials: true,
+            };
 
-    authContextData.authenticated && (
-        authContextData.tokenData?.user_name && (
-        email = authContextData.tokenData?.user_name)) 
-    
-    // then, getting the user Id by email
-    
-    const [user, setUser] = useState<User>();
-
-    const getUser = useCallback(() => {
-        const params : AxiosRequestConfig = {
-          method:"GET",
-          url: `/users/email/${email}`,
-          withCredentials:true
-        }
-        requestBackend(params) 
-          .then(response => {
+            const response = await requestBackend(params);
             setUser(response.data);
-          })
-    }, [])
+        }
+        } catch (error) {
+            console.log("Error: " + error);
+        }
+    }, []);
 
     useEffect(() => {
         getUser();
@@ -228,7 +208,6 @@ const PostCard = ({postId, onDelete, userLogged} : Props) => {
         testIfIsLiked();
     }, [testIfIsLiked]);
 
-
     /**/
 
     const [comments, setComments] = useState<Comment[]>([]); //recebe a lista de reviews obtida na requisição.
@@ -250,9 +229,9 @@ const PostCard = ({postId, onDelete, userLogged} : Props) => {
 
 
     const handleInsertComment = (comment: Comment) => {
-        const clone = [...comments]; // copia o conteúdo que já tem
-        clone.push(comment); // insere o novo conteúdo naquele copiado
-        setComments(clone); // define o conteúdo copiado
+        const clone = [...comments]; 
+        clone.push(comment); 
+        setComments(clone); 
         getPostById();
     };
 
@@ -280,7 +259,6 @@ const PostCard = ({postId, onDelete, userLogged} : Props) => {
                 <p>{post?.description}</p>
                 <p className='postcard-date'>{post?.date && formatDate(post.date)}</p>
             </div>
-
             <div>
                 {post && 
                     <div className='postcard-like-zone'>
@@ -298,7 +276,6 @@ const PostCard = ({postId, onDelete, userLogged} : Props) => {
                     </div>
                 }
             </div>
-
             <div className='postcard-bottom-container'>
                 <div className='postcard-likes-comments-info'>
                     {quantityLikes ? (
@@ -318,7 +295,6 @@ const PostCard = ({postId, onDelete, userLogged} : Props) => {
                     </div>
                 }
             </div>
-
             {showLikes && 
                 <div className='postcard-likes-zone'>
                     {post?.likes && post.likes.map(like => (
@@ -326,7 +302,6 @@ const PostCard = ({postId, onDelete, userLogged} : Props) => {
                     ))}
                 </div>
             }
-
             {showComments && 
                 <div className='postcard-comments'>
                     {post?.comments && post.comments.map(comment => (

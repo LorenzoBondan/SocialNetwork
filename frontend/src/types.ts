@@ -8,8 +8,7 @@ export type SpringPage<T> = {
     first: boolean;
     numberOfElements?: number;
     empty: boolean;
-  };
-
+};
 
 export type User = {
     id:number;

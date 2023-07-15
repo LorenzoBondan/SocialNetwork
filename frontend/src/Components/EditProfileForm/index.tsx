@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import './styles.css';
 import { requestBackend } from 'util/requests';
@@ -6,7 +5,6 @@ import { User } from 'types';
 import { useForm } from 'react-hook-form';
 import { AxiosRequestConfig } from 'axios';
 import history from 'util/history';
-
 
 type Props = {
     userId : number;
@@ -24,8 +22,6 @@ const EditProfileForm = ({userId} : Props) => {
                 setValue('name', user.name);
                 setValue('imgUrl', user.imgUrl);
                 setValue('bio', user.bio);
-
-                // not editable values
                 setValue('password', user.password);
                 setValue('email', user.email);
                 setValue('commentsId', user.commentsId);
@@ -62,11 +58,9 @@ const EditProfileForm = ({userId} : Props) => {
         <div className="edit-profile-form-container">
             <div className="base-card post-card-form-card">
                 <h1>Edit Profile</h1>
-
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='row post-crud-inputs-container'>
                         <div className='post-crud-inputs-left-container'>
-
                             <div className='margin-bottom-30'>
                                 <label htmlFor="">Name</label>
                                 <input 
@@ -80,7 +74,6 @@ const EditProfileForm = ({userId} : Props) => {
                                 />
                                 <div className='invalid-feedback d-block'>{errors.name?.message}</div>
                             </div>
-
                             <div className='margin-bottom-30'>
                                 <label htmlFor="">Bio</label>
                                 <textarea 
@@ -95,7 +88,6 @@ const EditProfileForm = ({userId} : Props) => {
                                 <div className='invalid-feedback d-block'>{errors.bio?.message}</div>
                             </div>
                         </div>
-
                         <div className='margin-bottom-30'>
                             <label htmlFor="">Img Url</label>  
                                 <input 
@@ -113,7 +105,6 @@ const EditProfileForm = ({userId} : Props) => {
                                 />
                                 <div className='invalid-feedback d-block'>{errors.imgUrl?.message}</div>
                         </div>
-
                         <div className='post-crud-buttons-container'>
                             <button 
                                 className='btn btn-outline-danger post-crud-buttons'
@@ -121,12 +112,10 @@ const EditProfileForm = ({userId} : Props) => {
                                 >
                                 CANCEL
                             </button>
-
                             <button className='btn btn-primary text-white post-crud-buttons'>SAVE</button>
                         </div>
                     </div>
                 </form>
-            
             </div>
         </div>
     );

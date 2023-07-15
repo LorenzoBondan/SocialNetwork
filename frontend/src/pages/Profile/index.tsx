@@ -1,36 +1,41 @@
 import './styles.css';
-import { useContext, useEffect } from 'react';
-import { AuthContext } from 'AuthContext';
-import { getTokenData, isAuthenticated } from 'util/auth';
+import { useCallback, useEffect, useState } from 'react';
+import { getTokenData } from 'util/auth';
 import ProfileCard from 'Components/ProfileCard';
+import { requestBackend } from 'util/requests';
+import { AxiosRequestConfig } from 'axios';
+import { User } from 'types';
 
 const Profile = () => {
 
-    const { authContextData, setAuthContextData } = useContext(AuthContext);
+  const [user, setUser] = useState<User | null>(null);
 
-        useEffect(() => {
-            if(isAuthenticated()){
-              setAuthContextData({
-                authenticated: true,
-                tokenData: getTokenData()
-              })
-            }
-            else{
-              setAuthContextData({
-                authenticated: false,
-              })
-            }
-          }, [setAuthContextData]);
+  const getUser = useCallback(async () => {
+      try {
+          const email = getTokenData()?.user_name;
 
-          let email;
+          if (email) {
+              const params: AxiosRequestConfig = {
+              method: "GET",
+              url: `/users/email/${email}`,
+              withCredentials: true,
+          };
 
-          authContextData.authenticated && (
-             authContextData.tokenData?.user_name && (
-             email = authContextData.tokenData?.user_name)) 
+          const response = await requestBackend(params);
+          setUser(response.data);
+      }
+      } catch (error) {
+          console.log("Error: " + error);
+      }
+  }, []);
+
+  useEffect(() => {
+      getUser();
+  }, [getUser]);
 
     return(
         <div className='profile-container'>
-            <ProfileCard userEmail={email}/>
+            {user && <ProfileCard user={user}/>}
         </div>
     );
 }

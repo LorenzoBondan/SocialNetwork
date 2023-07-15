@@ -1,4 +1,3 @@
-
 import Navbar from "Components/Navbar";
 import Admin from "pages/Admin";
 import Auth from "pages/Auth";
@@ -74,7 +73,6 @@ const Routes = () => {
                     <Route path="/admin">
                         <Admin/>
                     </Route>
-
 
                 </Switch>
             </div>

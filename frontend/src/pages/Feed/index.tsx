@@ -1,10 +1,9 @@
 import { Post, User } from 'types';
 import './styles.css';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { AxiosRequestConfig } from 'axios';
 import { requestBackend } from 'util/requests';
-import { AuthContext } from 'AuthContext';
-import { getTokenData, isAuthenticated } from 'util/auth';
+import { getTokenData } from 'util/auth';
 import './styles.css';
 import PostCard from 'Components/PostCard';
 import CardLoader from 'Components/CardLoader';
@@ -13,56 +12,30 @@ const Feed = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-    // getting the email
-    const { authContextData, setAuthContextData } = useContext(AuthContext);
+  const [user, setUser] = useState<User | null>(null);
 
-    useEffect(() => {
-        if(isAuthenticated()){
-          setAuthContextData({
-            authenticated: true,
-            tokenData: getTokenData()
-          })
-        }
-        else{
-          setAuthContextData({
-            authenticated: false,
-          })
-        }
-    }, [setAuthContextData]);
+  const getUser = useCallback(async () => {
+      try {
+          const email = getTokenData()?.user_name;
 
-    let email: string;
-
-    authContextData.authenticated && (
-        authContextData.tokenData?.user_name && (
-        email = authContextData.tokenData?.user_name)) 
-    
-    // then, getting the user Id by email
-    
-    const [user, setUser] = useState<User>();
-
-    const getUser = useCallback(async () => {
-        try {
-          const params: AxiosRequestConfig = {
-            method: "GET",
-            url: `/users/email/${email}`,
-            withCredentials: true
+          if (email) {
+              const params: AxiosRequestConfig = {
+              method: "GET",
+              url: `/users/email/${email}`,
+              withCredentials: true,
           };
-          setIsLoading(true);
+
           const response = await requestBackend(params);
           setUser(response.data);
-        } catch (error) {
-          console.error(error);
-        }
-        finally{
-          setIsLoading(false);
-        }
-      }, []);
+      }
+      } catch (error) {
+          console.log("Error: " + error);
+      }
+  }, []);
 
-      useEffect(() => {
-        if (email) {
-          getUser();
-        }
-      }, [getUser]);
+  useEffect(() => {
+      getUser();
+  }, [getUser]);
 
     /////
 
