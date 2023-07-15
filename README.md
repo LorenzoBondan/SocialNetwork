@@ -48,13 +48,14 @@ This is a project of Social Network where users can post, follow, like and comme
 ## Used technologies
 
 - Java
-- Spring
+- Spring Boot
 - SQL
 
 - TypeScript
 - React
 - CSS
 
+Spring Boot v4.15.3 | Node v14.18.2
 
 ## Author
 
